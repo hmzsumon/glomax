@@ -1,0 +1,190 @@
+<div class="bn-modal-confirm web-2fa-management-warning">
+	<div
+		class="bn-flex bn-modal-confirm-icon"
+		style="
+			width: 96px;
+			height: auto;
+			align-items: center;
+			justify-content: center;
+		"
+	>
+		<img
+			class="bn-lazy-img w-16 h-16 sm:w-24 sm:h-24"
+			data-src="https://bin.bnbstatic.com/static/illustrations/graphical-icons-svg/security-medium.svg"
+			src="https://bin.bnbstatic.com/static/illustrations/graphical-icons-svg/security-medium.svg"
+			style="background-color: transparent"
+		/>
+	</div>
+	<div class="bn-modal-confirm-title">
+		<div class="text-lg sm:text-xl">
+			Are You Sure You Want to Change Your Email Address?
+		</div>
+	</div>
+	<div class="bn-modal-confirm-desc">
+		<div
+			class="text-[--color-textSecondary] text-base sm:text-[--color-textThird] sm:text-sm"
+		>
+			<div class="text-[--color-textSecondary] sm:text-[--color-textThird]">
+				<ul class="text-left list-disc">
+					<li class="before:content-['•'] before:block before:mr-2 flex">
+						You will need to log in to your account after changing your email.
+					</li>
+					<li class="before:content-['•'] before:block before:mr-2 flex">
+						Withdrawals and P2P transactions will be disabled for 24 hours after
+						changing your email verification to ensure the safety of your
+						assets.
+					</li>
+					<li class="before:content-['•'] before:block before:mr-2 flex">
+						The old email address cannot be used to re-register for 30 days
+						after updating it.
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="bn-modal-confirm-actions">
+		<div class="flex flex-row gap-3">
+			<button
+				class="bn-button bn-button__secondary data-size-middle"
+				style="flex: 1 1 0%"
+			>
+				Cancel</button
+			><button
+				class="bn-button bn-button__primary data-size-middle"
+				style="flex: 1 1 0%; width: 100%"
+			>
+				Continue
+			</button>
+		</div>
+	</div>
+</div>
+
+<div class="bn-mfa-navigator" style="height: 350px">
+	<div class="bn-mfa-navigator-header">
+		<div class="bn-mfa-navigator-placeholder"></div>
+		<svg
+			fill="iconNormal"
+			class="bn-svg bn-mfa-navigator-clickable bn-mfa-navigator-close"
+			viewBox="0 0 24 24"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<path
+				d="M6.697 4.575L4.575 6.697 9.88 12l-5.304 5.303 2.122 2.122L12 14.12l5.303 5.304 2.122-2.122L14.12 12l5.304-5.303-2.122-2.122L12 9.88 6.697 4.575z"
+				fill="currentColor"
+			></path>
+		</svg>
+	</div>
+	<div class="height-container">
+		<div style="height: 100%; display: block">
+			<div class="verify-page">
+				<div class="verify-title bids-widget-page-title">
+					Security Verification
+				</div>
+				<div class="bn-formItem web">
+					<div class="bn-formItem-label">Email Verification Code</div>
+					<div
+						class="bn-textField bn-textField__line data-size-large mfa-form-input"
+					>
+						<input
+							class="bn-textField-input"
+							autocomplete=""
+							spellcheck="false"
+							value=""
+						/>
+						<div class="bn-textField-suffix">
+							<div class="typography-Body3 text-brand">
+								<div class="bn-mfa-send-code">Get Code</div>
+							</div>
+						</div>
+					</div>
+					<div class="bn-formItem-tips">
+						Enter the 6-digit verification code sent to hmz***@gmail.com.
+					</div>
+				</div>
+				<button
+					class="bn-button bn-button__primary data-size-large inactive mfa-verify-button"
+				>
+					Submit
+				</button>
+				<div
+					class="second-link-space typography-Btn_link2 bids-widget-m-link text-brand"
+				>
+					Security verification unavailable?
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="bn-modal-wrap">
+	<div class="bn-modal-header w-[440px] max-w-full">
+		<div class="bn-modal-header-main"></div>
+		<div class="bn-modal-header-next">
+			<svg
+				fill="textThird"
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+				class="bn-svg"
+			>
+				<path
+					d="M6.697 4.575L4.575 6.697 9.88 12l-5.304 5.303 2.122 2.122L12 14.12l5.303 5.304 2.122-2.122L14.12 12l5.304-5.303-2.122-2.122L12 9.88 6.697 4.575z"
+					fill="currentColor"
+				></path>
+			</svg>
+		</div>
+	</div>
+	<div class="bn-modal-content w-[440px] max-w-full">
+		<div class="typography-Subtitle1 mt-[-24px]">Edit Email</div>
+		<form class="form">
+			<div class="bn-flex flex flex-col">
+				<div class="my-6">
+					<div class="bn-formItem">
+						<div class="bn-formItem-label">New Email Address</div>
+						<div class="bn-textField bn-textField__line data-size-large w-full">
+							<input
+								id="email"
+								class="bn-textField-input"
+								spellcheck="false"
+								autocomplete=""
+								value=""
+								style="width: 100%"
+							/>
+						</div>
+						<div class="typography-Caption1 text-[--color-error]"></div>
+					</div>
+					<div class="bn-formItem mt-4">
+						<div class="bn-formItem-label">Enter Verification Code</div>
+						<div class="bn-textField bn-textField__line data-size-large w-full">
+							<input
+								id="emailVerifyCode"
+								inputmode="numeric"
+								pattern="[0-9]*"
+								maxlength="6"
+								type="digit"
+								autofill="oneTimeSMS"
+								autocomplete="one-time-code"
+								class="bn-textField-input"
+								spellcheck="false"
+								value=""
+								style="width: 100%"
+							/>
+							<div class="bn-textField-suffix">
+								<div class="typography-Body3 text-[--color-textBrand]">
+									<div class="cursor-pointer">Get Code</div>
+								</div>
+							</div>
+						</div>
+						<div class="typography-Caption1 text-[--color-error]"></div>
+					</div>
+				</div>
+				<button
+					formtype="submit"
+					class="bn-button bn-button__primary data-size-large inactive w-full"
+					disabled=""
+				>
+					Submit
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
