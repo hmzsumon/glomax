@@ -17,7 +17,7 @@ const AiRobot = () => {
 	return (
 		<Layout>
 			<ProtectedRoute>
-				<div className='py-40 px-2 ai-wrapper '>
+				<div className='pt-20 pb-24 px-2 ai-wrapper '>
 					{/* <div className='ai-overlay'></div> */}
 					<div className='relative px-4 py-6 mx-auto rounded-lg bg-black_2 md:w-7/12'>
 						<div className=''>

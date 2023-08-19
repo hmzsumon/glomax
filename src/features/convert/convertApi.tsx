@@ -9,9 +9,15 @@ export const convertApi = apiSlice.injectEndpoints({
 				method: 'POST',
 				body: data,
 			}),
-			invalidatesTags: ['User'],
+			invalidatesTags: ['User', 'Convert'],
+		}),
+
+		// get logged in user convert records
+		myConvertRecords: builder.query({
+			query: () => `/convert-records`,
+			providesTags: ['Convert'],
 		}),
 	}),
 });
 
-export const { useConvertMutation } = convertApi;
+export const { useConvertMutation, useMyConvertRecordsQuery } = convertApi;

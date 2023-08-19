@@ -1,37 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import {
-	Card,
-	CardHeader,
-	Typography,
-	Button,
-	CardBody,
-	CardFooter,
-} from '@material-tailwind/react';
-import { useRouter } from 'next/router';
+import { Card, Typography, Button, CardBody } from '@material-tailwind/react';
 
-import { useGetLoggedInUserRecordsQuery } from '@/features/winGame/winGameApi';
 import { NotFoundIcon } from '@/global/icons/CommonIcons';
-import useTimer from '@/hooks/useTimer';
 import { useSelector } from 'react-redux';
-import { IoIosArrowDown } from 'react-icons/io';
-import ClockLoader from 'react-spinners/ClockLoader';
 
-const TABLE_HEAD = ['Period', 'Status', 'Amount'];
+import { useMyConvertRecordsQuery } from '@/features/convert/convertApi';
+import { formDateWithTime } from '@/utils/functions';
 
-const UserTradeRecords = ({ open }: any) => {
+const headers = [
+	{
+		id: 1,
+		name: 'Date',
+		class: 'text-left',
+	},
+	{
+		id: 2,
+		name: 'From',
+		class: 'text-center',
+	},
+	{
+		id: 3,
+		name: 'To',
+		class: 'text-center',
+	},
+	{
+		id: 4,
+		name: 'Amount',
+		class: 'text-center',
+	},
+	{
+		id: 5,
+		name: 'Status',
+		class: 'text-right',
+	},
+];
+
+const ConvertRecords = ({ open }: any) => {
 	const { user } = useSelector((state: any) => state.auth);
-	const { data, refetch } = useGetLoggedInUserRecordsQuery(user?._id);
-
-	// refetch data on open
-	useEffect(() => {
-		if (open) {
-			refetch();
-		}
-	}, [open]);
+	const { data } = useMyConvertRecordsQuery(undefined, {
+		skip: !open,
+	});
 
 	const { records } = data || { records: [] };
 
-	const router = useRouter();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [showMore, setShowMore] = useState(false);
 	const [selected_id, setSelected_id] = useState<string | null>(null);
@@ -55,19 +66,13 @@ const UserTradeRecords = ({ open }: any) => {
 				<CardBody className='px-4 rounded'>
 					<div className='w-full text-left table-auto min-w-max'>
 						<div className='bg-[#071832] rounded-t-md'>
-							<div className='grid grid-cols-3 list-none '>
-								{TABLE_HEAD.map((head, index) => (
+							<div className='grid grid-cols-5 list-none px-2 '>
+								{headers.map((head, index) => (
 									<li
-										key={head}
-										className='p-4 transition-colors cursor-pointer rounded-t-md bg-[#071832] '
+										key={head.id}
+										className={`py-2 font-normal text-blue-gray-100 ${head.class}`}
 									>
-										<Typography
-											variant='small'
-											color='blue-gray'
-											className={`items-center text-center justify-between gap-2 font-normal leading-none text-white opacity-70`}
-										>
-											{head}
-										</Typography>
+										<span>{head.name}</span>
 									</li>
 								))}
 							</div>
@@ -77,90 +82,44 @@ const UserTradeRecords = ({ open }: any) => {
 							{records.slice((currentPage - 1) * 5, currentPage * 5).map(
 								(
 									game: {
-										period: number;
-										win_number: string;
-										trade_colors: any;
+										amount: number;
+										createdAt: any;
+										from: string;
 										status: string;
-										trade_amount: number;
+										to: string;
 										_id: string;
-										win_amount: number;
 									},
 									index: number
 								) => {
-									const {
-										period,
-										win_number,
-										trade_colors,
-										status,
-										trade_amount,
-										win_amount,
-										_id,
-									} = game;
+									const { amount, createdAt, from, status, to, _id } = game;
 									const oddEven =
 										index % 2 === 0 ? 'bg-blue-gray-800' : 'bg-blue-gray-900';
 
 									return (
 										<>
 											<div
-												key={period}
+												key={_id}
 												className={`
-                    ${oddEven} grid grid-cols-3 list-none justify-between items-center px-4 py-1 text-xs transition-colors cursor-pointer 
+                    ${oddEven} grid grid-cols-5 list-none justify-between text-blue-gray-200  px-2 py-1 text-xs transition-colors cursor-pointer 
                     `}
 												onClick={() => handleShowMore(_id)}
 											>
 												<li className=''>
-													<Typography
-														variant='small'
-														color='blue-gray'
-														className='py-2 font-normal text-center text-white'
-													>
-														{period}
-													</Typography>
+													<p className='py-2 font-normal text-left '>
+														{formDateWithTime(createdAt)}
+													</p>
 												</li>
-												<li className=''>
-													<div className='flex-col md:flex'>
-														{status === 'win' && (
-															<p className='capitalize text-center text-[#388E3C]'>
-																{status}
-															</p>
-														)}
-														{status === 'lose' && (
-															<p className='capitalize text-center text-[#D32F2F]'>
-																{status}
-															</p>
-														)}
-														{status === 'pending' && (
-															<p className='capitalize text-center text-[#FFA000]'>
-																{status}
-															</p>
-														)}
-													</div>
+												<li className='text-center'>
+													<p>{from}</p>
 												</li>
-												<li className='grid items-center justify-around grid-cols-2 ml-2 '>
-													<div className='flex items-center justify-end'>
-														{status === 'win' && (
-															<p className='capitalize text-center text-[#388E3C]'>
-																+ {Number(win_amount).toFixed(2)} $
-															</p>
-														)}
-														{status === 'lose' && (
-															<p className='capitalize text-center text-[#D32F2F]'>
-																- {Number(trade_amount).toFixed(2)} $
-															</p>
-														)}
-														{status === 'pending' && (
-															<ClockLoader size={15} color='#FFA000' />
-														)}
-													</div>
-													<div className='flex items-center justify-end '>
-														<IoIosArrowDown
-															className={`${
-																showMore && selected_id === _id
-																	? 'transform rotate-180'
-																	: ''
-															} text-blue-gray-400 text-xl  transition-all `}
-														/>
-													</div>
+												<li className='text-center '>
+													<p>{to}</p>
+												</li>
+												<li className='  text-right '>
+													<p className='mr-10'>{amount} USDT</p>
+												</li>
+												<li className=' text-right '>
+													<p>{status}</p>
 												</li>
 											</div>
 										</>
@@ -177,7 +136,7 @@ const UserTradeRecords = ({ open }: any) => {
 						</div>
 					)}
 				</CardBody>
-				<CardFooter className='flex items-center justify-between p-4 border-t border-blue-gray-50'>
+				<div className='flex  items-center justify-between p-4 border-t border-blue-gray-50'>
 					<Typography
 						variant='small'
 						color='blue-gray'
@@ -208,10 +167,10 @@ const UserTradeRecords = ({ open }: any) => {
 							Next
 						</Button>
 					</div>
-				</CardFooter>
+				</div>
 			</Card>
 		</div>
 	);
 };
 
-export default UserTradeRecords;
+export default ConvertRecords;

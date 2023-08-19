@@ -14,8 +14,12 @@ import { fetchBaseQueryError } from '@/services/helpers';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import UserTradeRecords from '@/components/Wingame/UserTradeRecords';
+import ConvertRecords from '@/components/Convert/ConvertRecords';
+import { useRouter } from 'next/router';
+import { HiArrowSmLeft } from 'react-icons/hi';
 
 const Withdraw = () => {
+	const router = useRouter();
 	const { user } = useSelector((state: any) => state.auth);
 	const [convert, { isError, isLoading, isSuccess, error }] =
 		useConvertMutation();
@@ -73,6 +77,12 @@ const Withdraw = () => {
 				<div className='py-20 px-2 h-screen md:h-auto withdraw-wrapper'>
 					<div className='relative px-4 py-6 mx-auto rounded-lg bg-black_2 md:w-7/12'>
 						<div className='flex items-center justify-between mb-4'>
+							<div>
+								<HiArrowSmLeft
+									className='text-2xl text-blue-gray-300 cursor-pointer hover:text-blue-700'
+									onClick={() => router.back()}
+								/>
+							</div>
 							<div className='ml-2 '>
 								<h1 className='-mb-1 text-xl font-bold text-blue-gray-200 '>
 									Convert
@@ -209,7 +219,7 @@ const Withdraw = () => {
 						</div>
 						<hr className='my-2 border border-black_3' />
 						<DialogBody className=' px-0 overflow-auto'>
-							<UserTradeRecords open={open} />
+							<ConvertRecords open={open} />
 						</DialogBody>
 					</Dialog>
 				</>

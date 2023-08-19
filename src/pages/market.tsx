@@ -40,7 +40,7 @@ const Market = () => {
 		}
 	};
 
-	console.log(searchResults);
+	// console.log(searchResults);
 
 	const handleSearch = (query: string) => {
 		setSearchQuery(query);

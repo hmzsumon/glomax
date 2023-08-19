@@ -13,10 +13,11 @@ export const apiSlice = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: baseUrl,
 		// Introduce an artificial delay using `setTimeout`
-		prepareHeaders: (headers, { getState }) => {
-			const token = getCookie('token');
+		prepareHeaders: async (headers, { getState, endpoint }: any) => {
+			const token = getState()?.auth?.token;
+			// console.log('token', token);
 			if (token) {
-				headers.set('Authorization', `Bearer ${token}`);
+				headers.set('token', `${token}`);
 			}
 			return headers;
 		},
@@ -36,6 +37,7 @@ export const apiSlice = createApi({
 		'Game-1m',
 		'Game-3m',
 		'Game-5m',
+		'Convert',
 	],
 	endpoints: (builder) => ({}),
 });
