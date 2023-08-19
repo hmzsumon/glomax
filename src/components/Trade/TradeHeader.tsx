@@ -23,7 +23,7 @@ const TradeHeader = ({ setOpen, open }: any) => {
 
 		ws.onmessage = (event) => {
 			const data = JSON.parse(event.data);
-			console.log(data);
+			// console.log(data);
 			setTicker(data);
 		};
 

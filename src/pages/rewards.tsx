@@ -87,7 +87,7 @@ const Rewards = () => {
 	return (
 		<Layout>
 			<ProtectedRoute>
-				<div className='py-20 reward-wrapper'>
+				<div className='pt-20 md:pb-24 h-screen md:h-[100%]  reward-wrapper px-1'>
 					<div className='md:w-6/12 mx-auto opacity-95 bg-black_2 py-4 px-3'>
 						<h2 className=' text-xl md:text-2xl text-center font-bold text-blue-gray-300'>
 							Rank & Reward
@@ -136,7 +136,7 @@ const Rewards = () => {
 								</ul>
 								<ul className='border-orange-500 grid grid-cols-3 items-center border my-4  text-blue-gray-200'>
 									<li className=' border-orange-500 flex items-center justify-center border-r  h-full'>
-										<h2>Marvelous</h2>
+										<h2>Supreme</h2>
 									</li>
 									<li className=' border-orange-500 flex flex-col items-center justify-center text-xs text-center border-r  h-full'>
 										<p>5 Marvelous Rank </p>
