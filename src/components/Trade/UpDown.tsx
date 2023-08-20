@@ -10,6 +10,7 @@ import {
 import { useSelector } from 'react-redux';
 
 const UpDown = () => {
+	const { user } = useSelector((state: any) => state.auth);
 	const { symbol } = useSelector((state: any) => state.trade);
 	const l_symbol = symbol.toLowerCase();
 	const [ticker, setTicker] = React.useState<any>(null);
@@ -80,6 +81,11 @@ const UpDown = () => {
 
 	// handle create trade
 	const handleCreateTrade = async (e: any) => {
+		if (user?.m_balance < amount) {
+			toast.warning('Insufficient balance');
+			return;
+		}
+
 		if (!ticker) {
 			toast.warning('Network error, Please  try again!');
 			return;
