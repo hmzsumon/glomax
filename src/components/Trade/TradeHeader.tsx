@@ -1,12 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { fetchBaseQueryError } from '@/services/helpers';
 import { BiTransferAlt } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
 import { BeatLoader } from 'react-spinners';
 import { HiArrowSmLeft } from 'react-icons/hi';
 import { HistoryIcon } from '@/global/icons/CommonIcons';
 import { useRouter } from 'next/router';
+import { useMyTradesQuery } from '@/features/trade/tradeApi';
+import { Dialog, DialogBody } from '@material-tailwind/react';
+import { IoCloseCircleOutline } from 'react-icons/io5';
+import TradeRecords from './TradeRecords';
 
 const TradeHeader = ({ setOpen, open }: any) => {
+	const [openDialog, setOpenDialog] = useState(false);
+	const handleOpen = () => setOpenDialog(!openDialog);
+	const { data, isError, isLoading, isSuccess, error } = useMyTradesQuery(
+		undefined,
+		{
+			skip: !openDialog,
+		}
+	);
+	const { trades } = data || [];
 	const { symbol } = useSelector((state: any) => state.trade);
 	const l_symbol = symbol.toLowerCase();
 	const [ticker, setTicker] = React.useState<any>(null);
@@ -35,6 +50,17 @@ const TradeHeader = ({ setOpen, open }: any) => {
 			ws.close();
 		};
 	}, [symbol]);
+
+	useEffect(() => {
+		if (isError) {
+			toast.error((error as fetchBaseQueryError).data.message);
+		}
+
+		if (isSuccess) {
+			console.log(trades);
+		}
+	}, [isError, isSuccess]);
+
 	return (
 		<div className=' bg-black_2 py-2'>
 			<div className=' flex items-center justify-between px-4 mb-4'>
@@ -52,7 +78,9 @@ const TradeHeader = ({ setOpen, open }: any) => {
 					<h2 className=' text-blue-gray-100'>{symbol}</h2>
 				</div>
 				<div>
-					<HistoryIcon h={6} w={6} color={'gray'} />
+					<span onClick={handleOpen} className='cursor-pointer'>
+						<HistoryIcon h={6} w={6} color={'gray'} />
+					</span>
 				</div>
 			</div>
 			<div className='flex items-center justify-between px-4 '>
@@ -131,6 +159,27 @@ const TradeHeader = ({ setOpen, open }: any) => {
 					</div>
 				</div>
 			</div>
+			<>
+				<Dialog
+					open={openDialog}
+					handler={handleOpen}
+					className='text-white bg-black_2 px-0 overflow-auto'
+				>
+					<div className='flex items-center justify-center py-3 '>
+						<h4 className='text-2xl font-bold text-center text-blue-gray-200'>
+							My Trade Records
+						</h4>
+						<IoCloseCircleOutline
+							className='absolute text-2xl text-blue-gray-600 cursor-pointer right-3 top-2 hover:text-red-500'
+							onClick={handleOpen}
+						/>
+					</div>
+					<hr className='my-2 border border-black_3' />
+					<DialogBody className=' px-0 overflow-auto'>
+						<TradeRecords records={trades} />
+					</DialogBody>
+				</Dialog>
+			</>
 		</div>
 	);
 };

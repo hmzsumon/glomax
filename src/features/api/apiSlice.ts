@@ -38,6 +38,7 @@ export const apiSlice = createApi({
 		'Game-3m',
 		'Game-5m',
 		'Convert',
+		'Trade',
 	],
 	endpoints: (builder) => ({}),
 });
