@@ -50,7 +50,7 @@ const UpDown = () => {
 	useEffect(() => {
 		let timerInterval: any = null;
 
-		if (isTimerRunning && remainingTime > 0) {
+		if (user?.m_balance > amount && isTimerRunning && remainingTime > 0) {
 			timerInterval = setInterval(() => {
 				setRemainingTime((prevRemainingTime) => prevRemainingTime - 1);
 			}, 1000);
