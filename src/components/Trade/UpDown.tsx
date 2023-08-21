@@ -168,7 +168,7 @@ const UpDown = () => {
 			toast.success('Trade Finished successfully');
 			setOpen(true);
 		}
-	}, [upIsError, upIsSuccess]);
+	}, [upIsError, upIsSuccess, trade]);
 
 	return (
 		<div className=' space-y-1 '>
