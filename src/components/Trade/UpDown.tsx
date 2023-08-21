@@ -37,8 +37,7 @@ const UpDown = () => {
 		},
 	] = useUpdateTradeMutation();
 
-	const { trade } = upData || {};
-	console.log(trade);
+	const { trade: tradeData } = upData || {};
 
 	const remainingTimeOptions: any = {
 		1: 30,
@@ -50,6 +49,7 @@ const UpDown = () => {
 	const [amount, setAmount] = React.useState(0.1);
 	const [remainingTime, setRemainingTime] = useState(30);
 	const [isTimerRunning, setIsTimerRunning] = useState(false);
+	const [trade, setTrade] = useState<any>(tradeData);
 	const [open, setOpen] = useState(false);
 
 	const handleOpen = () => setOpen(!open);
@@ -165,7 +165,7 @@ const UpDown = () => {
 		}
 
 		if (upIsSuccess) {
-			toast.success('Trade Finished successfully');
+			setTrade(tradeData);
 			setOpen(true);
 		}
 	}, [upIsError, upIsSuccess, trade]);
