@@ -11,8 +11,11 @@ import { useMyTradesQuery } from '@/features/trade/tradeApi';
 import { Dialog, DialogBody } from '@material-tailwind/react';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import TradeRecords from './TradeRecords';
+import { useTickerContext } from '@/TickerContext';
 
 const TradeHeader = ({ setOpen, open }: any) => {
+	const { ticker } = useTickerContext();
+	// console.log(ticker);
 	const [openDialog, setOpenDialog] = useState(false);
 	const handleOpen = () => setOpenDialog(!openDialog);
 	const { data, isError, isLoading, isSuccess, error } = useMyTradesQuery(
@@ -23,33 +26,8 @@ const TradeHeader = ({ setOpen, open }: any) => {
 	);
 	const { trades } = data || [];
 	const { symbol } = useSelector((state: any) => state.trade);
-	const l_symbol = symbol.toLowerCase();
-	const [ticker, setTicker] = React.useState<any>(null);
+
 	const router = useRouter();
-
-	useEffect(() => {
-		const ws = new WebSocket(
-			`wss://stream.binance.com:9443/ws/${l_symbol}@ticker`
-		);
-
-		ws.onopen = () => {
-			console.log('WebSocket connection opened');
-		};
-
-		ws.onmessage = (event) => {
-			const data = JSON.parse(event.data);
-			// console.log(data);
-			setTicker(data);
-		};
-
-		ws.onclose = () => {
-			console.log('WebSocket connection closed');
-		};
-
-		return () => {
-			ws.close();
-		};
-	}, [symbol]);
 
 	useEffect(() => {
 		if (isError) {
@@ -86,7 +64,7 @@ const TradeHeader = ({ setOpen, open }: any) => {
 			<div className='flex items-center justify-between px-4 '>
 				<div>
 					<p className='my-2 text-xs '>Last Price</p>
-					{ticker?.c ? (
+					{ticker?.c && ticker.s === symbol ? (
 						<div className='space-y-1 '>
 							<h2
 								className={` text-2xl md:text-3xl ${
@@ -135,7 +113,7 @@ const TradeHeader = ({ setOpen, open }: any) => {
 				<div className='flex flex-col md:flex-row items-center gap-1 text-xs md:gap-6 '>
 					<div className='space-y-1 md:space-y-2 '>
 						<p className=' text-blue-gray-300'>24h High</p>
-						{ticker?.h ? (
+						{ticker?.h && ticker.s === symbol ? (
 							<p className=' text-blue-gray-100'>
 								{Number(ticker?.h).toLocaleString('en-US')}
 							</p>
@@ -147,7 +125,7 @@ const TradeHeader = ({ setOpen, open }: any) => {
 					</div>
 					<div className='space-y-1  md:space-y-2'>
 						<p className=' text-blue-gray-300'>24h Low</p>
-						{ticker?.l ? (
+						{ticker?.l && ticker.s === symbol ? (
 							<p className=' text-blue-gray-100'>
 								{Number(ticker?.l).toLocaleString('en-US')}
 							</p>

@@ -26,16 +26,16 @@ const headers = [
 		name: 'Symbol',
 		class: 'text-left',
 	},
-	{
-		id: 2,
-		name: 'O-Price',
-		class: 'text-center',
-	},
-	{
-		id: 3,
-		name: 'C-Price',
-		class: 'text-center',
-	},
+	// {
+	// 	id: 2,
+	// 	name: 'O-Price',
+	// 	class: 'text-center',
+	// },
+	// {
+	// 	id: 3,
+	// 	name: 'C-Price',
+	// 	class: 'text-center',
+	// },
 	{
 		id: 4,
 		name: 'Type',
@@ -78,19 +78,21 @@ const TradeRecords = ({ records }: any) => {
 				<CardBody className='px-4 rounded'>
 					<div className='w-full min-w-max'>
 						<div className='bg-[#071832] rounded-t-md'>
-							<div className='grid grid-cols-6 list-none '>
-								{headers.map((head, index) => (
-									<li key={head.id} className=' py-4  px-2 '>
-										<Typography
-											variant='small'
-											color='blue-gray'
-											className={`
+							<div className='grid grid-cols-4  list-none '>
+								{headers.map((head, index) => {
+									return (
+										<li key={head.id} className={`py-4  px-2 `}>
+											<Typography
+												variant='small'
+												color='blue-gray'
+												className={`
                       ${head.class} font-semibold leading-none text-white opacity-70`}
-										>
-											{head.name}
-										</Typography>
-									</li>
-								))}
+											>
+												{head.name}
+											</Typography>
+										</li>
+									);
+								})}
 							</div>
 						</div>
 
@@ -130,20 +132,12 @@ const TradeRecords = ({ records }: any) => {
 											<div
 												key={_id}
 												className={`
-                    ${oddEven} grid grid-cols-6 list-none justify-between items-center px-2 py-2 text-xs transition-colors text-blue-gray-200 cursor-pointer 
+                    ${oddEven} grid grid-cols-4  list-none justify-between items-center px-2 py-2 text-xs transition-colors text-blue-gray-200 cursor-pointer 
                     `}
 												onClick={() => handleShowMore(_id)}
 											>
 												<li className=''>
 													<p className='font-normal text-left'>{symbol}</p>
-												</li>
-
-												<li className=' text-center'>
-													<p>{open_price}</p>
-												</li>
-
-												<li className=' text-center'>
-													<p>{close_price}</p>
 												</li>
 
 												<li className=''>

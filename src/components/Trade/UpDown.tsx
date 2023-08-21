@@ -2,30 +2,43 @@ import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { fetchBaseQueryError } from '@/services/helpers';
 import { PiNavigationArrowFill } from 'react-icons/pi';
-import { Select, Option, Input } from '@material-tailwind/react';
+import {
+	Select,
+	Option,
+	Input,
+	Dialog,
+	DialogBody,
+} from '@material-tailwind/react';
 import {
 	useCreateTradeMutation,
 	useUpdateTradeMutation,
 } from '@/features/trade/tradeApi';
 import { useSelector } from 'react-redux';
+import { useTickerContext } from '@/TickerContext';
+import { IoCloseCircleOutline } from 'react-icons/io5';
 
 const UpDown = () => {
+	const { ticker } = useTickerContext();
+	//console.log(ticker);
 	const { user } = useSelector((state: any) => state.auth);
 	const { symbol } = useSelector((state: any) => state.trade);
-	const l_symbol = symbol.toLowerCase();
-	const [ticker, setTicker] = React.useState<any>(null);
+	// const [ticker, setTicker] = React.useState<any>(null);
 	const [createTrade, { isError, isLoading, isSuccess, error }] =
 		useCreateTradeMutation();
 
 	const [
 		updateTrade,
 		{
+			data: upData,
 			isError: upIsError,
 			isLoading: upIsLoading,
 			isSuccess: upIsSuccess,
 			error: upError,
 		},
 	] = useUpdateTradeMutation();
+
+	const { trade } = upData || {};
+	console.log(trade);
 
 	const remainingTimeOptions: any = {
 		1: 30,
@@ -37,6 +50,9 @@ const UpDown = () => {
 	const [amount, setAmount] = React.useState(0.1);
 	const [remainingTime, setRemainingTime] = useState(30);
 	const [isTimerRunning, setIsTimerRunning] = useState(false);
+	const [open, setOpen] = useState(false);
+
+	const handleOpen = () => setOpen(!open);
 
 	const formatTime = (timeInSeconds: any) => {
 		const minutes = Math.floor(timeInSeconds / 60);
@@ -89,9 +105,6 @@ const UpDown = () => {
 		if (!ticker) {
 			toast.warning('Network error, Please  try again!');
 			return;
-		} else if (ticker?.c === 0) {
-			toast.warning('Network error, Please  try again!');
-			return;
 		} else if (amount < 0.1) {
 			toast.warning('Network error, Please  try again!');
 			return;
@@ -136,30 +149,6 @@ const UpDown = () => {
 	};
 
 	useEffect(() => {
-		const ws = new WebSocket(
-			`wss://stream.binance.com:9443/ws/${l_symbol}@ticker`
-		);
-
-		ws.onopen = () => {
-			console.log('WebSocket connection opened');
-		};
-
-		ws.onmessage = (event) => {
-			const data = JSON.parse(event.data);
-			// console.log(data);
-			setTicker(data);
-		};
-
-		ws.onclose = () => {
-			console.log('WebSocket connection closed');
-		};
-
-		return () => {
-			ws.close();
-		};
-	}, [symbol]);
-
-	useEffect(() => {
 		if (isError) {
 			toast.error((error as fetchBaseQueryError).data.message);
 		}
@@ -177,6 +166,7 @@ const UpDown = () => {
 
 		if (upIsSuccess) {
 			toast.success('Trade Finished successfully');
+			setOpen(true);
 		}
 	}, [upIsError, upIsSuccess]);
 
@@ -196,7 +186,11 @@ const UpDown = () => {
 						<button
 							className=' text-xl md:text-xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
 							onClick={handleSetTimeInc}
-							disabled={isTimerRunning || time === 5 ? true : false}
+							disabled={
+								isTimerRunning || ticker?.s !== symbol || time === 5
+									? true
+									: false
+							}
 						>
 							+
 						</button>
@@ -220,7 +214,9 @@ const UpDown = () => {
 					name='down'
 					className='rounded-md py-1 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-x-4 col-span-5 bg-red-500'
 					onClick={handleCreateTrade}
-					disabled={isTimerRunning || !ticker ? true : false}
+					disabled={
+						isTimerRunning || ticker?.s !== symbol || !ticker ? true : false
+					}
 				>
 					Down
 					<PiNavigationArrowFill className='md:text-xl  rotate-180 ' />
@@ -234,12 +230,77 @@ const UpDown = () => {
 					className='rounded-md flex items-center disabled:opacity-50 justify-center gap-x-5 py-1 col-span-5 bg-green-500 disabled:cursor-not-allowed'
 					name='up'
 					onClick={handleCreateTrade}
-					disabled={isTimerRunning || !ticker ? true : false}
+					disabled={
+						isTimerRunning || ticker?.s !== symbol || !ticker ? true : false
+					}
 				>
 					UP
 					<PiNavigationArrowFill className='md:text-xl  rotate-90 ' />
 				</button>
 			</div>
+			<>
+				<Dialog
+					open={open}
+					handler={handleOpen}
+					size='xs'
+					className='text-white bg-black_2 px-0 overflow-auto'
+				>
+					<div className='flex items-center justify-center py-3 '>
+						<h4 className='text-2xl font-bold text-center text-blue-gray-200'>
+							My Trade Records
+						</h4>
+						<IoCloseCircleOutline
+							className='absolute text-2xl text-blue-gray-600 cursor-pointer right-3 top-2 hover:text-red-500'
+							onClick={handleOpen}
+						/>
+					</div>
+					<hr className='my-2 border border-black_3' />
+					<DialogBody className=' px-0 overflow-auto'>
+						<div className='px-4 py-1 list-none text-blue-gray-400 '>
+							<div className='grid grid-cols-2'>
+								<li>Symbol</li>
+								<li className='text-end'>{trade?.symbol}</li>
+							</div>
+							<div className='grid grid-cols-2'>
+								<li>Open Price</li>
+								<li className='text-end'>{trade?.open_price}</li>
+							</div>
+							<div className='grid grid-cols-2'>
+								<li>Close Price</li>
+								<li className='text-end'>{trade?.close_price}</li>
+							</div>
+
+							<div className='grid grid-cols-2'>
+								<li>Trade Amount</li>
+								<li className='text-end'>{trade?.trade_amount}</li>
+							</div>
+
+							{trade?.result === 'win' && (
+								<div className='grid grid-cols-2'>
+									<li>Win Amount</li>
+									<li className='text-end text-[#388E3C]'>
+										+{Number(trade?.profit).toFixed(2)}
+									</li>
+								</div>
+							)}
+
+							{trade?.result === 'loss' && (
+								<div className='grid grid-cols-2'>
+									<li>Lose Amount</li>
+									<li className='text-end text-[#D32F2F]'>
+										-{Number(trade?.trade_amount).toFixed(2)}
+									</li>
+								</div>
+							)}
+
+							<div className='grid grid-cols-2 '>
+								<li>Select</li>
+								<li className='text-end'>{trade?.trade_type}</li>
+							</div>
+						</div>
+					</DialogBody>
+				</Dialog>
+			</>
 		</div>
 	);
 };
