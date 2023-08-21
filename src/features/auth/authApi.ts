@@ -73,7 +73,7 @@ export const authApi = apiSlice.injectEndpoints({
 
 		// get user by token._id from cookie
 		loadUser: builder.query<any, void>({
-			query: (id) => `/load-user/${id}`, //`/user-by-token/${token}
+			query: () => '/load-user ', //`/user-by-token/${token}
 			providesTags: ['User'],
 			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
 				try {

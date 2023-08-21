@@ -18,13 +18,16 @@ import { useSelector } from 'react-redux';
 import { useTickerContext } from '@/TickerContext';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import ioBaseUrl from '@/config/ioBaseUrl';
+import { useLoadUserQuery } from '@/features/auth/authApi';
 
 const UpDown = () => {
 	const { ticker } = useTickerContext();
 	const { user } = useSelector((state: any) => state.auth);
 	const { symbol } = useSelector((state: any) => state.trade);
+	// const [refetch, setRefetch] = useState(false);
 	const [createTrade, { isError, isLoading, isSuccess, error }] =
 		useCreateTradeMutation();
+	const { refetch } = useLoadUserQuery();
 
 	const [time, setTime] = React.useState(30000);
 	const [amount, setAmount] = React.useState(0.1);
@@ -114,6 +117,7 @@ const UpDown = () => {
 			// find this user particular data and set it to trade
 			if (data.user_id === user?._id) {
 				setTrade(data);
+				refetch();
 				setOpen(true);
 				// Close the dialog after 3 seconds
 				setTimeout(() => {
@@ -197,7 +201,16 @@ const UpDown = () => {
 				</button>
 				<div className='col-span-2 flex items-center justify-center'>
 					<div className=' bg-black_3 p-2 h-8 flex items-center justify-center rounded-md w-12'>
-						<p className=' text-xs font-bold'>{formatTime(remainingTime)}</p>
+						<p
+							className={`text-xs font-bold ${
+								user?.active_trade > 0
+									? 'text-orange-600'
+									: ' text-blue-gray-100'
+							}`}
+						>
+							{' '}
+							AT {user?.active_trade}
+						</p>
 					</div>
 				</div>
 				<button

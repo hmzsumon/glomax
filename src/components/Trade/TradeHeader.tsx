@@ -18,12 +18,8 @@ const TradeHeader = ({ setOpen, open }: any) => {
 	// console.log(ticker);
 	const [openDialog, setOpenDialog] = useState(false);
 	const handleOpen = () => setOpenDialog(!openDialog);
-	const { data, isError, isLoading, isSuccess, error } = useMyTradesQuery(
-		undefined,
-		{
-			skip: !openDialog,
-		}
-	);
+	const { data, refetch, isError, isLoading, isSuccess, error } =
+		useMyTradesQuery(undefined);
 	const { trades } = data || [];
 	const { symbol } = useSelector((state: any) => state.trade);
 
@@ -38,6 +34,12 @@ const TradeHeader = ({ setOpen, open }: any) => {
 			console.log(trades);
 		}
 	}, [isError, isSuccess]);
+
+	// handle refetch
+	const handleRefetch = () => {
+		refetch();
+		handleOpen();
+	};
 
 	return (
 		<div className=' bg-black_2 py-2'>
@@ -56,7 +58,7 @@ const TradeHeader = ({ setOpen, open }: any) => {
 					<h2 className=' text-blue-gray-100'>{symbol}</h2>
 				</div>
 				<div>
-					<span onClick={handleOpen} className='cursor-pointer'>
+					<span onClick={handleRefetch} className='cursor-pointer'>
 						<HistoryIcon h={6} w={6} color={'gray'} />
 					</span>
 				</div>
