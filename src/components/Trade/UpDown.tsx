@@ -255,50 +255,52 @@ const UpDown = () => {
 						/>
 					</div>
 					<hr className='my-2 border border-black_3' />
-					<DialogBody className=' px-0 overflow-auto'>
-						<div className='px-4 py-1 list-none text-blue-gray-400 '>
-							<div className='grid grid-cols-2'>
-								<li>Symbol</li>
-								<li className='text-end'>{trade?.symbol}</li>
-							</div>
-							<div className='grid grid-cols-2'>
-								<li>Open Price</li>
-								<li className='text-end'>{trade?.open_price}</li>
-							</div>
-							<div className='grid grid-cols-2'>
-								<li>Close Price</li>
-								<li className='text-end'>{trade?.close_price}</li>
-							</div>
-
-							<div className='grid grid-cols-2'>
-								<li>Trade Amount</li>
-								<li className='text-end'>{trade?.trade_amount}</li>
-							</div>
-
-							{trade?.result === 'win' && (
+					{trade && (
+						<DialogBody className=' px-0 overflow-auto'>
+							<div className='px-4 py-1 list-none text-blue-gray-400 '>
 								<div className='grid grid-cols-2'>
-									<li>Win Amount</li>
-									<li className='text-end text-[#388E3C]'>
-										+{Number(trade?.profit).toFixed(2)}
-									</li>
+									<li>Symbol</li>
+									<li className='text-end'>{trade?.symbol}</li>
 								</div>
-							)}
-
-							{trade?.result === 'loss' && (
 								<div className='grid grid-cols-2'>
-									<li>Lose Amount</li>
-									<li className='text-end text-[#D32F2F]'>
-										-{Number(trade?.trade_amount).toFixed(2)}
-									</li>
+									<li>Open Price</li>
+									<li className='text-end'>{trade?.open_price}</li>
 								</div>
-							)}
+								<div className='grid grid-cols-2'>
+									<li>Close Price</li>
+									<li className='text-end'>{trade?.close_price}</li>
+								</div>
 
-							<div className='grid grid-cols-2 '>
-								<li>Select</li>
-								<li className='text-end'>{trade?.trade_type}</li>
+								<div className='grid grid-cols-2'>
+									<li>Trade Amount</li>
+									<li className='text-end'>{trade?.trade_amount}</li>
+								</div>
+
+								{trade?.result === 'win' && (
+									<div className='grid grid-cols-2'>
+										<li>Win Amount</li>
+										<li className='text-end text-[#388E3C]'>
+											+{Number(trade?.profit).toFixed(2)}
+										</li>
+									</div>
+								)}
+
+								{trade?.result === 'loss' && (
+									<div className='grid grid-cols-2'>
+										<li>Lose Amount</li>
+										<li className='text-end text-[#D32F2F]'>
+											-{Number(trade?.trade_amount).toFixed(2)}
+										</li>
+									</div>
+								)}
+
+								<div className='grid grid-cols-2 '>
+									<li>Select</li>
+									<li className='text-end'>{trade?.trade_type}</li>
+								</div>
 							</div>
-						</div>
-					</DialogBody>
+						</DialogBody>
+					)}
 				</Dialog>
 			</>
 		</div>

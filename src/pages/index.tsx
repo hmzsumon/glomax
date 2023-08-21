@@ -10,7 +10,7 @@ import Notice from '@/components/Home/Notice';
 import Menu from '@/components/Home/Menu';
 export default function Home() {
 	const { isAuthenticated } = useSelector((state: any) => state.auth);
-
+	console.log(isAuthenticated);
 	return (
 		<Layout>
 			<main className={`pt-20 ${isAuthenticated && 'pb-14'}`}>
