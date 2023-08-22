@@ -10,7 +10,6 @@ const StartEaring = () => {
 				<Link
 					href={{
 						pathname: '/register',
-						query: { referral_id: referId },
 					}}
 					className='w-full py-3 mx-auto font-semibold text-center text-gray-800 bg-yellow-700 rounded '
 				>

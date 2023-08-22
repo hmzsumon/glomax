@@ -153,7 +153,7 @@ const LoginPage = () => {
 									className='flex justify-center mt-6'
 								>
 									Don't have an account?
-									<Link href='/sign-up'>
+									<Link href='/register'>
 										<span className='ml-1 font-bold text-blue-700 underline'>
 											Sign up
 										</span>
