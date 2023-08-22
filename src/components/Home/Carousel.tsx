@@ -14,9 +14,11 @@ export default class SimpleSlider extends Component {
 			autoplaySpeed: 4000,
 		};
 		const sliderItems = [
+			'./images/carousel/ai-grid.png',
 			'./images/carousel/ai-robot.png',
-			'./images/carousel/first_deposit.png',
-			'./images/carousel/refer.png',
+			'./images/carousel/deposit.png',
+			'./images/carousel/trading.png',
+			'./images/carousel/refarel.png',
 		];
 		return (
 			<div className=' bg-gray-900 px-2 w-[95%] mx-auto   py-4'>

@@ -4,8 +4,8 @@ export default function Document() {
 	return (
 		<Html lang='en'>
 			<Head>
-				<link rel='icon' href='/fev_icon.png' />
-				<meta property='og:image' content='/logo_white_2.png' />
+				<link rel='icon' href='/fav_icon.png' />
+				<meta property='og:image' content='/fav-icon.png' />
 			</Head>
 			<body>
 				<Main />
