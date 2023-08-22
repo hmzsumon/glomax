@@ -21,6 +21,8 @@ import { ExplanationIcon } from '@/global/icons/CommonIcons';
 const pattern = `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,20}$`;
 const SignupPage = () => {
 	const router = useRouter();
+	const referralId = router.query.referral_id;
+	console.log(referralId);
 	const [registerUser, { isLoading, error, isSuccess, isError }] =
 		useRegisterUserMutation();
 	const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -36,9 +38,18 @@ const SignupPage = () => {
 	const [passwordError, setPasswordError] = useState<string>('');
 	const [confirmPassword, setConfirmPassword] = useState<string>('');
 	const [confirmPasswordError, setConfirmPasswordError] = useState<string>('');
-	const [referralCode, setReferralCode] = useState<string>('');
+	const [referralCode, setReferralCode] = useState<string>(
+		referralId as string
+	);
 	const [isAgree, setIsAgree] = useState<boolean>(false);
 	const [isAgreeError, setIsAgreeError] = useState<string>('');
+
+	// set referral code
+	useEffect(() => {
+		if (referralId) {
+			setReferralCode(referralId as string);
+		}
+	}, [referralId]);
 
 	// handle change phone
 	const handleChangePhone = (value: string) => {
@@ -377,6 +388,7 @@ const SignupPage = () => {
 									name='referralCode'
 									value={referralCode}
 									onChange={handleChange}
+									readOnly={referralId ? true : false}
 								/>
 								<div className='flex items-center'>
 									<input
