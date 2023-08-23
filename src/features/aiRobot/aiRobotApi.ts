@@ -36,6 +36,12 @@ export const aiRobotApi = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ['User', 'AiRobot'],
 		}),
+
+		// get all aiRobot
+		getAllAiRobot: builder.query({
+			query: () => `/aiRobot/all`,
+			providesTags: ['AiRobot'],
+		}),
 	}),
 });
 
@@ -44,4 +50,5 @@ export const {
 	useMyAiRobotQuery,
 	useCancelAiRobotMutation,
 	useEditAiRobotMutation,
+	useGetAllAiRobotQuery,
 } = aiRobotApi;

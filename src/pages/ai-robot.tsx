@@ -66,12 +66,16 @@ const AiRobot = () => {
 								</div>
 
 								<div className=' grid grid-cols-2 my-4 gap-2'>
-									<Button color='amber' className=' w-full'>
-										Convert
-									</Button>
-									<Button color='amber' className=' w-full'>
-										History
-									</Button>
+									<Link href='/convert'>
+										<Button color='amber' className=' w-full'>
+											Convert
+										</Button>
+									</Link>
+									<Link href='/ai-history'>
+										<Button color='amber' className=' w-full'>
+											History
+										</Button>
+									</Link>
 								</div>
 								<div>{user?.ai_robot ? <AfterCreate /> : <BeforeCreate />}</div>
 							</div>
