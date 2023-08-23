@@ -16,34 +16,61 @@ const AiRobotDetails = ({ record }: Props) => {
 					})}
 				</li>
 			</div>
+			{record?.status === 'cancelled' && (
+				<div className='grid grid-cols-2'>
+					<li>Cancelled Charge</li>
+					<li className='text-end'>
+						{Number(record?.cancel_charge).toLocaleString('en-US', {
+							style: 'currency',
+							currency: 'USD',
+						})}
+					</li>
+				</div>
+			)}
+			{record?.status === 'cancelled' ? (
+				<div className='grid grid-cols-2'>
+					<li>Refund</li>
+					<li className='text-end'>
+						{Number(record?.refund_amount).toLocaleString('en-US', {
+							style: 'currency',
+							currency: 'USD',
+						})}
+					</li>
+				</div>
+			) : (
+				<div className='grid grid-cols-2'>
+					<li>Profit</li>
+					<li className='text-end'>
+						{Number(record?.profit).toLocaleString('en-US', {
+							style: 'currency',
+							currency: 'USD',
+						})}
+					</li>
+				</div>
+			)}
+			{record?.status === 'completed' && (
+				<div className='grid grid-cols-2'>
+					<li>Ai Charge</li>
+					<li className='text-end'>
+						{Number(record?.trade_charge).toLocaleString('en-US', {
+							style: 'currency',
+							currency: 'USD',
+						})}
+					</li>
+				</div>
+			)}
+			{record?.status === 'completed' && (
+				<div className='grid grid-cols-2'>
+					<li>Take Profit</li>
+					<li className='text-end'>
+						{Number(record?.take_profit).toLocaleString('en-US', {
+							style: 'currency',
+							currency: 'USD',
+						})}
+					</li>
+				</div>
+			)}
 
-			<div className='grid grid-cols-2'>
-				<li>Profit</li>
-				<li className='text-end'>
-					{Number(record?.profit).toLocaleString('en-US', {
-						style: 'currency',
-						currency: 'USD',
-					})}
-				</li>
-			</div>
-			<div className='grid grid-cols-2'>
-				<li>Ai Charge</li>
-				<li className='text-end'>
-					{Number(record?.trade_charge).toLocaleString('en-US', {
-						style: 'currency',
-						currency: 'USD',
-					})}
-				</li>
-			</div>
-			<div className='grid grid-cols-2'>
-				<li>Take Profit</li>
-				<li className='text-end'>
-					{Number(record?.take_profit).toLocaleString('en-US', {
-						style: 'currency',
-						currency: 'USD',
-					})}
-				</li>
-			</div>
 			<div className='grid grid-cols-2'>
 				<li>Grid Number</li>
 				<li className='text-end '>{record?.grid_no}</li>

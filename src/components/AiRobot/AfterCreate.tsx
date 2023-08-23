@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { BsArrowRight } from 'react-icons/bs';
 import { GiCheckMark } from 'react-icons/gi';
 import { PiChartLineDuotone } from 'react-icons/pi';
-import { formDateWithTime } from '@/utils/functions';
+import { formDateWithTime, formDateWithTimeToLocal } from '@/utils/functions';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import ClockLoader from 'react-spinners/ClockLoader';
 import {
@@ -52,11 +52,16 @@ const AfterCreate = () => {
 	return (
 		<div>
 			<section className=' flex flex-col justify-center  mx-auto'>
-				<div className='  my-5 p-5 space-y-3 rounded-md border border-yellow-700 '>
+				<div className='relative  my-5 p-5 space-y-3 rounded-md border border-yellow-700 '>
 					<div className=' flex items-center justify-between'>
-						<div className=' items-center flex gap-x-2'>
-							<ClockLoader size={22} color='#FFA000' />
-							<h4 className='text-blue-gray-200 text-xl font-semibold'>
+						<div className='  flex-col md:flex-row items-center flex gap-x-2'>
+							<div className=' absolute md:hidden left-2 top-2'>
+								<ClockLoader size={20} color='#FFA000' />
+							</div>
+							<div className=' hidden md:block left-2 top-2'>
+								<ClockLoader size={20} color='#FFA000' />
+							</div>
+							<h4 className='text-blue-gray-200 text-sm md:text-xl font-semibold'>
 								Ai Robot Running
 							</h4>
 						</div>
@@ -113,7 +118,7 @@ const AfterCreate = () => {
 							<li className=' flex items-start justify-between'>
 								<p className=' text-blue-gray-400'>Created Time</p>
 								<p className=' uppercase text-blue-gray-100'>
-									{formDateWithTime(aiRobot?.open_time)}
+									{formDateWithTimeToLocal(aiRobot?.open_time)}
 								</p>
 							</li>
 						</ul>
