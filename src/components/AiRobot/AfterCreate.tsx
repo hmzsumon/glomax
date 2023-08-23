@@ -61,7 +61,7 @@ const AfterCreate = () => {
 							<div className=' hidden md:block left-2 top-2'>
 								<ClockLoader size={20} color='#FFA000' />
 							</div>
-							<h4 className='text-blue-gray-200 text-xl font-bold'>
+							<h4 className='text-blue-gray-200 md:text-xl font-bold'>
 								Ai Robot Running
 							</h4>
 						</div>
@@ -87,7 +87,7 @@ const AfterCreate = () => {
 						</div>
 					</div>
 
-					<div>
+					<div className=' text-sm'>
 						<ul>
 							<li className=' flex items-start justify-between'>
 								<p className=' text-blue-gray-400'>Total Investment</p>
