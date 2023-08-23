@@ -38,12 +38,10 @@ const Hero = () => {
 				<div>
 					<h1 className='font-semibold text-center md:text-left md:text-2xl '>
 						<span className=' md:text-2xl'>
-							Quickly play the games and win infinite prizes!
+							Trade crypto currency fast and win infinite.
 						</span>
 						<br />
-						<span className='text-gray-300 '>
-							Winning at Rapid win is now easier!
-						</span>
+						<span className='text-gray-300 '>Never miss the Profit.</span>
 					</h1>
 					<div className='my-8 space-y-6 '>
 						<div className='flex items-center space-x-2'>

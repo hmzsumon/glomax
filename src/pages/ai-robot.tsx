@@ -11,6 +11,8 @@ import { PiChartLineDuotone } from 'react-icons/pi';
 import { GiCheckMark } from 'react-icons/gi';
 import { BsArrowRight } from 'react-icons/bs';
 import Link from 'next/link';
+import BeforeCreate from '@/components/AiRobot/BeforeCreate';
+import AfterCreate from '@/components/AiRobot/AfterCreate';
 
 const AiRobot = () => {
 	const { user } = useSelector((state: any) => state.auth);
@@ -38,7 +40,10 @@ const AiRobot = () => {
 										<span className=' text-blue-gray-400'>
 											Ai Balance:{' '}
 											<span className='text-yellow-700'>
-												{user?.ai_balance} USDT
+												{Number(user?.ai_balance).toLocaleString('en-US', {
+													minimumFractionDigits: 2,
+												})}{' '}
+												USDT
 											</span>
 										</span>
 									</div>
@@ -60,10 +65,7 @@ const AiRobot = () => {
 									</div>
 								</div>
 
-								<div className=' grid grid-cols-3 my-4 gap-2'>
-									<Button color='amber' className=' w-full'>
-										Setting
-									</Button>
+								<div className=' grid grid-cols-2 my-4 gap-2'>
 									<Button color='amber' className=' w-full'>
 										Convert
 									</Button>
@@ -71,47 +73,7 @@ const AiRobot = () => {
 										History
 									</Button>
 								</div>
-								<div>
-									<section className=' flex flex-col justify-center  mx-auto'>
-										<div className='  my-5 p-5 space-y-3 rounded-md border border-yellow-700 '>
-											<div className=' items-center flex gap-x-2'>
-												<PiChartLineDuotone className=' text-2xl' />
-												<h4 className='text-blue-gray-200 text-xl font-semibold'>
-													Ai Spot Grid
-												</h4>
-											</div>
-
-											<p className='text-gray-500 text-sm'>
-												Buy low and sell high 24/7 automatically with just one
-												click.
-											</p>
-
-											<div className='flex gap-x-2'>
-												<GiCheckMark className='text-green-500' />
-												<h4 className='text-gray-500 font-body'>
-													Volatile Markets
-												</h4>
-											</div>
-
-											<div className='flex gap-x-2'>
-												<GiCheckMark className='text-green-500' />
-												<h4 className='text-gray-500 font-body'>
-													Preset Ranges
-												</h4>
-											</div>
-
-											<div className='flex justify-between items-center'>
-												<Link
-													href='create-robot'
-													className='flex items-center gap-x-2 border cursor-pointer transition-all duration-200 hover:scale-110 p-2 rounded-md'
-												>
-													<p className='text-yellow-900'>Create</p>
-													<BsArrowRight className='text-yellow-900' />
-												</Link>
-											</div>
-										</div>
-									</section>
-								</div>
+								<div>{user?.ai_robot ? <AfterCreate /> : <BeforeCreate />}</div>
 							</div>
 						</div>
 					</div>

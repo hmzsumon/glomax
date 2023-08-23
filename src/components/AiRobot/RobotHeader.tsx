@@ -36,34 +36,37 @@ const RobotHeader = ({ ticker, setOpen, open }: any) => {
 							<h2 className='text-xl text-blue-gray-100'>{symbol}</h2>
 						</div>
 						<div>
-							{ticker?.lastPrice ? (
+							{ticker?.c ? (
 								<div className='space-y-1 '>
 									<h2
 										className={`${
-											Number(ticker?.lastPrice) > Number(ticker?.bidPrice)
+											Number(ticker?.c) > Number(ticker?.b)
 												? 'text-green-500'
-												: Number(ticker?.lastPrice) < Number(ticker?.bidPrice)
+												: Number(ticker?.c) < Number(ticker?.b)
 												? 'text-deep-orange-500'
 												: 'text-blue-gray-100'
 										}`}
 									>
 										<span>
-											{ticker?.lastPrice?.length === 10
-												? Number(ticker?.lastPrice).toLocaleString('en-US', {
+											{ticker?.c?.length === 10
+												? Number(ticker?.c).toLocaleString('en-US', {
 														minimumFractionDigits: 6,
 												  })
-												: Number(ticker?.lastPrice).toLocaleString('en-US', {
+												: Number(ticker?.c).toLocaleString('en-US', {
 														minimumFractionDigits: 2,
 												  })}
 										</span>
 										<span
 											className={` text-xs ml-1 ${
-												Number(ticker?.priceChangePercent) > 0
+												Number(ticker?.P) > 0
 													? 'text-green-500'
 													: 'text-deep-orange-500'
 											}`}
 										>
-											{ticker?.priceChangePercent}%
+											{Number(ticker?.P).toLocaleString('en-US', {
+												minimumFractionDigits: 2,
+											})}
+											%
 										</span>
 									</h2>
 									<h2 className={`text-sm space-x-2`}></h2>

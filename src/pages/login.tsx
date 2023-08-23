@@ -1,5 +1,6 @@
 import Layout from '@/Layout';
 import { toast } from 'react-toastify';
+import { fetchBaseQueryError } from '@/services/helpers';
 import {
 	Card,
 	CardBody,
@@ -12,7 +13,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { useLoginUserMutation } from '@/features/auth/authApi';
-import { fetchBaseQueryError } from '@/services/helpers';
 
 const LoginPage = () => {
 	const router = useRouter();
