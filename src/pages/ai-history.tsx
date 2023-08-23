@@ -68,10 +68,10 @@ const AiHistory = () => {
 	return (
 		<Layout>
 			<ProtectedRoute>
-				<div className='pt-20 pb-24 px-2 ai-wrapper'>
+				<div className='pt-20 pb-24  h-screen md:h-auto px-2 ai-wrapper'>
 					{/* <div className='ai-overlay'></div> */}
 					<div className=''>
-						<div className=' px-2 py-6 mx-auto rounded-lg  min-h-screen bg-black_2 md:w-7/12'>
+						<div className=' px-2 py-6 mx-auto rounded-lg  bg-black_2 md:w-7/12'>
 							{/* Header Start */}
 							<div className=' grid grid-cols-3 mb-4'>
 								<div className=' col-span-1'>
@@ -99,7 +99,7 @@ const AiHistory = () => {
 										</ul>
 										<div>
 											{aiRobots
-												?.slice((currentPage - 1) * 5, currentPage * 5)
+												?.slice((currentPage - 1) * 9, currentPage * 9)
 												.map((item: any, index: number) => {
 													const oddEven =
 														index % 2 === 0
@@ -184,7 +184,7 @@ const AiHistory = () => {
 										color='blue-gray'
 										className='font-normal text-white'
 									>
-										Page {currentPage} of {Math.ceil(aiRobots?.length / 5)}
+										Page {currentPage} of {Math.ceil(aiRobots?.length / 9)}
 									</Typography>
 									<div className='flex gap-2'>
 										<Button
@@ -201,8 +201,8 @@ const AiHistory = () => {
 											color='blue-gray'
 											size='sm'
 											disabled={
-												currentPage === Math.ceil(aiRobots?.length / 5) ||
-												aiRobots?.length < 5
+												currentPage === Math.ceil(aiRobots?.length / 9) ||
+												aiRobots?.length < 9
 											}
 											onClick={() => setCurrentPage(currentPage + 1)}
 										>

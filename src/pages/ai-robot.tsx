@@ -31,7 +31,7 @@ const AiRobot = () => {
 											AI Robot Trading
 										</h1>
 										<p className='text-gray-500  text-sm my-2 '>
-											Deploy RapidWin automation tools to trade crypto like a
+											Deploy Glomax automation tools to trade crypto like a
 											pro.Identify and replicate trading strategies on the
 											largest exchange with unparalleled liquidity.
 										</p>

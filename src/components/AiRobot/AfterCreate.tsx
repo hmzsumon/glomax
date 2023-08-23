@@ -61,7 +61,7 @@ const AfterCreate = () => {
 							<div className=' hidden md:block left-2 top-2'>
 								<ClockLoader size={20} color='#FFA000' />
 							</div>
-							<h4 className='text-blue-gray-200 text-sm md:text-xl font-semibold'>
+							<h4 className='text-blue-gray-200 text-xl font-bold'>
 								Ai Robot Running
 							</h4>
 						</div>
