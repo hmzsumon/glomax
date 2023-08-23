@@ -109,7 +109,7 @@ const AiHistory = () => {
 														<>
 															<ul
 																key={index}
-																className={`${oddEven} text-xs md:text-sm grid grid-cols-4 px-2 py-4 cursor-pointer transition-colors `}
+																className={`${oddEven} text-xs md:text-sm grid grid-cols-4 px-2 py-3 cursor-pointer transition-colors `}
 																onClick={() => handleShowMore(item?._id)}
 															>
 																<li>
@@ -178,7 +178,7 @@ const AiHistory = () => {
 							</div>
 							{/* Footer Start */}
 							{aiRobots?.length > 0 && (
-								<div className='flex items-center justify-between px-4 py-2 border-t border-blue-gray-800 mt-2'>
+								<div className=' sticky flex items-center justify-between px-4 py-2 border-t border-blue-gray-800 mt-2'>
 									<Typography
 										variant='small'
 										color='blue-gray'
