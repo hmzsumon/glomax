@@ -42,6 +42,16 @@ export const aiRobotApi = apiSlice.injectEndpoints({
 			query: () => `/aiRobot/all`,
 			providesTags: ['AiRobot'],
 		}),
+
+		// update aiRobot auto_create
+		updateAiRobotAutoCreate: builder.mutation({
+			query: (data) => ({
+				url: `/aiRobot/autoCreate`,
+				method: 'PUT',
+				body: data,
+			}),
+			invalidatesTags: ['User', 'AiRobot'],
+		}),
 	}),
 });
 
@@ -51,4 +61,5 @@ export const {
 	useCancelAiRobotMutation,
 	useEditAiRobotMutation,
 	useGetAllAiRobotQuery,
+	useUpdateAiRobotAutoCreateMutation,
 } = aiRobotApi;

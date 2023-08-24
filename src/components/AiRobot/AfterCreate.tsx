@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { fetchBaseQueryError } from '@/services/helpers';
 import {
 	useCancelAiRobotMutation,
 	useMyAiRobotQuery,
+	useUpdateAiRobotAutoCreateMutation,
 } from '@/features/aiRobot/aiRobotApi';
 import Link from 'next/link';
 import { BsArrowRight } from 'react-icons/bs';
 import { GiCheckMark } from 'react-icons/gi';
 import { PiChartLineDuotone } from 'react-icons/pi';
-import { formDateWithTime, formDateWithTimeToLocal } from '@/utils/functions';
+import { formDateWithTimeToLocal } from '@/utils/functions';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import ClockLoader from 'react-spinners/ClockLoader';
 import {
@@ -18,7 +19,9 @@ import {
 	DialogHeader,
 	DialogBody,
 	DialogFooter,
+	Switch,
 } from '@material-tailwind/react';
+import { text } from 'stream/consumers';
 
 const AfterCreate = () => {
 	const { data, isLoading, isError, isSuccess, error } =
@@ -34,9 +37,43 @@ const AfterCreate = () => {
 			error: c_error,
 		},
 	] = useCancelAiRobotMutation();
+	const [
+		updateAiRobotAutoCreate,
+		{
+			isError: a_isError,
+			isSuccess: a_isSuccess,
+			isLoading: a_isLoading,
+			error: a_error,
+		},
+	] = useUpdateAiRobotAutoCreateMutation();
 	const [more, setMore] = useState<boolean>(false);
 	const [open, setOpen] = React.useState(false);
+	const [switchOn, setSwitchOn] = React.useState(false);
 	const handleOpen = () => setOpen(!open);
+
+	// handle switch
+	const handleSwitch = () => {
+		setSwitchOn(!switchOn);
+		updateAiRobotAutoCreate({ auto_create: !switchOn, robot_id: aiRobot?._id });
+	};
+
+	useEffect(() => {
+		if (aiRobot?.auto_create) {
+			setSwitchOn(true);
+		} else {
+			setSwitchOn(false);
+		}
+	}, [aiRobot]);
+
+	useEffect(() => {
+		if (a_isSuccess) {
+			toast.success('Ai Robot auto create updated successfully');
+		}
+
+		if (a_isError && a_error) {
+			toast.error((a_error as fetchBaseQueryError).data.message);
+		}
+	}, [a_isSuccess, a_isError, a_isLoading, a_error]);
 
 	useEffect(() => {
 		if (c_isSuccess) {
@@ -53,6 +90,17 @@ const AfterCreate = () => {
 		<div>
 			<section className=' flex flex-col justify-center  mx-auto'>
 				<div className='relative  my-5 p-5 space-y-3 rounded-md border border-yellow-700 '>
+					<div className=' absolute top-1 right-6'>
+						<Switch
+							color='green'
+							label={`Auto Create ${switchOn ? 'On' : 'Off'}`}
+							checked={switchOn}
+							labelProps={{
+								className: 'text-blue-gray-200 text-left',
+							}}
+							onChange={handleSwitch}
+						/>
+					</div>
 					<div className=' flex items-center justify-between'>
 						<div className='  flex-col md:flex-row items-center flex gap-x-2'>
 							<div className=' absolute md:hidden left-2 top-2'>
