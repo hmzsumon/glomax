@@ -60,7 +60,9 @@ export default function Header() {
 										  })
 										: '0.00'}{' '}
 								</span>
-								<BiSolidWallet className='inline-block ml-2 text-xl' />
+								<Link href='/deposit'>
+									<BiSolidWallet className='inline-block ml-2 cursor-pointer hover:text-yellow-700 text-xl hover:scale-125 transition-all  ' />
+								</Link>
 							</div>
 
 							<Avatar

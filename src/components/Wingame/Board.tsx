@@ -303,7 +303,7 @@ const Board: React.FC<MyCombinedInterface> = ({ game }) => {
 								<input
 									className={`px-4 py-2 ${
 										textError && 'border-red-500'
-									} text-gray-700 bg-transparent border rounded hover:border-yellow-500 focus:border-yellow-600  focus:outline-none`}
+									} text-blue-gray-200 bg-transparent border rounded hover:border-yellow-500 focus:border-yellow-600  focus:outline-none`}
 									type='number'
 									value={amount}
 									onChange={(e) => handleChange(e)}

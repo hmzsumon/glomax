@@ -5,9 +5,10 @@ import { RiFileCopyFill } from 'react-icons/ri';
 
 type CopyToClipboardProps = {
 	text: string;
+	size?: string;
 };
 
-const CopyToClipboard: React.FC<CopyToClipboardProps> = ({ text }) => {
+const CopyToClipboard: React.FC<CopyToClipboardProps> = ({ text, size }) => {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const copyToClipboard = async () => {
@@ -32,11 +33,13 @@ const CopyToClipboard: React.FC<CopyToClipboardProps> = ({ text }) => {
 	return (
 		<div>
 			<button onClick={copyToClipboard}>
-				{isCopied ? (
-					<span className='ml-2 text-xs text-green-500'>Copied</span>
-				) : (
-					<RiFileCopyFill className='inline-block ml-2 text-sm cursor-pointer text-blue-gray-400' />
-				)}
+				<RiFileCopyFill
+					className={` inline-block ml-2 ${
+						size ? size : 'text-sm'
+					}  cursor-pointer ${
+						isCopied ? 'text-green-500' : 'text-blue-gray-400'
+					} `}
+				/>
 			</button>
 		</div>
 	);
