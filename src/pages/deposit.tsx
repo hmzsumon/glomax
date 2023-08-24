@@ -17,7 +17,7 @@ const Deposit = () => {
 	const router = useRouter();
 
 	const [textError, setTextError] = useState<string>('');
-	const [amount, setAmount] = useState<number>();
+	const [amount, setAmount] = useState<any>();
 	const [transactionId, setTransactionId] = useState<string>('');
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(!open);
