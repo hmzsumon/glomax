@@ -42,7 +42,7 @@ const Deposit = () => {
 	return (
 		<Layout>
 			<ProtectedRoute>
-				<div className='pt-14 md:pt-[5.5rem] px-2 md:pb-[6rem]'>
+				<div className='pt-14 md:pt-[5.5rem] px-2 md:pb-[6rem] h-auto'>
 					<div className='mx-auto md:w-6/12 py-4 px-4 rounded bg-black_2'>
 						<div className=' flex items-center justify-between '>
 							<div className=' '>
