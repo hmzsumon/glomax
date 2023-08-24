@@ -14,7 +14,12 @@ import { HiArrowSmLeft } from 'react-icons/hi';
 import { useSelector } from 'react-redux';
 import { BeatLoader } from 'react-spinners';
 import socketIOClient from 'socket.io-client';
-import { Dialog, DialogBody } from '@material-tailwind/react';
+import {
+	Dialog,
+	DialogBody,
+	Checkbox,
+	Typography,
+} from '@material-tailwind/react';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import { useTickerContext } from '@/TickerContext';
 import Link from 'next/link';
@@ -64,12 +69,14 @@ const CreateRobot = () => {
 	const [tickers, setTickers] = useState<any[]>([]);
 	const [open, setOpen] = useState<boolean>(false);
 	const [openModal, setOpenModal] = useState<boolean>(false);
+	const [autoCreate, setAutoCreate] = useState<boolean>(false);
 	const handleOpen = () => setOpenModal(!openModal);
 
 	useEffect(() => {
 		if (mode === 'edit' && aiRobot) {
 			setGrid(aiRobot?.grid_no);
 			setAmount(aiRobot?.current_investment);
+			setAutoCreate(aiRobot?.auto_create);
 
 			if (aiRobot?.grid_no == 1) {
 				setMinAmount(30);
@@ -145,7 +152,9 @@ const CreateRobot = () => {
 			price_range:
 				Number(ticker?.l).toFixed(2) + ' - ' + Number(ticker?.h).toFixed(2),
 			last_price: ticker?.c,
+			auto_create: autoCreate,
 		};
+		// console.log(data);
 		createAiRobot(data);
 	};
 
@@ -159,6 +168,7 @@ const CreateRobot = () => {
 				Number(ticker?.l).toFixed(2) + ' - ' + Number(ticker?.h).toFixed(2),
 			last_price: ticker?.c,
 			robot_id: aiRobot?._id,
+			auto_create: autoCreate,
 		};
 		editAiRobot(data);
 	};
@@ -261,7 +271,7 @@ const CreateRobot = () => {
 						<div>
 							<div className=' flex items-center justify-between'>
 								<h2 className=''>3. Investment</h2>
-								<div className=' flex items-center gap-x-1 text-xs pr-2'>
+								<div className=' my-2 flex items-center gap-x-1 text-xs pr-2'>
 									Avbl:{' '}
 									<span
 										className={`text-blue-gray-300 ${
@@ -300,6 +310,45 @@ const CreateRobot = () => {
 							)}
 						</div>
 
+						{/* Start Advance Option */}
+						<div>
+							<div className=' my-1 flex items-center justify-between'>
+								<h2 className=''>4. Advance Option </h2>
+							</div>
+							<div className=''>
+								<Checkbox
+									label={
+										<div>
+											<Typography className='font-medium text-blue-gray-200'>
+												Auto Create Ai Spot Grids
+											</Typography>
+											<Typography
+												variant='small'
+												className='font-normal text-blue-gray-500'
+											>
+												Ai Robot&apos;ll be able to create Ai Spot Grids after
+												24 hours.
+											</Typography>
+										</div>
+									}
+									color='amber'
+									containerProps={{
+										className: '-mt-5',
+									}}
+									checked={autoCreate}
+									onChange={(e) => setAutoCreate(e.target.checked)}
+								/>
+							</div>
+
+							{/* {stateError && (
+								<small>
+									<span className='text-red-500 ml-1'>{errorText}</span>
+								</small>
+							)} */}
+						</div>
+						{/* End Advance Option */}
+
+						{/* Start Submit Button */}
 						<div className='my-4 '>
 							<button
 								className='w-full py-2 disabled:opacity-40 disabled:cursor-not-allowed font-bold text-gray-800 bg-yellow-700 rounded-md '
@@ -317,6 +366,7 @@ const CreateRobot = () => {
 								{mode === 'edit' ? 'Update Robot' : 'Create Robot'}
 							</button>
 						</div>
+						{/* End Submit Button */}
 					</div>
 					<Market open={open} setOpen={setOpen} tickers={tickers} />
 				</div>
