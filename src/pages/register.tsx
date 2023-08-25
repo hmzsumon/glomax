@@ -404,7 +404,10 @@ const SignupPage = () => {
 										className='ml-2 text-xs font-medium text-blue-gray-100 dark:text-gray-300'
 									>
 										I confirm that I am 18 years old and I have read the
-										<Link href='/' className='ml-1 text-yellow-700 underline'>
+										<Link
+											href='/privacy'
+											className='ml-1 text-yellow-700 underline'
+										>
 											Terms of Service.
 										</Link>{' '}
 									</label>

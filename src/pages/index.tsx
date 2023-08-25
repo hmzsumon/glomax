@@ -1,3 +1,4 @@
+import { NextPage } from 'next';
 import Head from 'next/head';
 import Hero from '@components/Home/Hero';
 import SimpleSlider from '@components/Home/Carousel';
@@ -8,7 +9,9 @@ import { useSelector } from 'react-redux';
 import Footer from '@/Layout/Footer/Footer';
 import Notice from '@/components/Home/Notice';
 import Menu from '@/components/Home/Menu';
-export default function Home() {
+import Cookies from 'js-cookie';
+const Home: NextPage = () => {
+	console.log(Cookies.get('token'));
 	const { isAuthenticated } = useSelector((state: any) => state.auth);
 	console.log(isAuthenticated);
 	return (
@@ -24,4 +27,6 @@ export default function Home() {
 			</main>
 		</Layout>
 	);
-}
+};
+
+export default Home;

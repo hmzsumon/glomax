@@ -13,8 +13,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { useLoginUserMutation } from '@/features/auth/authApi';
+import { NextPage } from 'next';
 
-const LoginPage = () => {
+const LoginPage: NextPage = () => {
 	const router = useRouter();
 	const [loginUser, { isLoading, isError, isSuccess, error }] =
 		useLoginUserMutation();
@@ -62,7 +63,7 @@ const LoginPage = () => {
 					<form onSubmit={handleSubmit}>
 						<Card className='bg-black_2  opacity-[0.95]'>
 							<Typography className='mt-4 text-2xl font-bold text-center text-blue-gray-200'>
-								Login
+								Login to your account
 							</Typography>
 							<CardBody className='flex flex-col gap-4'>
 								<Input
