@@ -4,4 +4,5 @@ export type fetchBaseQueryError = FetchBaseQueryError & {
 	data: {
 		message: string;
 	};
+	status: number;
 };

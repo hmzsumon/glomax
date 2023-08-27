@@ -16,32 +16,24 @@ import useTimer from '@/hooks/useTimer';
 import { useSelector } from 'react-redux';
 import { IoIosArrowDown } from 'react-icons/io';
 import ClockLoader from 'react-spinners/ClockLoader';
-import TradeDetails from './TradeDetails';
+import Deposit from './Deposit';
+import { formDate } from '@/utils/functions';
 
 const headers = [
 	{
 		id: 1,
-		name: 'Symbol',
+		name: 'Date',
 		class: 'text-left',
 	},
-	// {
-	// 	id: 2,
-	// 	name: 'O-Price',
-	// 	class: 'text-center',
-	// },
-	// {
-	// 	id: 3,
-	// 	name: 'C-Price',
-	// 	class: 'text-center',
-	// },
+
 	{
 		id: 4,
-		name: 'Type',
+		name: 'Amount',
 		class: 'text-center',
 	},
 	{
 		id: 5,
-		name: 'Amount',
+		name: 'Status',
 		class: 'text-center',
 	},
 	{
@@ -51,7 +43,7 @@ const headers = [
 	},
 ];
 
-const TradeRecords = ({ records }: any) => {
+const DepositRecords = ({ records }: any) => {
 	const router = useRouter();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [showMore, setShowMore] = useState(false);
@@ -98,30 +90,14 @@ const TradeRecords = ({ records }: any) => {
 							{records?.slice((currentPage - 1) * 5, currentPage * 5).map(
 								(
 									game: {
-										symbol: string;
-										trade_type: string;
-										profit: number;
+										createdAt: Date;
+										amount: string;
 										status: string;
-										result: string;
-										trade_amount: number;
 										_id: string;
-
-										open_price: number;
-										close_price: number;
 									},
 									index: number
 								) => {
-									const {
-										symbol,
-										trade_type,
-										profit,
-										status,
-										trade_amount,
-										close_price,
-										open_price,
-										result,
-										_id,
-									} = game;
+									const { createdAt, amount, status, _id } = game;
 									const oddEven =
 										index % 2 === 0 ? 'bg-blue-gray-800' : 'bg-blue-gray-900';
 
@@ -135,37 +111,32 @@ const TradeRecords = ({ records }: any) => {
 												onClick={() => handleShowMore(_id)}
 											>
 												<li className=''>
-													<p className='font-normal text-left'>{symbol}</p>
+													<p className='font-normal text-left'>
+														{formDate(createdAt)}
+													</p>
 												</li>
 
-												<li className=''>
-													<div className='flex-col md:flex'>
-														{trade_type && (
-															<p
-																className={`capitalize text-center ${
-																	trade_type === 'up'
-																		? 'text-[#388E3C]'
-																		: 'text-[#D32F2F]'
-																}`}
-															>
-																{trade_type}
-															</p>
-														)}
-													</div>
+												<li className='text-center '>
+													{Number(amount).toLocaleString('en-US', {
+														style: 'currency',
+														currency: 'USD',
+													})}
 												</li>
 												<li className=''>
-													{result === 'win' && (
+													{status === 'approved' && (
 														<p className='capitalize text-center text-[#388E3C]'>
-															+ {Number(profit).toFixed(2)} $
+															{status}
 														</p>
 													)}
-													{result === 'loss' && (
+													{status === 'rejected' && (
 														<p className='capitalize text-center text-[#D32F2F]'>
-															- {Number(trade_amount).toFixed(2)} $
+															{status}
 														</p>
 													)}
 													{status === 'pending' && (
-														<ClockLoader size={15} color='#FFA000' />
+														<p className='text-center text-orange-500 capitalize'>
+															{status}
+														</p>
 													)}
 												</li>
 
@@ -181,10 +152,7 @@ const TradeRecords = ({ records }: any) => {
 											</div>
 											{showMore && selected_id === _id && (
 												<div className=''>
-													<h2 className='my-2 text-center text-blue-gray-200'>
-														Trad Details
-													</h2>
-													<TradeDetails record={selectedItem} />
+													<Deposit record={selectedItem} />
 												</div>
 											)}
 										</>
@@ -238,4 +206,4 @@ const TradeRecords = ({ records }: any) => {
 	);
 };
 
-export default TradeRecords;
+export default DepositRecords;

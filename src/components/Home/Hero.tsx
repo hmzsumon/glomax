@@ -62,7 +62,7 @@ const Hero = () => {
 								}
 							>
 								<BiUser className='text-2xl ' />
-								Sign up with Email of Phone
+								Sign up with Email or Phone
 							</button>
 							<div className='grid items-center grid-cols-12'>
 								<div className=' col-span-3 h-[1px] bg-gray-400 '></div>
@@ -98,7 +98,7 @@ const Hero = () => {
 						</div>
 					</div>
 				</div>
-				<div className='hidden  grid-cols-2 gap-2 w-full md:flex items-center justify-center'>
+				<div className='items-center justify-center hidden w-full grid-cols-2 gap-2 md:flex'>
 					<img src='./rapid-logo1.png' alt='' className='w-[25rem]' />
 				</div>
 			</div>
