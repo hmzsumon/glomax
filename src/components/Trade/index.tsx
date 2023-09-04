@@ -38,7 +38,7 @@ const TradeHome: React.FC = (props) => {
 
 	useEffect(() => {
 		const socket = socketIOClient(
-			'https://rapid-trade-api-8113f7eb458c.herokuapp.com'
+			'https://glomax-trade-api-372edeb4df58.herokuapp.com'
 		);
 		socket.on('tickers', (data: any[]) => {
 			setTickers(data);
