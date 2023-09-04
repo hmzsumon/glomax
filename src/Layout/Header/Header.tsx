@@ -20,8 +20,10 @@ import { useLogoutUserMutation } from '@/features/auth/authApi';
 import { WalletIcon } from '@/global/icons/CommonIcons';
 import CopyToClipboard from '@/global/CopyToClipboard';
 import UserInfo from './UserInfo';
+import Cookies from 'js-cookie';
 
 export default function Header() {
+	const token = Cookies.get('token');
 	const [logoutUser, { isSuccess }] = useLogoutUserMutation();
 	const { isAuthenticated, user } = useSelector((state: any) => state.auth);
 	const [openRight, setOpenRight] = React.useState(false);
@@ -49,7 +51,7 @@ export default function Header() {
 					<Link href='/'>
 						<Image src='/rapid-logo1.png' alt='logo' width={100} height={40} />
 					</Link>
-					{isAuthenticated ? (
+					{token ? (
 						<div className='flex items-center gap-4'>
 							<div className='px-2 py-1 mr-4 bg-gray-900 rounded-md '>
 								<span>
@@ -61,7 +63,7 @@ export default function Header() {
 										: '0.00'}{' '}
 								</span>
 								<Link href='/deposit'>
-									<BiSolidWallet className='inline-block ml-2 cursor-pointer hover:text-yellow-700 text-xl hover:scale-125 transition-all  ' />
+									<BiSolidWallet className='inline-block ml-2 text-xl transition-all cursor-pointer hover:text-yellow-700 hover:scale-125 ' />
 								</Link>
 							</div>
 

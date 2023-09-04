@@ -22,7 +22,7 @@ const WingameFive = () => {
 	const handleOpen = () => setOpen(!open);
 
 	useEffect(() => {
-		const socket = socketIOClient(ioBaseUrl);
+		const socket = socketIOClient(ioBaseUrl, { transports: ['websocket'] });
 
 		socket.on('result-pop', (data) => {
 			// find this user particular data and set it to response

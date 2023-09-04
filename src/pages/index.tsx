@@ -11,9 +11,7 @@ import Notice from '@/components/Home/Notice';
 import Menu from '@/components/Home/Menu';
 import Cookies from 'js-cookie';
 const Home: NextPage = () => {
-	console.log(Cookies.get('token'));
 	const { isAuthenticated } = useSelector((state: any) => state.auth);
-	console.log(isAuthenticated);
 	return (
 		<Layout>
 			<main className={`pt-20 ${isAuthenticated && 'pb-14'}`}>

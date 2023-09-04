@@ -5,7 +5,9 @@ import Head from 'next/head';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import TradeFooter from './Footer/TradeFooter';
+import Cookies from 'js-cookie';
 const Layout = ({ children }: PropsWithChildren<{}>) => {
+	const token = Cookies.get('token');
 	const { isAuthenticated } = useSelector((state: any) => state.auth);
 	const router = useRouter();
 	return (
@@ -15,7 +17,7 @@ const Layout = ({ children }: PropsWithChildren<{}>) => {
 			</Head>
 			<Header />
 			{children}
-			{isAuthenticated && (
+			{token && (
 				<>{router.pathname !== '/trade' ? <FooterNav /> : <TradeFooter />}</>
 			)}
 		</>

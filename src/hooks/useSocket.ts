@@ -9,7 +9,7 @@ const useSocket = (): Socket => {
 	const [socket, setSocket] = useState<Socket | null>(null);
 
 	useEffect(() => {
-		const socket = io(ioBaseUrl); // Replace with your Socket.IO server URL
+		const socket = io(ioBaseUrl, { transports: ['websocket'] }); // Replace with your Socket.IO server URL
 		setSocket(socket);
 
 		// Clean up the socket connection on unmount

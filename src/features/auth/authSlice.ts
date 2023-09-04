@@ -28,6 +28,7 @@ export const authSlice = createSlice({
 			});
 		},
 		logoutUser: (state) => {
+			console.log('logoutUser');
 			state.user = null;
 			state.isAuthenticated = false;
 			// Remove token and user info from cookies
