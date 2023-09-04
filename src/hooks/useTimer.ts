@@ -20,7 +20,9 @@ const useTimer = ({ gameType }: TimerOptions): TimerState => {
 	const [timer, setTimer] = useState<number>(0);
 
 	useEffect(() => {
-		const socket: Socket = io(ioBaseUrl);
+		const socket: Socket = io(ioBaseUrl, {
+			transports: ['websocket', 'polling'],
+		});
 
 		socket.on('connect', () => {
 			// console.log('Connected to Socket.IO server', socket.id);

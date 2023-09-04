@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import Footer from '@/Layout/Footer/Footer';
 import Notice from '@/components/Home/Notice';
 import Menu from '@/components/Home/Menu';
-import Cookies from 'js-cookie';
+
 const Home: NextPage = () => {
 	const { isAuthenticated } = useSelector((state: any) => state.auth);
 	return (

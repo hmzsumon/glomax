@@ -58,7 +58,7 @@ const Market = () => {
 	const [ticker, setTicker] = React.useState<any>(null);
 	useEffect(() => {
 		const socket = socketIOClient(
-			'https://rapid-trade-api-8113f7eb458c.herokuapp.com'
+			'https://glomax-trade-api-372edeb4df58.herokuapp.com'
 		);
 		socket.on('tickers', (data: any[]) => {
 			// console.log(data);
@@ -76,9 +76,9 @@ const Market = () => {
 		<Layout>
 			<ProtectedRoute>
 				<div className='pt-14 md:pt-[5.5rem] pb-[4.5rem] md:pb-[5rem]'>
-					<div className='mx-auto md:w-6/12 py-4 rounded bg-black_2'>
+					<div className='py-4 mx-auto rounded md:w-6/12 bg-black_2'>
 						<div>
-							<h2 className=' text-center text-xl text-blue-gray-300'>
+							<h2 className='text-xl text-center text-blue-gray-300'>
 								Market Overview{' '}
 							</h2>
 						</div>
@@ -93,7 +93,7 @@ const Market = () => {
 							/>
 						</div>
 						<div>
-							<ul className=' grid grid-cols-3 px-2 py-1'>
+							<ul className='grid grid-cols-3 px-2 py-1 '>
 								{headers.map((header) => (
 									<li
 										key={header.id}
@@ -108,13 +108,13 @@ const Market = () => {
 								<div className=''>
 									{searchResults.map((ticker, index) => (
 										<ul key={index} className='grid grid-cols-3 px-2 py-1'>
-											<li className='text-left text-gray-500 font-bold'>
+											<li className='font-bold text-left text-gray-500'>
 												<h2 className=''>{ticker?.symbol}</h2>
-												<p className=' text-xs'>
+												<p className='text-xs '>
 													Vol {formatValue(ticker?.quoteVolume)}
 												</p>
 											</li>
-											<li className=' w-7/12 mx-auto text-left  text-gray-500 font-bold'>
+											<li className='w-7/12 mx-auto font-bold text-left text-gray-500 '>
 												<h2
 													className={` flex flex-col ${
 														Number(ticker?.lastPrice) > Number(ticker?.bidPrice)
@@ -125,7 +125,7 @@ const Market = () => {
 															: 'text-blue-gray-100'
 													}`}
 												>
-													<span className=' text-xl'>
+													<span className='text-xl '>
 														{ticker?.lastPrice?.length === 10
 															? Number(ticker?.lastPrice).toLocaleString(
 																	'en-US',
@@ -140,7 +140,7 @@ const Market = () => {
 																	}
 															  )}
 													</span>
-													<span className=' text-blue-gray-300 text-xs'>
+													<span className='text-xs text-blue-gray-300'>
 														$
 														{ticker?.lastPrice?.length === 10
 															? Number(ticker?.lastPrice).toLocaleString(
@@ -158,7 +158,7 @@ const Market = () => {
 													</span>
 												</h2>
 											</li>
-											<li className='text-right text-gray-500 font-bold'>
+											<li className='font-bold text-right text-gray-500'>
 												<button
 													className={` w-[50%] rounded-sm text-blue-gray-100 px-2 p-2 text-xs ${
 														Number(ticker?.priceChangePercent) > 0
@@ -176,13 +176,13 @@ const Market = () => {
 								<div className=''>
 									{tickers.map((ticker, index) => (
 										<ul key={index} className='grid grid-cols-3 px-2 py-1'>
-											<li className='text-left text-gray-500 font-bold'>
+											<li className='font-bold text-left text-gray-500'>
 												<h2 className=''>{ticker?.symbol}</h2>
-												<p className=' text-xs'>
+												<p className='text-xs '>
 													Vol {formatValue(ticker?.quoteVolume)}
 												</p>
 											</li>
-											<li className=' w-7/12 mx-auto text-left  text-gray-500 font-bold'>
+											<li className='w-7/12 mx-auto font-bold text-left text-gray-500 '>
 												<h2
 													className={` flex flex-col ${
 														Number(ticker?.lastPrice) > Number(ticker?.bidPrice)
@@ -193,7 +193,7 @@ const Market = () => {
 															: 'text-blue-gray-100'
 													}`}
 												>
-													<span className=' text-xl'>
+													<span className='text-xl '>
 														{ticker?.lastPrice?.length === 10
 															? Number(ticker?.lastPrice).toLocaleString(
 																	'en-US',
@@ -208,7 +208,7 @@ const Market = () => {
 																	}
 															  )}
 													</span>
-													<span className=' text-blue-gray-300 text-xs'>
+													<span className='text-xs text-blue-gray-300'>
 														$
 														{ticker?.lastPrice?.length === 10
 															? Number(ticker?.lastPrice).toLocaleString(
@@ -226,7 +226,7 @@ const Market = () => {
 													</span>
 												</h2>
 											</li>
-											<li className='text-right text-gray-500 font-bold'>
+											<li className='font-bold text-right text-gray-500'>
 												<button
 													className={` w-[50%] rounded-sm text-blue-gray-100 px-2 p-2 text-xs ${
 														Number(ticker?.priceChangePercent) > 0

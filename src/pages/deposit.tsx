@@ -21,7 +21,7 @@ import {
 	useCreateDepositRequestMutation,
 	useGetMyDepositsQuery,
 } from '@/features/deposit/depositApi';
-import socketIOClient from 'socket.io-client';
+
 import DepositRecords from '@/components/Deposits/DepositRecords';
 const Deposit = () => {
 	const [createDepositRequest, { isError, isSuccess, isLoading, error }] =
@@ -36,7 +36,7 @@ const Deposit = () => {
 	} = useGetMyDepositsQuery(undefined);
 
 	const { deposits } = data || [];
-	console.log('deposits', deposits);
+	// console.log('deposits', deposits);
 
 	const [textError, setTextError] = useState<string>('');
 	const [tnxError, setTnxError] = useState<string>('');

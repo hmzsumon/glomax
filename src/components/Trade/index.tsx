@@ -58,7 +58,7 @@ const TradeHome: React.FC = (props) => {
 			<div>
 				<div className='w-full px-4 mx-auto '>
 					<TradeHeader setOpen={setOpen} open={open} ticker={ticker} />
-					<div className='relative flex flex-col items-center justify-between  space-y-3'>
+					<div className='relative flex flex-col items-center justify-between space-y-3'>
 						<div className='absolute top-[40%]'>
 							<img src='/rapid-logo1.png' alt='' className='w-20 ' />
 						</div>

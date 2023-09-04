@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import CopyToClipboard from '@/global/CopyToClipboard';
 import Avatar from '@/components/Profile/Avatar';
-import UserFullName from '@/components/Profile/UserFullName';
+
 import { useLoadUserQuery } from '@/features/auth/authApi';
 
 const Profile = () => {
@@ -19,7 +19,7 @@ const Profile = () => {
 						<div className='p-4 md:w-7/12 rounded-md bg-black_2 opacity-[0.95] mx-auto'>
 							<div className=''>
 								<Avatar />
-								<div className='md:w-6/12 mx-auto my-6 '>
+								<div className='mx-auto my-6 md:w-6/12 '>
 									<div className='space-y-2 list-none '>
 										<div className='flex gap-2 '>
 											<li>Username</li>
