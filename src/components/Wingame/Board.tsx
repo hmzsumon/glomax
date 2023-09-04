@@ -30,7 +30,7 @@ const buttons = [
 		class: 'btn-0',
 		color: 'bg-[#6739b6]',
 		colors: ['#6739B6', '#D32F2F'],
-		profit: 3,
+		profit: 6,
 	},
 	{
 		id: 2,
@@ -38,7 +38,7 @@ const buttons = [
 		title: 'Selected 1',
 		color: 'bg-green-700',
 		colors: ['#388E3C'],
-		profit: 3,
+		profit: 6,
 	},
 	{
 		id: 3,
@@ -46,7 +46,7 @@ const buttons = [
 		title: 'Selected 2',
 		color: 'bg-red-700',
 		colors: ['#D32F2F'],
-		profit: 3,
+		profit: 6,
 	},
 	{
 		id: 4,
@@ -54,7 +54,7 @@ const buttons = [
 		title: 'Selected 3',
 		color: 'bg-green-700',
 		colors: ['#388E3C'],
-		profit: 3,
+		profit: 6,
 	},
 	{
 		id: 5,
@@ -62,7 +62,7 @@ const buttons = [
 		title: 'Selected 4',
 		color: 'bg-red-700',
 		colors: ['#D32F2F'],
-		profit: 3,
+		profit: 6,
 	},
 	{
 		id: 6,
@@ -71,7 +71,7 @@ const buttons = [
 		class: 'btn-5',
 		color: 'bg-[#6739b6]',
 		colors: ['#6739B6', '#388E3C'],
-		profit: 3,
+		profit: 6,
 	},
 	{
 		id: 7,
@@ -79,7 +79,7 @@ const buttons = [
 		title: 'Selected 6',
 		color: 'bg-red-700',
 		colors: ['#D32F2F'],
-		profit: 3,
+		profit: 6,
 	},
 	{
 		id: 8,
@@ -87,7 +87,7 @@ const buttons = [
 		title: 'Selected 7',
 		color: 'bg-green-700',
 		colors: ['#388E3C'],
-		profit: 3,
+		profit: 6,
 	},
 	{
 		id: 9,
@@ -95,7 +95,7 @@ const buttons = [
 		title: 'Selected 8',
 		color: 'bg-red-700',
 		colors: ['#D32F2F'],
-		profit: 3,
+		profit: 6,
 	},
 	{
 		id: 10,
@@ -103,7 +103,7 @@ const buttons = [
 		title: 'Selected 9',
 		color: 'bg-green-700',
 		colors: ['#388E3C'],
-		profit: 3,
+		profit: 6,
 	},
 ];
 
