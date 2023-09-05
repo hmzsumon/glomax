@@ -269,9 +269,9 @@ const CreateRobot = () => {
 						</div>
 
 						<div>
-							<div className=' flex items-center justify-between'>
+							<div className='flex items-center justify-between '>
 								<h2 className=''>3. Investment</h2>
-								<div className=' my-2 flex items-center gap-x-1 text-xs pr-2'>
+								<div className='flex items-center pr-2 my-2 text-xs gap-x-1'>
 									Avbl:{' '}
 									<span
 										className={`text-blue-gray-300 ${
@@ -305,53 +305,19 @@ const CreateRobot = () => {
 
 							{stateError && (
 								<small>
-									<span className='text-red-500 ml-1'>{errorText}</span>
+									<span className='ml-1 text-red-500'>{errorText}</span>
 								</small>
 							)}
 						</div>
 
 						{/* Start Advance Option */}
-						<div>
-							<div className=' my-1 flex items-center justify-between'>
-								<h2 className=''>4. Advance Option </h2>
-							</div>
-							<div className=''>
-								<Checkbox
-									label={
-										<div>
-											<Typography className='font-medium text-blue-gray-200'>
-												Auto Create Ai Spot Grids
-											</Typography>
-											<Typography
-												variant='small'
-												className='font-normal text-blue-gray-500'
-											>
-												Ai Robot&apos;ll be able to create Ai Spot Grids after
-												24 hours.
-											</Typography>
-										</div>
-									}
-									color='amber'
-									containerProps={{
-										className: '-mt-5',
-									}}
-									checked={autoCreate}
-									onChange={(e) => setAutoCreate(e.target.checked)}
-								/>
-							</div>
 
-							{/* {stateError && (
-								<small>
-									<span className='text-red-500 ml-1'>{errorText}</span>
-								</small>
-							)} */}
-						</div>
 						{/* End Advance Option */}
 
 						{/* Start Submit Button */}
 						<div className='my-4 '>
 							<button
-								className='w-full py-2 disabled:opacity-40 disabled:cursor-not-allowed font-bold text-gray-800 bg-yellow-700 rounded-md '
+								className='w-full py-2 font-bold text-gray-800 bg-yellow-700 rounded-md disabled:opacity-40 disabled:cursor-not-allowed '
 								disabled={
 									stateError ||
 									!ticker?.l ||
@@ -375,26 +341,26 @@ const CreateRobot = () => {
 						open={openModal}
 						handler={handleOpen}
 						size='xs'
-						className='text-white bg-black_2 px-0 overflow-auto'
+						className='px-0 overflow-auto text-white bg-black_2'
 					>
-						<div className='py-3 px-2 '>
-							<h4 className='text-xl font-bold  text-blue-gray-300'>
+						<div className='px-2 py-3 '>
+							<h4 className='text-xl font-bold text-blue-gray-300'>
 								Increase Balance
 							</h4>
-							<p className=' text-xs  text-blue-gray-400'>
+							<p className='text-xs text-blue-gray-400'>
 								Unable to place order due to insufficient balance or want to
 								increase balance. Convert assets from other wallet or deposit
 								funds to place an order.
 							</p>
 							<IoCloseCircleOutline
-								className='absolute text-2xl text-blue-gray-600 cursor-pointer right-3 top-2 hover:text-red-500'
+								className='absolute text-2xl cursor-pointer text-blue-gray-600 right-3 top-2 hover:text-red-500'
 								onClick={handleOpen}
 							/>
 						</div>
 						<hr className='my-2 border border-black_3' />
 
-						<DialogBody className=' px-2 overflow-auto'>
-							<div className=' space-y-2'>
+						<DialogBody className='px-2 overflow-auto '>
+							<div className='space-y-2 '>
 								<Link
 									href='/deposit'
 									className='flex items-center justify-between px-2 py-2 space-x-2 rounded-md bg-black_3'

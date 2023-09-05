@@ -88,9 +88,9 @@ const AfterCreate = () => {
 
 	return (
 		<div>
-			<section className=' flex flex-col justify-center  mx-auto'>
-				<div className='relative  my-5 p-5 space-y-3 rounded-md border border-yellow-700 '>
-					<div className=' absolute top-1 right-6'>
+			<section className='flex flex-col justify-center mx-auto '>
+				<div className='relative p-5 my-5 space-y-3 border border-yellow-700 rounded-md '>
+					{/* <div className='absolute  top-1 right-6'>
 						<Switch
 							color='green'
 							label={`Auto Create ${switchOn ? 'On' : 'Off'}`}
@@ -100,33 +100,33 @@ const AfterCreate = () => {
 							}}
 							onChange={handleSwitch}
 						/>
-					</div>
-					<div className=' flex items-center justify-between'>
-						<div className='  flex-col md:flex-row items-center flex gap-x-2'>
-							<div className=' absolute md:hidden left-2 top-2'>
+					</div> */}
+					<div className='flex items-center justify-between '>
+						<div className='flex flex-col items-center  md:flex-row gap-x-2'>
+							<div className='absolute  md:hidden left-2 top-2'>
 								<ClockLoader size={20} color='#FFA000' />
 							</div>
-							<div className=' hidden md:block left-2 top-2'>
+							<div className='hidden  md:block left-2 top-2'>
 								<ClockLoader size={20} color='#FFA000' />
 							</div>
-							<h4 className='text-blue-gray-200 md:text-xl font-bold'>
+							<h4 className='font-bold text-blue-gray-200 md:text-xl'>
 								Ai Robot Running
 							</h4>
 						</div>
 						<div>
-							<div className=' grid grid-cols-2 my-4 gap-2'>
+							<div className='grid grid-cols-2 gap-2 my-4 '>
 								<Link
 									href={{
 										pathname: '/create-robot',
 										query: { mode: 'edit' },
 									}}
 								>
-									<button className=' w-full bg-black_3 px-2 py-1 rounded'>
+									<button className='w-full px-2 py-1 rounded  bg-black_3'>
 										Edit
 									</button>
 								</Link>
 								<button
-									className=' w-full bg-black_3 px-2 py-1 rounded'
+									className='w-full px-2 py-1 rounded  bg-black_3'
 									onClick={handleOpen}
 								>
 									Cancel
@@ -135,9 +135,9 @@ const AfterCreate = () => {
 						</div>
 					</div>
 
-					<div className=' text-sm'>
+					<div className='text-sm '>
 						<ul>
-							<li className=' flex items-start justify-between'>
+							<li className='flex items-start justify-between '>
 								<p className=' text-blue-gray-400'>Total Investment</p>
 								<p className=' text-blue-gray-100'>
 									{Number(aiRobot?.current_investment).toLocaleString('en-US', {
@@ -145,11 +145,11 @@ const AfterCreate = () => {
 									})}
 								</p>
 							</li>
-							<li className=' flex items-start justify-between'>
+							<li className='flex items-start justify-between '>
 								<p className=' text-blue-gray-400'>Pair</p>
-								<p className=' uppercase text-blue-gray-100'>{aiRobot?.pair}</p>
+								<p className='uppercase  text-blue-gray-100'>{aiRobot?.pair}</p>
 							</li>
-							<li className=' flex items-start justify-between'>
+							<li className='flex items-start justify-between '>
 								<p className=' text-blue-gray-400'>Last Price</p>
 								<p className=' text-blue-gray-100'>
 									{Number(aiRobot?.last_price).toLocaleString('en-US', {
@@ -157,15 +157,15 @@ const AfterCreate = () => {
 									})}
 								</p>
 							</li>
-							<li className=' flex items-start justify-between'>
+							<li className='flex items-start justify-between '>
 								<p className=' text-blue-gray-400'>Price Range</p>
-								<p className=' uppercase text-blue-gray-100'>
+								<p className='uppercase  text-blue-gray-100'>
 									{aiRobot?.price_range}
 								</p>
 							</li>
-							<li className=' flex items-start justify-between'>
+							<li className='flex items-start justify-between '>
 								<p className=' text-blue-gray-400'>Created Time</p>
-								<p className=' uppercase text-blue-gray-100'>
+								<p className='uppercase  text-blue-gray-100'>
 									{formDateWithTimeToLocal(aiRobot?.open_time)}
 								</p>
 							</li>
@@ -173,53 +173,53 @@ const AfterCreate = () => {
 
 						{more && (
 							<>
-								<hr className=' my-2 border border-black_3 ' />
+								<hr className='my-2 border  border-black_3' />
 								<ul>
-									<li className=' flex items-start justify-between'>
+									<li className='flex items-start justify-between '>
 										<p className=' text-blue-gray-400'>Grid Number</p>
 										<p className=' text-blue-gray-100'>{aiRobot?.grid_no}</p>
 									</li>
-									<li className=' flex items-start justify-between'>
+									<li className='flex items-start justify-between '>
 										<p className=' text-blue-gray-400'>Profit/Grid</p>
-										<p className=' uppercase text-blue-gray-100'>
+										<p className='uppercase  text-blue-gray-100'>
 											{aiRobot?.profit_percent}
 										</p>
 									</li>
-									<li className=' flex items-start justify-between'>
+									<li className='flex items-start justify-between '>
 										<p className=' text-blue-gray-400'>Mode</p>
 										<p className=' text-blue-gray-100'>{aiRobot?.mode}</p>
 									</li>
-									<li className=' flex items-start justify-between'>
+									<li className='flex items-start justify-between '>
 										<p className=' text-blue-gray-400'>Status</p>
-										<p className='  text-blue-gray-100'>{aiRobot?.status}</p>
+										<p className=' text-blue-gray-100'>{aiRobot?.status}</p>
 									</li>
-									<li className=' flex items-start justify-between'>
+									<li className='flex items-start justify-between '>
 										<p className=' text-blue-gray-400'>Profit</p>
-										<p className=' uppercase text-blue-gray-100'>
+										<p className='uppercase  text-blue-gray-100'>
 											{Number(aiRobot?.profit).toLocaleString('en-US', {
 												minimumFractionDigits: 2,
 											})}
 										</p>
 									</li>
-									<li className=' flex items-start justify-between'>
+									<li className='flex items-start justify-between '>
 										<p className=' text-blue-gray-400'>Ai Charge</p>
-										<p className=' uppercase text-blue-gray-100'>
+										<p className='uppercase  text-blue-gray-100'>
 											{Number(aiRobot?.trade_charge).toLocaleString('en-US', {
 												minimumFractionDigits: 2,
 											})}
 										</p>
 									</li>
-									<li className=' flex items-start justify-between'>
+									<li className='flex items-start justify-between '>
 										<p className=' text-blue-gray-400'>Stop Loss</p>
-										<p className=' uppercase text-blue-gray-100'>
+										<p className='uppercase  text-blue-gray-100'>
 											{Number(aiRobot?.stop_loss).toLocaleString('en-US', {
 												minimumFractionDigits: 2,
 											})}
 										</p>
 									</li>
-									<li className=' flex items-start justify-between'>
+									<li className='flex items-start justify-between '>
 										<p className=' text-blue-gray-400'>Take Profit</p>
-										<p className=' uppercase text-blue-gray-100'>
+										<p className='uppercase  text-blue-gray-100'>
 											{Number(aiRobot?.take_profit).toLocaleString('en-US', {
 												minimumFractionDigits: 2,
 											})}
@@ -230,7 +230,7 @@ const AfterCreate = () => {
 						)}
 						<div>
 							<button
-								className=' text-yellow-700 '
+								className='text-yellow-700 '
 								onClick={() => setMore(!more)}
 							>
 								{more ? 'Less' : 'More Info'}
@@ -255,12 +255,12 @@ const AfterCreate = () => {
 					className=' bg-black_2'
 				>
 					<DialogHeader>
-						<span className=' text-sm text-blue-gray-300'>
+						<span className='text-sm  text-blue-gray-300'>
 							Are you sure you want to cancel this Ai Robot?
 						</span>
 					</DialogHeader>
 					<DialogBody>
-						<span className=' text-xs text-blue-gray-500'>
+						<span className='text-xs  text-blue-gray-500'>
 							If you cancel the Ai Spot Grid will never get the profit and 1%
 							charge applicable for this grid investment.
 						</span>
