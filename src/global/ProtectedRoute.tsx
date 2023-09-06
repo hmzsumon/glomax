@@ -8,8 +8,8 @@ import { logoutUser } from '@/features/auth/authSlice';
 const ProtectedRoute = ({ children }: PropsWithChildren<{}>) => {
 	const router = useRouter();
 	const dispatch = useDispatch();
-	const { isAuthenticated, user } = useSelector((state: any) => state.auth);
-	useLoadUserQuery(user?._id);
+	const { isAuthenticated,  } = useSelector((state: any) => state.auth);
+	// useLoadUserQuery(user?._id);
 	useEffect(() => {
 		const token = Cookies.get('token');
 		if (!token) {

@@ -110,7 +110,9 @@ const UpDown = () => {
 	};
 
 	useEffect(() => {
-		const socket = socketIOClient(ioBaseUrl);
+		const socket = socketIOClient(ioBaseUrl, {
+			transports: ['websocket', 'polling'],
+		});
 
 		socket.on('trade-pop', (data) => {
 			console.log(data);
@@ -149,12 +151,12 @@ const UpDown = () => {
 	}, [isError, isSuccess]);
 
 	return (
-		<div className=' space-y-1 '>
-			<div className=' grid gap-4 grid-cols-2 '>
+		<div className='space-y-1 '>
+			<div className='grid grid-cols-2 gap-4 '>
 				<div>
-					<li className=' rounded-md py-1 bg-black_3 flex items-center justify-around list-none'>
+					<li className='flex items-center justify-around py-1 list-none rounded-md bg-black_3'>
 						<button
-							className=' text-2xl md:text-3xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+							className='text-2xl cursor-pointer md:text-3xl disabled:opacity-50 disabled:cursor-not-allowed'
 							onClick={handleSetTimeDec}
 							disabled={isTimerRunning || time === 30000 ? true : false}
 						>
@@ -162,7 +164,7 @@ const UpDown = () => {
 						</button>
 						<span>{formatTime2(time)}</span>
 						<button
-							className=' text-xl md:text-xl cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+							className='text-xl cursor-pointer md:text-xl disabled:opacity-50 disabled:cursor-not-allowed'
 							onClick={handleSetTimeInc}
 							disabled={
 								isTimerRunning || ticker?.s !== symbol || time === 300000
@@ -175,7 +177,7 @@ const UpDown = () => {
 					</li>
 				</div>
 				<div className=''>
-					<li className='  list-none'>
+					<li className='list-none '>
 						<input
 							type='number'
 							name=''
@@ -187,20 +189,20 @@ const UpDown = () => {
 					</li>
 				</div>
 			</div>
-			<div className=' grid gap-4 grid-cols-12 '>
+			<div className='grid grid-cols-12 gap-4 '>
 				<button
 					name='down'
-					className='rounded-md py-1 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-x-4 col-span-5 bg-red-500'
+					className='flex items-center justify-center col-span-5 py-1 bg-red-500 rounded-md disabled:opacity-50 disabled:cursor-not-allowed gap-x-4'
 					onClick={handleCreateTrade}
 					disabled={
 						isTimerRunning || ticker?.s !== symbol || !ticker ? true : false
 					}
 				>
 					Down
-					<PiNavigationArrowFill className='md:text-xl  rotate-180 ' />
+					<PiNavigationArrowFill className='rotate-180 md:text-xl ' />
 				</button>
-				<div className='col-span-2 flex items-center justify-center'>
-					<div className=' bg-black_3 p-2 h-8 flex items-center justify-center rounded-md w-12'>
+				<div className='flex items-center justify-center col-span-2'>
+					<div className='flex items-center justify-center w-12 h-8 p-2 rounded-md bg-black_3'>
 						<p
 							className={`text-xs font-bold ${
 								user?.active_trade > 0
@@ -214,7 +216,7 @@ const UpDown = () => {
 					</div>
 				</div>
 				<button
-					className='rounded-md flex items-center disabled:opacity-50 justify-center gap-x-5 py-1 col-span-5 bg-green-500 disabled:cursor-not-allowed'
+					className='flex items-center justify-center col-span-5 py-1 bg-green-500 rounded-md disabled:opacity-50 gap-x-5 disabled:cursor-not-allowed'
 					name='up'
 					onClick={handleCreateTrade}
 					disabled={
@@ -222,7 +224,7 @@ const UpDown = () => {
 					}
 				>
 					UP
-					<PiNavigationArrowFill className='md:text-xl  rotate-90 ' />
+					<PiNavigationArrowFill className='rotate-90 md:text-xl ' />
 				</button>
 			</div>
 			<>
@@ -230,20 +232,20 @@ const UpDown = () => {
 					open={open}
 					handler={handleOpen}
 					size='xs'
-					className='text-white bg-black_2 px-0 overflow-auto'
+					className='px-0 overflow-auto text-white bg-black_2'
 				>
 					<div className='flex items-center justify-center py-3 '>
 						<h4 className='text-2xl font-bold text-center text-blue-gray-200'>
 							My Trade Records
 						</h4>
 						<IoCloseCircleOutline
-							className='absolute text-2xl text-blue-gray-600 cursor-pointer right-3 top-2 hover:text-red-500'
+							className='absolute text-2xl cursor-pointer text-blue-gray-600 right-3 top-2 hover:text-red-500'
 							onClick={handleOpen}
 						/>
 					</div>
 					<hr className='my-2 border border-black_3' />
 					{trade && (
-						<DialogBody className=' px-0 overflow-auto'>
+						<DialogBody className='px-0 overflow-auto '>
 							<div className='px-4 py-1 list-none text-blue-gray-400 '>
 								<div className='grid grid-cols-2'>
 									<li>Symbol</li>

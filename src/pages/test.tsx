@@ -10,7 +10,7 @@ import { useGetBitcoinDataQuery } from '@/services/app';
 const localData = ['USD', 'EUR', 'JPY', 'GBP', 'AUD'];
 const TestReduxToolkit = () => {
 	const { data, isLoading } = useGetBitcoinDataQuery();
-	console.log(data, isLoading);
+	// console.log(data, isLoading);
 	const { currency } = useAppSelector((state) => state.app);
 	const dispatch = useAppDispatch();
 
