@@ -155,19 +155,19 @@ const Board: React.FC<MyCombinedInterface> = ({ game }) => {
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(!open);
 	const [textError, setTextError] = useState<string>('');
-	const [amount, setAmount] = useState<string>('');
+	const [amount, setAmount] = useState<number>(0.1);
 
 	const [trade, setTrade] = useState<any>({});
 	// console.log('trade', trade);
 	//  handle multiplier
 	const handleMultiplier = (m: number) => {
-		setAmount((parseFloat(amount) * m).toString());
+		setAmount(amount * m);
 	};
 
 	// handle change
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setAmount(e.target.value);
-		if (amount.length > 0.1 || amount < user?.m_balance) {
+	const handleChange = (e: number) => {
+		setAmount(e);
+		if (e > 0.1 || amount < user?.m_balance) {
 			setTextError('');
 		}
 	};
@@ -176,13 +176,17 @@ const Board: React.FC<MyCombinedInterface> = ({ game }) => {
 	const handleTrade = (e: any) => {
 		handleOpen();
 		setTrade(e);
-		console.log('trade', e);
+		// console.log('trade', e);
 	};
 
 	// handle submit trade
 	const handleSubmitTrade = async () => {
-		if (amount.length < 0.1 || amount > user?.m_balance) {
-			setTextError('Insufficient balance');
+		if (amount < 0.1 || amount > user?.m_balance) {
+			if (amount < 0.1) {
+				setTextError('Minimum trade amount is $0.1');
+			} else if (amount > user?.m_balance) {
+				setTextError('Insufficient balance');
+			}
 		} else {
 			setTextError('');
 			const data = {
@@ -201,7 +205,7 @@ const Board: React.FC<MyCombinedInterface> = ({ game }) => {
 			winGameCreateTrade(data);
 			setOpen(false);
 			setTrade({});
-			setAmount('');
+			setAmount(null as any);
 			// if (res.data.status === 'success') {
 			// 	setOpen(false);
 			// 	setTrade({});
@@ -303,10 +307,11 @@ const Board: React.FC<MyCombinedInterface> = ({ game }) => {
 								<input
 									className={`px-4 py-2 ${
 										textError && 'border-red-500'
-									} text-blue-gray-200 bg-transparent border rounded hover:border-yellow-500 focus:border-yellow-600  focus:outline-none`}
+									} text-blue-gray-200 bg-transparent border rounded hover:border-yellow-500 focus:border-yellow-600  focus:outline-none placeholder:text-blue-gray-600 `}
 									type='number'
+									placeholder='> 0.1'
 									value={amount}
-									onChange={(e) => handleChange(e)}
+									onChange={(e: any) => handleChange(e.target.value)}
 								/>
 
 								{amount && (
