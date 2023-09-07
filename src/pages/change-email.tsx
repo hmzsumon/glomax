@@ -207,8 +207,13 @@ const ChangeEmail = () => {
 						</div>
 					</div>
 					{/* Dialog alert */}
-					<Dialog open={open} handler={handleOpen} size='xs'>
-						<DialogHeader className=' text-center text-xs '>
+					<Dialog
+						open={open}
+						handler={handleOpen}
+						size='xs'
+						className='bg-black_2'
+					>
+						<DialogHeader className=' text-center text-xs text-blue-gray-200 '>
 							Are You Sure You Want to Change Your Email Address?
 						</DialogHeader>
 						<DialogBody divider>
@@ -240,17 +245,25 @@ const ChangeEmail = () => {
 					</Dialog>
 
 					{/* Dialog Security */}
-					<Dialog open={open2} handler={handleOpen2} size='xs'>
-						<div className=' flex items-end justify-end my-2 mx-2'>
-							<span onClick={handleOpen2}>
-								<CloseIcon2 />
-							</span>
+					<Dialog
+						open={open2}
+						handler={handleOpen2}
+						size='xs'
+						className='bg-black_2'
+					>
+						<div className=' flex items-center justify-between'>
+							<DialogHeader className=' text-center text-blue-gray-200 font-bold '>
+								Security Verification
+							</DialogHeader>
+							<div className=' flex items-end justify-end my-2 mx-2'>
+								<span onClick={handleOpen2}>
+									<CloseIcon2 />
+								</span>
+							</div>
 						</div>
-						<DialogHeader className=' text-center text-sm font-bold '>
-							Security Verification
-						</DialogHeader>
-						<DialogBody divider>
-							<div className='my-8'>
+						<hr className='border-0.5 border-black_3' />
+						<DialogBody>
+							<div className='my-4'>
 								<div className='space-y-4 text-white '>
 									<div className=' relative flex flex-col gap-1'>
 										<label className='text-sm font-semibold text-gray-400 '>

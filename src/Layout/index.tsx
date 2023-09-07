@@ -8,6 +8,7 @@ import TradeFooter from './Footer/TradeFooter';
 import Cookies from 'js-cookie';
 import { Dialog, DialogBody, DialogFooter } from '@material-tailwind/react';
 import { IoCloseCircleOutline } from 'react-icons/io5';
+
 const Layout = ({ children }: PropsWithChildren<{}>) => {
 	const token = Cookies.get('token');
 	const { user } = useSelector((state: any) => state.auth);

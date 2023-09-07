@@ -9,7 +9,7 @@ import {
 import { NotFoundIcon } from '@/global/icons/CommonIcons';
 import { IoIosArrowDown } from 'react-icons/io';
 import ClockLoader from 'react-spinners/ClockLoader';
-import Deposit from './Deposit';
+import Withdraw from './Withdraw';
 import { formDate } from '@/utils/functions';
 
 const headers = [
@@ -36,7 +36,7 @@ const headers = [
 	},
 ];
 
-const DepositRecords = ({ records }: any) => {
+const WithdrawRecords = ({ records }: any) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [showMore, setShowMore] = useState(false);
 	const [selected_id, setSelected_id] = useState<string | null>(null);
@@ -81,7 +81,7 @@ const DepositRecords = ({ records }: any) => {
 						<div>
 							{records?.slice((currentPage - 1) * 5, currentPage * 5).map(
 								(
-									game: {
+									withdraw: {
 										createdAt: Date;
 										amount: string;
 										status: string;
@@ -89,7 +89,7 @@ const DepositRecords = ({ records }: any) => {
 									},
 									index: number
 								) => {
-									const { createdAt, amount, status, _id } = game;
+									const { createdAt, amount, status, _id } = withdraw;
 									const oddEven =
 										index % 2 === 0 ? 'bg-blue-gray-800' : 'bg-blue-gray-900';
 
@@ -120,6 +120,12 @@ const DepositRecords = ({ records }: any) => {
 															Successful
 														</p>
 													)}
+
+													{status === 'pending' && (
+														<p className='text-center text-yellow-700 capitalize '>
+															Processing
+														</p>
+													)}
 												</li>
 
 												<li className='flex items-center justify-end '>
@@ -134,7 +140,7 @@ const DepositRecords = ({ records }: any) => {
 											</div>
 											{showMore && selected_id === _id && (
 												<div className=''>
-													<Deposit record={selectedItem} />
+													<Withdraw record={selectedItem} />
 												</div>
 											)}
 										</>
@@ -188,4 +194,4 @@ const DepositRecords = ({ records }: any) => {
 	);
 };
 
-export default DepositRecords;
+export default WithdrawRecords;

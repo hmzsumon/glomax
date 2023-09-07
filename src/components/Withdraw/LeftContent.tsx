@@ -1,16 +1,53 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { fetchBaseQueryError } from '@/services/helpers';
 import ScaleLoader from 'react-spinners/ScaleLoader';
-import { Select, Option, Input } from '@material-tailwind/react';
+import {
+	Select,
+	Option,
+	Input,
+	Dialog,
+	DialogHeader,
+	DialogBody,
+} from '@material-tailwind/react';
 import PulseLoader from 'react-spinners/PulseLoader';
 import { useSelector } from 'react-redux';
 import { m } from 'framer-motion';
 import { useCreateWithdrawRequestMutation } from '@/features/withdraw/withdrawApi';
+import { CloseIcon2, ExplanationIcon } from '@/utils/icons/CommonIcons';
+import { maskEmail } from '@/utils/functions';
+import {
+	useLoadUserQuery,
+	useResendVerificationEmailMutation,
+	useSecurityVerifyMutation,
+} from '@/features/auth/authApi';
 
 const LeftContent = () => {
 	const [createWithdrawRequest, { isLoading, isSuccess, isError, error }] =
 		useCreateWithdrawRequestMutation();
+
+	// call resend email verification api
+	const [
+		resendVerificationEmail,
+		{
+			isLoading: isResendLoading,
+			isSuccess: isResendSuccess,
+			isError: isResendError,
+			error: resendError,
+		},
+	] = useResendVerificationEmailMutation();
+
+	const [
+		securityVerify,
+		{
+			isLoading: v_isLoading,
+			isSuccess: v_isSuccess,
+			isError: v_isError,
+			error: v_error,
+		},
+	] = useSecurityVerifyMutation();
+
+	const { refetch } = useLoadUserQuery();
 	const { user } = useSelector((state: any) => state.auth);
 	const [way, setWay] = React.useState<string>('crypto');
 	const [network, setNetwork] = React.useState<string>('TRC20');
@@ -20,6 +57,31 @@ const LeftContent = () => {
 	const [availableAmount, setAvailable] = React.useState<number>(0);
 	const [receiveAmount, setReceiveAmount] = React.useState<number>(0);
 	const [errorText, setErrorText] = React.useState<string>('');
+	const [code, setCode] = useState<string>('');
+	const [isResend, setIsResend] = useState<boolean>(false);
+	const [codeError, setCodeError] = useState<boolean>(false);
+	const [open2, setOpen2] = useState(false);
+	const handleOpen2 = () => setOpen2(!open2);
+
+	// handle resend email verification
+	const handleResend = () => {
+		resendVerificationEmail({ email: user?.email as string });
+		setIsResend(true);
+	};
+
+	// submit form
+	const next = (e: { preventDefault: () => void }) => {
+		e.preventDefault();
+		securityVerify({ email: user?.email, code: code });
+	};
+
+	// handle change
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setCodeError(false);
+		setErrorText('');
+		const { value } = e.target;
+		setCode(value);
+	};
 
 	// set available amount
 	useEffect(() => {
@@ -65,11 +127,28 @@ const LeftContent = () => {
 	};
 
 	useEffect(() => {
+		if (v_isError) {
+			setCodeError(true);
+			setErrorText('Invalid code');
+		}
+		if (v_isSuccess) {
+			setOpen2(false);
+			setAmount(0);
+			setCode('');
+			setIsResend(false);
+			handleSubmit();
+		}
+	}, [v_isError, v_error, v_isSuccess]);
+
+	useEffect(() => {
 		if (isError && error) {
 			toast.error((error as fetchBaseQueryError).data?.message);
 		}
 		if (isSuccess) {
+			refetch();
 			toast.success('Withdraw request created successfully');
+			setOpen2(false);
+			setAmount(0);
 		}
 	}, [isError, error, isSuccess]);
 
@@ -149,6 +228,11 @@ const LeftContent = () => {
 			</div>
 
 			<hr className='my-2 border border-blue-gray-900 ' />
+			{user?.is_withdraw_requested && (
+				<small className=' text-center text-red-500'>
+					Your withdrawal request is under processing.
+				</small>
+			)}
 			<div className='grid grid-cols-2 gap-4 '>
 				<div className='space-y-1 '>
 					<p className='text-xs text-blue-gray-600'>Receive Amount</p>
@@ -166,8 +250,14 @@ const LeftContent = () => {
 				<div className='flex items-center justify-center '>
 					<button
 						className='w-full flex items-center justify-center py-2 font-bold bg-yellow-700 rounded-lg text-blue-gray-900 disabled:opacity-50 disabled:cursor-not-allowed '
-						disabled={errorText ? true : false || !amount ? true : false}
-						onClick={handleSubmit}
+						disabled={
+							errorText
+								? true
+								: false || !amount
+								? true
+								: false || user?.is_withdraw_requested
+						}
+						onClick={handleOpen2}
 					>
 						{isLoading ? (
 							<ScaleLoader height={15} color={'#fff'} />
@@ -177,6 +267,83 @@ const LeftContent = () => {
 					</button>
 				</div>
 			</div>
+			{/* Dialog Security */}
+			<Dialog
+				open={open2}
+				handler={handleOpen2}
+				size='xs'
+				className='bg-black_2'
+			>
+				<div className=' flex items-center justify-between'>
+					<DialogHeader className=' text-center text-blue-gray-200 font-bold '>
+						Security Verification
+					</DialogHeader>
+					<div className=' flex items-end justify-end my-2 mx-2'>
+						<span onClick={handleOpen2}>
+							<CloseIcon2 />
+						</span>
+					</div>
+				</div>
+				<hr className='border-0.5 border-black_3' />
+				<DialogBody>
+					<div className='my-4'>
+						<div className='space-y-4 text-white '>
+							<div className=' relative flex flex-col gap-1'>
+								<label className='text-sm font-semibold text-gray-400 '>
+									Email Verification Code
+								</label>
+								<input
+									className={`px-4 py-2 ${
+										codeError && 'border-red-500'
+									} text-gray-700 bg-transparent border rounded hover:border-yellow-500 focus:border-yellow-600  focus:outline-none`}
+									type='text'
+									value={code}
+									onChange={(e) => handleChange(e)}
+								/>
+								<button
+									className=' absolute right-2 top-9 text-xs font-bold text-yellow-800 '
+									onClick={handleResend}
+								>
+									{isResend ? (
+										<span className=' flex text-gray-500'>
+											Verification code sent
+											<ExplanationIcon h={4} w={4} color={''} />
+										</span>
+									) : (
+										'Get code'
+									)}
+								</button>
+
+								{codeError && (
+									<p className='text-xs text-red-500'>{errorText}</p>
+								)}
+
+								{user?.email && (
+									<small className=' text-gray-500'>
+										Enter the 6-digit code sent to {maskEmail(user?.email)}
+									</small>
+								)}
+							</div>
+
+							<div className='my-6 space-y-4'>
+								<button
+									className='w-full py-3 font-semibold text-gray-800 bg-yellow-700 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-yellow-700'
+									onClick={next}
+									disabled={isLoading || isResendLoading || code.length < 6}
+								>
+									{isLoading ? (
+										<div className='flex justify-center'>
+											<ScaleLoader color={'#ffffff'} loading={true} />
+										</div>
+									) : (
+										'Next'
+									)}
+								</button>
+							</div>
+						</div>
+					</div>
+				</DialogBody>
+			</Dialog>
 		</div>
 	);
 };

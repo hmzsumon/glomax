@@ -9,9 +9,18 @@ export const withdrawApi = apiSlice.injectEndpoints({
 				method: 'POST',
 				body,
 			}),
-			invalidatesTags: ['User'],
+			invalidatesTags: ['User', 'Withdraws'],
+		}),
+
+		// get  my withdraw requests
+		getMyWithdrawRequests: builder.query<any, any>({
+			query: () => `/my-withdraws`,
+			providesTags: ['Withdraws'],
 		}),
 	}),
 });
 
-export const { useCreateWithdrawRequestMutation } = withdrawApi;
+export const {
+	useCreateWithdrawRequestMutation,
+	useGetMyWithdrawRequestsQuery,
+} = withdrawApi;
