@@ -60,6 +60,11 @@ const UpDown = () => {
 
 	// handle create trade
 	const handleCreateTrade = async (e: any) => {
+		if (user?.is_active === false) {
+			toast.warning('Your account is not active');
+			return;
+		}
+
 		if (user?.m_balance < amount) {
 			toast.warning('Insufficient balance');
 			return;
@@ -115,7 +120,7 @@ const UpDown = () => {
 		});
 
 		socket.on('trade-pop', (data) => {
-			console.log(data);
+			// console.log(data);
 			// find this user particular data and set it to trade
 			if (data.user_id === user?._id) {
 				setTrade(data);

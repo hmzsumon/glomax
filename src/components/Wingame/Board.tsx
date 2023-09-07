@@ -174,6 +174,10 @@ const Board: React.FC<MyCombinedInterface> = ({ game }) => {
 
 	// handle trade
 	const handleTrade = (e: any) => {
+		if (user?.is_active === false) {
+			toast.info('Please activate your account first');
+			return;
+		}
 		handleOpen();
 		setTrade(e);
 		// console.log('trade', e);

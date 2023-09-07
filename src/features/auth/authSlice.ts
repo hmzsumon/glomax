@@ -19,12 +19,12 @@ export const authSlice = createSlice({
 			state.token = action.payload.token;
 			state.isAuthenticated = true;
 			// Save token and user info to cookies
-			const inFiveMinutes = new Date(new Date().getTime() + 5 * 60 * 1000);
+			// const inFiveMinutes = new Date(new Date().getTime() + 5 * 60 * 1000);
 			Cookies.set('token', action.payload.token, {
-				expires: inFiveMinutes,
+				expires: 1,
 			});
 			Cookies.set('user', JSON.stringify(action.payload.user), {
-				expires: inFiveMinutes,
+				expires: 1,
 			});
 		},
 		logoutUser: (state) => {
