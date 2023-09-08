@@ -28,8 +28,10 @@ import {
 	useEditAiRobotMutation,
 	useMyAiRobotQuery,
 } from '@/features/aiRobot/aiRobotApi';
+import { useLoadUserQuery } from '@/features/auth/authApi';
 
 const CreateRobot = () => {
+	const { refetch } = useLoadUserQuery();
 	const router = useRouter();
 	const mode = router.query.mode as string;
 
@@ -178,6 +180,7 @@ const CreateRobot = () => {
 			toast.error((error as fetchBaseQueryError).data.message);
 		}
 		if (isSuccess) {
+			refetch();
 			toast.success('Ai-Robot created successfully');
 			setAmount(0);
 			setGrid(1);

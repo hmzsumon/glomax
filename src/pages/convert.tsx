@@ -17,8 +17,10 @@ import UserTradeRecords from '@/components/Wingame/UserTradeRecords';
 import ConvertRecords from '@/components/Convert/ConvertRecords';
 import { useRouter } from 'next/router';
 import { HiArrowSmLeft } from 'react-icons/hi';
+import { useLoadUserQuery } from '@/features/auth/authApi';
 
 const Withdraw = () => {
+	const { refetch } = useLoadUserQuery();
 	const router = useRouter();
 	const { user } = useSelector((state: any) => state.auth);
 	const [convert, { isError, isLoading, isSuccess, error }] =
@@ -65,6 +67,7 @@ const Withdraw = () => {
 			toast.error((error as fetchBaseQueryError).data.message);
 		}
 		if (isSuccess) {
+			refetch();
 			toast.success('Convert successful');
 			setAmount(0);
 			setConvertAmount(0);
@@ -74,12 +77,12 @@ const Withdraw = () => {
 	return (
 		<Layout>
 			<ProtectedRoute>
-				<div className='py-20 px-2 h-screen md:h-auto withdraw-wrapper'>
+				<div className='h-screen px-2 py-20 md:h-auto withdraw-wrapper'>
 					<div className='relative px-4 py-6 mx-auto rounded-lg bg-black_2 md:w-7/12'>
 						<div className='flex items-center justify-between mb-4'>
 							<div>
 								<HiArrowSmLeft
-									className='text-2xl text-blue-gray-300 cursor-pointer hover:text-blue-700'
+									className='text-2xl cursor-pointer text-blue-gray-300 hover:text-blue-700'
 									onClick={() => router.back()}
 								/>
 							</div>
@@ -96,21 +99,21 @@ const Withdraw = () => {
 							</span>
 						</div>
 
-						<div className=' space-y-4'>
-							<div className=' bg-black_3 px-2 rounded-sm'>
-								<div className=' grid grid-cols-5'>
-									<div className=' space-y-2 col-span-4 text-blue-gray-300  py-2'>
-										<div className='flex items-center  justify-between'>
+						<div className='space-y-4 '>
+							<div className='px-2 rounded-sm bg-black_3'>
+								<div className='grid grid-cols-5 '>
+									<div className='col-span-4 py-2 space-y-2 text-blue-gray-300'>
+										<div className='flex items-center justify-between'>
 											<h2>From </h2>
 											{main ? (
 												<h2 className=''>Main Balance</h2>
 											) : (
 												<h2 className=''>Ai Balance</h2>
 											)}
-											<IoIosArrowForward className=' text-blue-gray-600  ' />
+											<IoIosArrowForward className=' text-blue-gray-600' />
 										</div>
 										<div className='flex items-center justify-around'>
-											<FaLongArrowAltDown className=' text-blue-gray-600   ' />
+											<FaLongArrowAltDown className=' text-blue-gray-600' />
 										</div>
 										<div className='flex items-center justify-between'>
 											<h2 className=''>To </h2>
@@ -119,19 +122,19 @@ const Withdraw = () => {
 											) : (
 												<h2 className=''>Main Balance</h2>
 											)}
-											<IoIosArrowForward className=' text-blue-gray-600  ' />
+											<IoIosArrowForward className=' text-blue-gray-600' />
 										</div>
 									</div>
-									<div className=' flex items-center justify-center col-span-1'>
+									<div className='flex items-center justify-center col-span-1 '>
 										<BiTransferAlt
-											className=' text-yellow-700 text-3xl rotate-90 cursor-pointer'
+											className='text-3xl text-yellow-700 rotate-90 cursor-pointer '
 											onClick={handleConvertFromChange}
 										/>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div className=' my-6'>
+						<div className='my-6 '>
 							<div className=''>
 								<Input
 									type='text'
@@ -142,12 +145,12 @@ const Withdraw = () => {
 									onChange={handleAmountChange}
 								/>
 
-								<small className=' flex items-center justify-between mt-1 px-1 text-blue-gray-700'>
+								<small className='flex items-center justify-between px-1 mt-1 text-blue-gray-700'>
 									{main ? (
-										<span className=' '>
+										<span className=''>
 											Main Balance
 											{user?.m_balance ? (
-												<span className=' text-blue-gray-300 mx-1'>
+												<span className='mx-1 text-blue-gray-300'>
 													{Number(user?.m_balance).toFixed(2)}
 												</span>
 											) : (
@@ -156,10 +159,10 @@ const Withdraw = () => {
 											USDT
 										</span>
 									) : (
-										<span className=' '>
+										<span className=''>
 											Ai Balance
 											{user?.m_balance ? (
-												<span className=' text-blue-gray-300 mx-1'>
+												<span className='mx-1 text-blue-gray-300'>
 													{Number(user?.ai_balance).toFixed(2)}
 												</span>
 											) : (
@@ -206,19 +209,19 @@ const Withdraw = () => {
 					<Dialog
 						open={open}
 						handler={handleOpen}
-						className='text-white bg-black_2 px-0 overflow-auto'
+						className='px-0 overflow-auto text-white bg-black_2'
 					>
 						<div className='flex items-center justify-center py-3 '>
 							<h4 className='text-2xl font-bold text-center text-blue-gray-200'>
 								My Trade Record
 							</h4>
 							<IoCloseCircleOutline
-								className='absolute text-2xl text-blue-gray-600 cursor-pointer right-3 top-2 hover:text-red-500'
+								className='absolute text-2xl cursor-pointer text-blue-gray-600 right-3 top-2 hover:text-red-500'
 								onClick={handleOpen}
 							/>
 						</div>
 						<hr className='my-2 border border-black_3' />
-						<DialogBody className=' px-0 overflow-auto'>
+						<DialogBody className='px-0 overflow-auto '>
 							<ConvertRecords open={open} />
 						</DialogBody>
 					</Dialog>
