@@ -9,6 +9,9 @@ import { useSelector } from 'react-redux';
 import Footer from '@/Layout/Footer/Footer';
 import Notice from '@/components/Home/Notice';
 import Menu from '@/components/Home/Menu';
+import TradeSection from '@/components/Home/TradeSection';
+import AiSection from '@/components/Home/AiSection';
+import WinGame from '@/components/Home/WinGame';
 
 const Home: NextPage = () => {
 	const { isAuthenticated } = useSelector((state: any) => state.auth);
@@ -19,6 +22,9 @@ const Home: NextPage = () => {
 				<SimpleSlider />
 				{isAuthenticated && <Notice />}
 				{isAuthenticated && <Menu />}
+				<TradeSection />
+				<AiSection />
+				<WinGame />
 				<Help />
 				{!isAuthenticated && <StartEaring />}
 				{!isAuthenticated && <Footer />}
