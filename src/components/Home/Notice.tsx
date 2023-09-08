@@ -17,7 +17,7 @@ const Notice = () => {
 						className='text-sm text-gray-500'
 					>
 						<p className='text-sm font-semibold text-gray-500'>
-							🚀 Welcome to Rapid Win, your ultimate gaming and trading
+							🚀 Welcome to Glomax, your ultimate gaming and trading
 							destination! 🎮💹 We are thrilled to introduce you to a
 							revolutionary experience, as we proudly stand as the first-ever
 							company to offer AI-powered robotic trade services. Level up your

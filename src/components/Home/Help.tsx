@@ -57,7 +57,7 @@ const allFaq = [
 		],
 	},
 	{
-		id: 6,
+		id: 19,
 		question: `What should I do if I withdraw coins to the wrong address?`,
 		answer: [
 			`When withdrawing coins, Glomax will enter the automatic withdrawal sequence after you complete the security verification and click [Submit], which cannot be stopped. If you fill in the wrong address, Glomax will not be able to find the recipient of your funds due to the anonymity of the blockchain address, so it will not be able to provide you with further assistance.`,

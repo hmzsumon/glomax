@@ -196,6 +196,7 @@ const Board: React.FC<MyCombinedInterface> = ({ game }) => {
 			const data = {
 				user_id: user?._id,
 				name: user?.name,
+				username: user?.username,
 				customer_id: user?.customer_id,
 				colors: trade?.colors,
 				amount,

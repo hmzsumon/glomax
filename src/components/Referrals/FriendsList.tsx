@@ -146,7 +146,7 @@ export default function FriendsList() {
 	}
 
 	return (
-		<div className='mx-auto  md:w-7/12'>
+		<div className='mx-auto md:w-7/12'>
 			<Card className='w-full h-full bg-blue-gray-900'>
 				<div className='flex items-center gap-2 px-4 mt-4'>
 					<FiUserPlus className='inline-block mr-2 text-2xl text-gray-100 cursor-pointer md:text-4xl ' />
@@ -226,8 +226,11 @@ export default function FriendsList() {
 												customer_id,
 												kyc_verified,
 												join_date,
-												is_start,
+
+												is_active,
 												level,
+												total_withdraw,
+												total_deposit,
 											},
 											index
 										) => {
@@ -262,7 +265,7 @@ export default function FriendsList() {
 																<Typography
 																	variant='small'
 																	color='blue-gray'
-																	className='text-xs font-normal text-white md:hidden'
+																	className='text-xs font-normal text-white'
 																>
 																	{formDateWithTime(join_date)}
 																</Typography>
@@ -276,19 +279,28 @@ export default function FriendsList() {
 																color='blue-gray'
 																className='font-normal text-white'
 															>
-																{formDateWithTime(join_date)}
+																{Number(total_deposit).toLocaleString('en-US', {
+																	style: 'currency',
+																	currency: 'USD',
+																})}
 															</Typography>
 														</div>
 													</td>
 													<td className={classes}>
 														<div className='text-white w-max'>
-															<Chip
-																variant='ghost'
-																size='sm'
-																value={kyc_verified ? 'verified' : 'unverified'}
-																color={kyc_verified ? 'green' : 'blue-gray'}
-																className='text-white'
-															/>
+															<Typography
+																variant='small'
+																color='blue-gray'
+																className='font-normal text-white'
+															>
+																{Number(total_withdraw).toLocaleString(
+																	'en-US',
+																	{
+																		style: 'currency',
+																		currency: 'USD',
+																	}
+																)}
+															</Typography>
 														</div>
 													</td>
 													<td className={classes}>
@@ -296,10 +308,12 @@ export default function FriendsList() {
 															<Chip
 																variant='ghost'
 																size='sm'
-																value={is_start ? 'online' : 'offline'}
-																color={is_start ? 'green' : 'blue-gray'}
+																value={is_active ? 'Active' : 'Inactive'}
+																color={is_active ? 'green' : 'blue-gray'}
 																className={` ${
-																	is_start ? 'text-white' : 'text-orange-700'
+																	is_active
+																		? 'text-green-500'
+																		: 'text-orange-700'
 																}`}
 															/>
 														</div>

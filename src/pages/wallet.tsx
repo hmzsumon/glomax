@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import ProtectedRoute from '@/global/ProtectedRoute';
 import { useSelector } from 'react-redux';
+import WalletHistory from '@/components/Wallet/WalletHistory';
 
 const menuItems = [
 	{
@@ -34,10 +35,10 @@ const Wallet = () => {
 	return (
 		<Layout>
 			<ProtectedRoute>
-				<div className='py-20  px-2 min-h-[100vh] wallet-wrapper'>
-					<div className='px-4 text-blue-gray-200 py-6 mx-auto rounded-lg bg-black_2 md:w-7/12'>
+				<div className='px-2 pt-20 pb-24 '>
+					<div className='px-4 py-6 mx-auto rounded-lg text-blue-gray-200 bg-black_2 md:w-7/12'>
 						<div className='space-y-2'>
-							<p className='text-xs text-blue-gray-800'>Total Balance</p>
+							<p className='text-xs text-blue-gray-300'>Total Balance</p>
 							<p className=''>${totalBalance}</p>
 						</div>
 						<hr className='my-2 border border-blue-gray-800 ' />
@@ -57,9 +58,10 @@ const Wallet = () => {
 							</ul>
 						</div>
 						{/* <hr className='my-4 border border-blue-gray-800 ' /> */}
-						<div className='grid grid-cols-2 py-1 my-4 '>
-							<p className=' text-blue-gray-100'>Transactions History</p>
+						<div className=''>
+							<WalletHistory />
 						</div>
+						<br />
 					</div>
 				</div>
 			</ProtectedRoute>

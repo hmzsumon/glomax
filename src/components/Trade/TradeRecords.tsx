@@ -52,7 +52,6 @@ const headers = [
 ];
 
 const TradeRecords = ({ records }: any) => {
-	const router = useRouter();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [showMore, setShowMore] = useState(false);
 	const [selected_id, setSelected_id] = useState<string | null>(null);

@@ -217,6 +217,11 @@ export const authApi = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ['User'],
 		}),
+
+		// get all transactions
+		getAllTransactions: builder.query<any, void>({
+			query: () => '/transactions',
+		}),
 	}),
 });
 
@@ -240,4 +245,5 @@ export const {
 	useChangePhoneNumberMutation,
 	useUpdateUserProfilePictureMutation,
 	useUpdateFullNameMutation,
+	useGetAllTransactionsQuery,
 } = authApi;
