@@ -25,7 +25,7 @@ const UserInfo = ({ closeDrawerRight }: UserInfoProps) => {
 					<img
 						src={user?.avatar?.url ? user?.avatar?.url : '/profile.png'}
 						alt='user avatar'
-						className='rounded-full ring-2 w-9 h-9 p-1 ring-blue-500'
+						className='p-1 rounded-full ring-2 w-9 h-9 ring-blue-500'
 					/>
 				</div>
 			</div>
@@ -35,7 +35,10 @@ const UserInfo = ({ closeDrawerRight }: UserInfoProps) => {
 						{maskEmail(user?.email ? user?.email : 'example@gmail.com')}
 					</Typography>
 					<Typography variant='small' className='text-blue-gray-400'>
-						Usernam: {user?.username}
+						Your Rank: {user?.rank}
+					</Typography>
+					<Typography variant='small' className='text-blue-gray-400'>
+						Username: {user?.username}
 					</Typography>
 					<div className='flex items-center'>
 						<Typography variant='small' className='text-blue-gray-400'>

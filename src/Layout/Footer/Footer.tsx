@@ -56,33 +56,33 @@ const communities = [
 		id: 2,
 		name: 'Twitter',
 		icon: <SlSocialTwitter />,
-		url: 'https://twitter.com/binance',
+		url: 'https://t.me/johan028',
 	},
 
 	{
 		id: 4,
 		name: 'whatsapp',
 		icon: <BiLogoWhatsapp />,
-		url: 'https://www.youtube.com/binance',
+		url: 'https://t.me/johan028',
 	},
 	{
 		id: 6,
 		name: 'Telegram',
 		icon: <FaTelegram />,
-		url: 'https://t.me/binanceexchange',
+		url: 'https://t.me/johan028',
 	},
 ];
 const Footer = () => {
 	return (
-		<div className='md:py-8 px-4 text-white'>
+		<div className='px-4 text-white md:py-8'>
 			<div className=' md:grid md:grid-cols-3'>
 				<div className='col-span-2 '>
-					<div className=' mb-6 space-y-4 md:space-y-0 flex  items-center justify-around '>
+					<div className='flex items-center justify-around mb-6 space-y-4 md:space-y-0'>
 						{items.map((item) => {
 							return (
 								<div key={item.id} className=''>
 									<h2>{item.title}</h2>
-									<ul className='  md:block mt-1 text-gray-500 '>
+									<ul className='mt-1 text-gray-500 md:block'>
 										{item.links.map((link) => {
 											return <li key={link.id}>{link.name}</li>;
 										})}
@@ -92,16 +92,16 @@ const Footer = () => {
 						})}
 					</div>
 				</div>
-				<div className=' w-full md:col-span-1'>
-					<h2 className=' text-center'>Community</h2>
-					<div className='mt-8 flex items-center  justify-around w-full '>
+				<div className='w-full md:col-span-1'>
+					<h2 className='text-center '>Community</h2>
+					<div className='flex items-center justify-around w-full mt-8 '>
 						{communities.map((community) => {
 							return (
 								<div
 									key={community.id}
 									className='flex items-center justify-between'
 								>
-									<div className='flex text-2xl items-center justify-center'>
+									<div className='flex items-center justify-center text-2xl'>
 										{community.icon}
 									</div>
 								</div>
@@ -111,7 +111,7 @@ const Footer = () => {
 				</div>
 			</div>
 			<div className='border-t mt-8 border-[#272A2E]  flex items-center justify-center'>
-				<p className=' text-gray-500 mt-4'>Rapid win &#169; 2022</p>
+				<p className='mt-4 text-gray-500 '>Rapid win &#169; 2022</p>
 			</div>
 		</div>
 	);

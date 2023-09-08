@@ -11,7 +11,7 @@ const Security = () => {
 	return (
 		<Layout>
 			<ProtectedRoute>
-				<div className='px-6 pt-20 '>
+				<div className='px-6 py-20 '>
 					<div>
 						<TwoFactorAuth />
 					</div>

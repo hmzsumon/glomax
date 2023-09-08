@@ -22,6 +22,12 @@ const Profile = () => {
 								<div className='mx-auto my-6 md:w-6/12 '>
 									<div className='space-y-2 list-none '>
 										<div className='flex gap-2 '>
+											<li>Your Rank</li>
+											<li>:</li>
+											<li className='capitalize '>{user?.rank}</li>
+										</div>
+
+										<div className='flex gap-2 '>
 											<li>Username</li>
 											<li>:</li>
 											<li>{user?.username}</li>

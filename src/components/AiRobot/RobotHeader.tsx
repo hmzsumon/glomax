@@ -9,6 +9,7 @@ import { BeatLoader } from 'react-spinners';
 const RobotHeader = ({ ticker, setOpen, open }: any) => {
 	const router = useRouter();
 	const { symbol } = useSelector((state: any) => state.trade);
+
 	return (
 		<div>
 			<div className='py-2 bg-black_2'>
