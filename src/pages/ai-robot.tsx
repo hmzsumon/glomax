@@ -3,23 +3,84 @@ import ProtectedRoute from '@/global/ProtectedRoute';
 import { Button } from '@material-tailwind/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { MdLegendToggle } from 'react-icons/md';
-import { HistoryIcon } from '@/global/icons/CommonIcons';
 import { FcFaq } from 'react-icons/fc';
-import AiTradeRecords from '@/components/AiRobot/AiTradeRecords';
-import { PiChartLineDuotone } from 'react-icons/pi';
-import { GiCheckMark } from 'react-icons/gi';
-import { BsArrowRight } from 'react-icons/bs';
 import Link from 'next/link';
 import BeforeCreate from '@/components/AiRobot/BeforeCreate';
 import AfterCreate from '@/components/AiRobot/AfterCreate';
-import { Dialog, DialogBody } from '@material-tailwind/react';
-import { IoCloseCircleOutline } from 'react-icons/io5';
-import AiFAQ from '@/components/AiRobot/AiFAQ';
+import { setFaqData, setFaqTitle } from '@/features/appSlice';
+import { useDispatch } from 'react-redux';
+const aiFaq = [
+	{
+		id: 1,
+		question: 'What is Ai spot grid?',
+		answer: [
+			`AI robot trading, also known as algorithmic trading or automated trading, refers to the practice of using artificial intelligence (AI) and computer algorithms to execute trading strategies in financial markets. In this approach, trading decisions are made by computers based on predefined rules and criteria, eliminating or reducing the need for manual intervention.`,
+		],
+	},
+	{
+		id: 2,
+		question: `How does AI robot trading typically work?`,
+		answer: [
+			`1. *Data Analysis:* AI algorithms analyze vast amounts of market data, including price movements, trading volume, news, and other relevant information.`,
+			`2. *Pattern Recognition:* AI systems can identify patterns, trends, and anomalies in the data that might not be easily noticeable by human traders.`,
+			`3. *Decision Making:* Based on the analysis, the AI algorithms make trading decisions. These decisions could involve buying or selling assets, determining entry and exit points, and managing risk.`,
+			`4. *Trade Execution:* The AI robot trading system can automatically place trades on various exchanges or trading platforms. This process is usually much faster and more efficient than manual trading.`,
+			`5. *Risk Management:* AI robot trading systems often include risk management protocols to control the size of trades and limit potential losses.`,
+			`6. *Constant Monitoring:* AI robot traders can operate 24/7, monitoring markets and executing trades even when human traders are unavailable.`,
+		],
+	},
+	{
+		id: 3,
+		question: `Benefits of AI robot trading include?`,
+		answer: [
+			`*Speed:* AI systems can process and react to market data in milliseconds, enabling faster execution of trades.`,
+
+			`*Objectivity:* AI algorithms follow predefined rules and are not influenced by emotions, reducing the impact of emotional decisions on trading outcomes.`,
+
+			`*Efficiency:* AI robot trading can manage multiple markets and strategies simultaneously, increasing trading efficiency.`,
+
+			`*Backtesting:* Traders can test their strategies on historical data to evaluate their effectiveness before deploying them in live markets.`,
+
+			`*Diversification:* AI robot trading allows traders to diversify their strategies across different assets and markets.`,
+
+			`However, it's important to note that AI robot trading also has its challenges and risks:`,
+
+			`*Complexity:* Developing and maintaining effective AI trading algorithms requires expertise in both finance and AI technologies.`,
+
+			`*Data Quality:* The accuracy and quality of input data can significantly impact the performance of AI trading systems.`,
+
+			`*Market Conditions:* Rapid changes in market conditions or unexpected events can lead to losses if the AI system isn't capable of adapting appropriately.`,
+
+			`Overall, AI robot trading has gained popularity as technology has advanced, but it's crucial for traders and investors to thoroughly understand the technology, risks, and potential benefits before incorporating it into their trading strategies.`,
+		],
+	},
+	{
+		id: 4,
+		question: `How can i create an Ai spot grid?`,
+		answer: [
+			`To create Ai spot grid follow the undermentioned steps`,
+			`1.At first click the Ai Robot`,
+			`2.Then click Create Button, AI will automatically fill up the coin price range field.`,
+			`3.Then set your grid{Number of grid, 1 grid => 30USDT, 2 grid => 40USDT, 3 grid => 45USDT, 4 grid => 60USDT, and next grids(5-170 grids) => grid number X 15 USDT }`,
+			`4.Then type amount you want to invest.`,
+			`5.Final step >> Just click on the create button and broom!`,
+			`6.After creating the grid, within 24 hour Ai Robot will provide the profit (1.5 to 30%).`,
+			`7.After 24 hour you will be able to edit or cancel the Ai spot grid.`,
+			`8.Before 24 hours, If you cancel or edit the grid you will never get the profit.`,
+		],
+	},
+];
+
 const AiRobot = () => {
 	const { user } = useSelector((state: any) => state.auth);
-	const [open3, setOpen3] = React.useState(false);
-	const handleOpen3 = () => setOpen3(!open3);
+	const dispatch = useDispatch();
+
+	// handle faq data
+	const handleFaqData = () => {
+		dispatch(setFaqData(aiFaq));
+		dispatch(setFaqTitle('AI Robot Trading'));
+	};
+
 	return (
 		<Layout>
 			<ProtectedRoute>
@@ -53,10 +114,14 @@ const AiRobot = () => {
 									</div>
 								</div>
 								<div className='flex'>
-									<FcFaq
-										className='inline-block mr-1 text-xl text-white cursor-pointer '
-										onClick={handleOpen3}
-									/>
+									<Link
+										href='/faq'
+										onClick={() => {
+											handleFaqData();
+										}}
+									>
+										<FcFaq className='inline-block mr-1 text-xl text-white cursor-pointer ' />
+									</Link>
 								</div>
 							</div>
 							{/* End Heading */}
@@ -90,28 +155,6 @@ const AiRobot = () => {
 					</div>
 				</div>
 				{/* For FAQ */}
-				<>
-					<Dialog
-						size='md'
-						open={open3}
-						handler={handleOpen3}
-						className='px-0 overflow-auto overflow-y-scroll text-white bg-black_2'
-					>
-						<div className='flex items-center justify-center py-3 '>
-							<h4 className='text-2xl font-bold text-center text-blue-gray-200'>
-								Ai Robot Rules FAQ!
-							</h4>
-							<IoCloseCircleOutline
-								className='absolute text-2xl cursor-pointer text-blue-gray-600 right-3 top-2 hover:text-red-500'
-								onClick={handleOpen3}
-							/>
-						</div>
-						<hr className='my-2 border border-black_3' />
-						<DialogBody className='px-4 overflow-auto '>
-							<AiFAQ />
-						</DialogBody>
-					</Dialog>
-				</>
 			</ProtectedRoute>
 		</Layout>
 	);

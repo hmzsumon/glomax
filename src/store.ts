@@ -21,7 +21,7 @@ import cryptoReducer from './cryptoSlice';
 const persistConfig = {
 	key: 'root',
 	storage: storage,
-	whitelist: ['auth'],
+	whitelist: ['auth', 'app'],
 };
 
 export const rootReducer = combineReducers({

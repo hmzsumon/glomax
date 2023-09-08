@@ -7,9 +7,9 @@ const baseUrl =
 		: 'https://wfcmining.com/api/v1';
 
 // console.log('baseUrl', baseUrl);
+
 export const apiSlice = createApi({
 	reducerPath: 'api',
-
 	baseQuery: fetchBaseQuery({
 		baseUrl: baseUrl,
 		// Introduce an artificial delay using `setTimeout`
@@ -22,6 +22,7 @@ export const apiSlice = createApi({
 			return headers;
 		},
 	}),
+
 	tagTypes: [
 		'Users',
 		'Admin',
@@ -42,6 +43,7 @@ export const apiSlice = createApi({
 		'AiRobot',
 		'Deposits',
 	],
+
 	endpoints: (builder) => ({}),
 });
 
