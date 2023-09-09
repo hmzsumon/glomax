@@ -7,6 +7,7 @@ import { formDateWithTime } from '@/utils/functions';
 import { User2Icon } from '@/utils/icons/SecurityIcons';
 import FriendsList from './FriendsList';
 
+
 type memberType = {
 	_id: string;
 	name: string;

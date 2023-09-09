@@ -33,10 +33,15 @@ import {
 	Avatar,
 	IconButton,
 	Tooltip,
+	Dialog,
+	DialogBody,
 } from '@material-tailwind/react';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { FiUserPlus } from 'react-icons/fi';
+import { HistoryIcon } from '@/global/icons/CommonIcons';
+import { IoCloseCircleOutline } from 'react-icons/io5';
+import ReferRecords from './ReferRecords';
 
 const TABS = [
 	{
@@ -112,6 +117,9 @@ export default function FriendsList() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [searchQuery, setSearchQuery] = useState('');
 
+	const [openDialog, setOpenDialog] = useState(false);
+	const handleOpen = () => setOpenDialog(!openDialog);
+
 	const { user } = useSelector((state: any) => state.auth);
 	const { data, isLoading, isError, isSuccess, error } = useGetMyTeamQuery(
 		user?._id
@@ -127,6 +135,14 @@ export default function FriendsList() {
 
 	let count = 0;
 	let activeCount = 0;
+	let totalTradeCommission = 0;
+	// calculate total trade commission
+	if (user) {
+		totalTradeCommission =
+			user?.trade_com?.level_1 +
+			user?.trade_com?.level_2 +
+			user?.trade_com?.level_3;
+	}
 	// find count and active count
 	if (selectedTab === 'all') {
 		count = members?.length;
@@ -151,11 +167,74 @@ export default function FriendsList() {
 	return (
 		<div className='mx-auto md:w-7/12'>
 			<Card className='w-full h-full bg-blue-gray-900'>
-				<div className='flex items-center gap-2 px-4 mt-4'>
-					<FiUserPlus className='inline-block mr-2 text-2xl text-gray-100 cursor-pointer md:text-4xl ' />
-					<h1 className='text-xl font-bold text-gray-100 md:text-2xl '>
-						My Friends{' '}
-					</h1>
+				<div className='grid grid-cols-2 mt-4'>
+					<div className='flex items-center gap-2 px-4 '>
+						<FiUserPlus className='inline-block mr-1 text-2xl cursor-pointer text-blue-gray-200' />
+						<h1 className='text-xl font-bold text-blue-gray-200 '>
+							My Friends{' '}
+						</h1>
+					</div>
+
+					<div className='mr-4 justify-self-end'>
+						<span className='cursor-pointer' onClick={handleOpen}>
+							<HistoryIcon h={6} w={6} color={'gray'} />
+						</span>
+					</div>
+				</div>
+				<div className='flex items-center justify-between px-4 mt-2 text-blue-gray-200 '>
+					<small>
+						Total Referral Bonus:{' '}
+						<span className='text-green-500'>
+							{Number(user?.referral_bonus).toLocaleString('en-US', {
+								style: 'currency',
+								currency: 'USD',
+							})}
+						</span>
+					</small>
+					{selectedTab === 'all' && (
+						<small>
+							Total Trade Commission:{' '}
+							<span className='text-green-500'>
+								{Number(totalTradeCommission).toLocaleString('en-US', {
+									style: 'currency',
+									currency: 'USD',
+								})}
+							</span>
+						</small>
+					)}
+					{selectedTab === 'level_1' && (
+						<small>
+							1<sup>st</sup> Level Trade Commission:{' '}
+							<span className='text-green-500'>
+								{Number(user?.trade_com?.level_1).toLocaleString('en-US', {
+									style: 'currency',
+									currency: 'USD',
+								})}
+							</span>
+						</small>
+					)}
+					{selectedTab === 'level_2' && (
+						<small>
+							2<sup>nd</sup> Level Trade Commission:{' '}
+							<span className='text-green-500'>
+								{Number(user?.trade_com?.level_2).toLocaleString('en-US', {
+									style: 'currency',
+									currency: 'USD',
+								})}
+							</span>
+						</small>
+					)}
+					{selectedTab === 'level_3' && (
+						<small>
+							3<sup>rd</sup> Level Trade Commission:{' '}
+							<span className='text-green-500'>
+								{Number(user?.trade_com?.level_3).toLocaleString('en-US', {
+									style: 'currency',
+									currency: 'USD',
+								})}
+							</span>
+						</small>
+					)}
 				</div>
 				<CardHeader floated={false} shadow={false} className='rounded-none'>
 					<div className='flex flex-col items-center justify-between gap-4 bg-blue-gray-900'>
@@ -374,6 +453,28 @@ export default function FriendsList() {
 					</div>
 				</CardFooter>
 			</Card>
+			{/* For records */}
+			<>
+				<Dialog
+					open={openDialog}
+					handler={handleOpen}
+					className='px-0 overflow-auto text-white bg-black_2'
+				>
+					<div className='flex items-center justify-center py-3 '>
+						<h4 className='text-2xl font-bold text-center text-blue-gray-200'>
+							Refer & Trade Commission
+						</h4>
+						<IoCloseCircleOutline
+							className='absolute text-2xl cursor-pointer text-blue-gray-600 right-3 top-2 hover:text-red-500'
+							onClick={handleOpen}
+						/>
+					</div>
+					<hr className='my-2 border border-black_3' />
+					<DialogBody className='px-0 overflow-auto '>
+						<ReferRecords />
+					</DialogBody>
+				</Dialog>
+			</>
 		</div>
 	);
 }
