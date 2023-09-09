@@ -183,7 +183,7 @@ export default function FriendsList() {
 				</div>
 				<div className='flex items-center justify-between px-4 mt-2 text-blue-gray-200 '>
 					<small>
-						Total Referral Bonus:{' '}
+						Referral Bonus:{' '}
 						<span className='text-green-500'>
 							{Number(user?.referral_bonus).toLocaleString('en-US', {
 								style: 'currency',
@@ -193,7 +193,7 @@ export default function FriendsList() {
 					</small>
 					{selectedTab === 'all' && (
 						<small>
-							Total Trade Commission:{' '}
+							Trade Commission:{' '}
 							<span className='text-green-500'>
 								{Number(totalTradeCommission).toLocaleString('en-US', {
 									style: 'currency',
@@ -204,7 +204,7 @@ export default function FriendsList() {
 					)}
 					{selectedTab === 'level_1' && (
 						<small>
-							1<sup>st</sup> Level Trade Commission:{' '}
+							1<sup>st</sup> Level Commission:{' '}
 							<span className='text-green-500'>
 								{Number(user?.trade_com?.level_1).toLocaleString('en-US', {
 									style: 'currency',
@@ -215,7 +215,7 @@ export default function FriendsList() {
 					)}
 					{selectedTab === 'level_2' && (
 						<small>
-							2<sup>nd</sup> Level Trade Commission:{' '}
+							2<sup>nd</sup> Level Commission:{' '}
 							<span className='text-green-500'>
 								{Number(user?.trade_com?.level_2).toLocaleString('en-US', {
 									style: 'currency',
@@ -226,7 +226,7 @@ export default function FriendsList() {
 					)}
 					{selectedTab === 'level_3' && (
 						<small>
-							3<sup>rd</sup> Level Trade Commission:{' '}
+							3<sup>rd</sup> Level Commission:{' '}
 							<span className='text-green-500'>
 								{Number(user?.trade_com?.level_3).toLocaleString('en-US', {
 									style: 'currency',
@@ -462,7 +462,7 @@ export default function FriendsList() {
 				>
 					<div className='flex items-center justify-center py-3 '>
 						<h4 className='text-2xl font-bold text-center text-blue-gray-200'>
-							Refer & Trade Commission
+							Refer & Commission
 						</h4>
 						<IoCloseCircleOutline
 							className='absolute text-2xl cursor-pointer text-blue-gray-600 right-3 top-2 hover:text-red-500'
