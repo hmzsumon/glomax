@@ -55,7 +55,7 @@ const Referral = () => {
 										</div>
 
 										<div className='flex items-center grid-cols-8 gap-4 '>
-											<RWebShare data={{ text: referralLink }}>
+											<RWebShare data={{ url: referralLink }}>
 												<div className='relative flex-1 col-span-7 p-4 bg-yellow-600 cursor-pointer rounded-xl'>
 													<div className='absolute hidden md:block bottom-1'>
 														<Image
