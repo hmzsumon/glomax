@@ -12,6 +12,9 @@ type memberType = {
 	join_date: Date;
 	is_start: boolean;
 	level: number;
+	total_withdraw: number;
+	total_deposit: number;
+	is_active: boolean;
 };
 
 import { PencilIcon, UserPlusIcon } from '@heroicons/react/24/solid';
