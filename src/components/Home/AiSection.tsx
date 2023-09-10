@@ -7,13 +7,13 @@ import { useSelector } from 'react-redux';
 const AiSection = () => {
 	const { isAuthenticated } = useSelector((state: any) => state.auth);
 	return (
-		<div className=' px-8 py-10'>
-			<div className=' md:grid grid-cols-2 gap-8'>
-				<div className=' md:flex flex-col items-start justify-center'>
-					<div className=' space-y-4'>
+		<div className='px-8 py-10 '>
+			<div className='grid-cols-2 gap-8 md:grid'>
+				<div className='flex-col items-start justify-center md:flex'>
+					<div className='space-y-4 '>
 						<div>
-							<h2 className=' text-left'>
-								<span className='text-xl text-blue-gray-200 font-bold'>
+							<h2 className='text-left '>
+								<span className='text-xl font-bold text-blue-gray-100'>
 									AI-Powered Trading Revolutionizing Financial Markets
 								</span>
 							</h2>
@@ -34,7 +34,7 @@ const AiSection = () => {
 						{isAuthenticated ? (
 							<div>
 								<Link href='/ai-robot'>
-									<button className=' w-full md:w-6/12 bg-yellow-700 hover:bg-yellow-800 text-blue-gray-900 font-bold py-2 px-4 rounded'>
+									<button className='w-full px-4 py-2 font-bold bg-yellow-700 rounded md:w-6/12 hover:bg-yellow-800 text-blue-gray-900'>
 										Create Ai now
 									</button>
 								</Link>
@@ -42,7 +42,7 @@ const AiSection = () => {
 						) : (
 							<div>
 								<Link href='/register'>
-									<button className=' w-full md:6/12 bg-yellow-700 hover:bg-yellow-800 text-blue-gray-900 font-bold py-2 px-4 rounded'>
+									<button className='w-full px-4 py-2 font-bold bg-yellow-700 rounded md:6/12 hover:bg-yellow-800 text-blue-gray-900'>
 										Crate an account
 									</button>
 								</Link>
@@ -50,7 +50,7 @@ const AiSection = () => {
 						)}
 					</div>
 				</div>
-				<div className=' mt-8 md:mt-0'>
+				<div className='mt-8 md:mt-0'>
 					<div className='flex justify-center gap-6'>
 						<img
 							src='/images/ai/AI_1.png'

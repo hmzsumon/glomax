@@ -9,8 +9,12 @@ const WinGame = () => {
 			<div>
 				<div className='flex flex-col items-center justify-center '>
 					<div className='text-blue-gray-200'>
-						<h2 className='text-2xl text-center '>Win Game</h2>
-						<h2 className='text-xl text-center '>Just play and earn from it</h2>
+						<h2 className='text-3xl font-bold text-center text-blue-gray-100 '>
+							Win Game
+						</h2>
+						<h2 className='text-2xl text-center '>
+							Just play and earn from it
+						</h2>
 						<p className='mx-auto my-2 md:w-6/12 text-blue-gray-300'>
 							Play win game and earn money. You can join our telegram
 							group/channel and follow our prediction to win a game. We will

@@ -12,6 +12,7 @@ import Menu from '@/components/Home/Menu';
 import TradeSection from '@/components/Home/TradeSection';
 import AiSection from '@/components/Home/AiSection';
 import WinGame from '@/components/Home/WinGame';
+import MakeUp from '@/components/Home/MakeUp';
 
 const Home: NextPage = () => {
 	const { isAuthenticated } = useSelector((state: any) => state.auth);
@@ -25,6 +26,7 @@ const Home: NextPage = () => {
 				<TradeSection />
 				<AiSection />
 				<WinGame />
+				<MakeUp />
 				<Help />
 				{!isAuthenticated && <StartEaring />}
 				{!isAuthenticated && <Footer />}

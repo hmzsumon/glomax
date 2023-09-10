@@ -18,19 +18,25 @@ const Timer = ({ gameType }: any) => {
 	return (
 		<div>
 			{remainingSeconds > 0 ? (
-				<div className='flex list-none items-center rounded-md justify-between px-4 py-2 timer'>
-					<li className=' flex flex-col md:flex-row items-center'>
-						<p>Period Id </p>
-						<p>{gameId}</p>
+				<div className='flex items-center justify-between px-4 py-2 list-none rounded-md timer'>
+					<li className='flex flex-col items-center gap-1 md:flex-row'>
+						<p className='text-blue-gray-200 '>Period ID </p>
+						<p className='text-blue-gray-50 '>{gameId}</p>
 					</li>
-					<li className=' flex flex-col gap-1 md:flex-row items-center'>
+					<li className='flex flex-col items-center gap-1 md:flex-row'>
 						<p>Count Down</p>
 						<p>{formatTime(remainingSeconds)}</p>
 					</li>
 				</div>
 			) : (
-				<div className='flex list-none items-center rounded-md justify-center px-4 py-2 timer'>
-					<p>Game Over! Wait for the next game.</p>
+				<div className='flex items-center justify-center px-4 py-2 list-none rounded-md timer'>
+					{remainingSeconds === 0 ? (
+						<p className='text-blue-gray-50 '>
+							Game over please wait for next game
+						</p>
+					) : (
+						<p className='text-blue-gray-50 '>Waiting for next game</p>
+					)}
 				</div>
 			)}
 		</div>
