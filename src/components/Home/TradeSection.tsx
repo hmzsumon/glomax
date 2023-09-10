@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 const TradeSection = () => {
 	const { isAuthenticated } = useSelector((state: any) => state.auth);
 	return (
-		<div className='px-8 py-10 '>
+		<div className='px-8 pb-10 '>
 			<div className='flex flex-col items-center gap-8 md:flex-row justify-evenly'>
 				<div className='order-2 md:order-1'>
 					<div className='flex justify-center gap-6'>
