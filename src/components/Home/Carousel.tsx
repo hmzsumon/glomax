@@ -16,7 +16,6 @@ export default class SimpleSlider extends Component {
 		const sliderItems = [
 			'./images/carousel/ai-grid.png',
 			'./images/carousel/ai-robot.png',
-			'./images/carousel/deposit.png',
 			'./images/carousel/trading.png',
 			'./images/carousel/refarel.png',
 		];

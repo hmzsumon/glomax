@@ -9,6 +9,7 @@ import BeforeCreate from '@/components/AiRobot/BeforeCreate';
 import AfterCreate from '@/components/AiRobot/AfterCreate';
 import { setFaqData, setFaqTitle } from '@/features/appSlice';
 import { useDispatch } from 'react-redux';
+import { useLoadUserQuery } from '@/features/auth/authApi';
 const aiFaq = [
 	{
 		id: 1,
@@ -72,6 +73,7 @@ const aiFaq = [
 ];
 
 const AiRobot = () => {
+	useLoadUserQuery();
 	const { user } = useSelector((state: any) => state.auth);
 	const dispatch = useDispatch();
 
