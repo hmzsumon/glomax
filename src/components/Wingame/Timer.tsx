@@ -31,9 +31,7 @@ const Timer = ({ gameType }: any) => {
 			) : (
 				<div className='flex items-center justify-center px-4 py-2 list-none rounded-md timer'>
 					{remainingSeconds === 0 ? (
-						<p className='text-blue-gray-50 '>
-							Game over please wait for next game
-						</p>
+						<p className='text-blue-gray-50 '>Please wait...</p>
 					) : (
 						<p className='text-blue-gray-50 '>Waiting for next game</p>
 					)}
