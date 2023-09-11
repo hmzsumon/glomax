@@ -135,7 +135,7 @@ const AiRobot = () => {
 									</div>
 									<div>
 										<p className='text-sm text-gray-500'>Total Value</p>
-										<h2>105.514,187.34</h2>
+										<h2>105,951</h2>
 									</div>
 								</div>
 

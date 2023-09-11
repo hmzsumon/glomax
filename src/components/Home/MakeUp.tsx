@@ -14,19 +14,19 @@ const MakeUp = () => {
 						traders in the world.
 					</p>
 				</div>
-				<div className='grid gap-6 my-4 md:grid-cols-3 text-blue-gray-200'>
+				<div className='grid gap-6 my-4 md:grid-cols-2 text-blue-gray-200'>
 					<div className='flex flex-col items-center justify-center py-4 rounded bg-black_2'>
 						<p className='text-2xl text-blue-gray-100'>$5.89 million </p>
-						<p>Trading volume in August 2023</p>
+						<p>Trading volume </p>
 					</div>
 					<div className='flex flex-col items-center justify-center py-4 rounded bg-black_2'>
 						<p className='text-2xl text-blue-gray-100'>15,512</p>
-						<p>Active clients in August 2023</p>
+						<p>Active clients </p>
 					</div>
-					<div className='flex flex-col items-center justify-center py-4 rounded bg-black_2'>
+					{/* <div className='flex flex-col items-center justify-center py-4 rounded bg-black_2'>
 						<p className='text-2xl text-blue-gray-100'>$1.50 billion</p>
 						<p>Client withdrawals in Q2 2023</p>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>

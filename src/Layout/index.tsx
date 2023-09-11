@@ -18,7 +18,9 @@ const Layout = ({ children }: PropsWithChildren<{}>) => {
 
 	useEffect(() => {
 		if (user?.is_active === false) {
-			handleOpen();
+			if (router.pathname === '/trade' || router.pathname === '/wingame') {
+				handleOpen();
+			}
 		}
 	}, [user]);
 
