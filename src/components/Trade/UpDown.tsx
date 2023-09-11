@@ -89,7 +89,7 @@ const UpDown = () => {
 			symbol,
 			time,
 		};
-		console.log(data);
+		// console.log(data);
 		createTrade(data);
 
 		// Start the timer

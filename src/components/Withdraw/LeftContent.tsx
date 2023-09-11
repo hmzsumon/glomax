@@ -86,7 +86,11 @@ const LeftContent = () => {
 	// set available amount
 	useEffect(() => {
 		const balance = user?.m_balance - user?.trading_volume;
-		setAvailable(balance);
+		if (balance < 0) {
+			setAvailable(0);
+		} else {
+			setAvailable(balance);
+		}
 	}, [user]);
 
 	// handle amount change
@@ -206,11 +210,11 @@ const LeftContent = () => {
 					onChange={handleAmountChange}
 				/>
 
-				<small className=' flex items-center justify-between mt-1 px-1 text-blue-gray-700'>
-					<span className=' '>
+				<small className='flex items-center justify-between px-1 mt-1 text-blue-gray-700'>
+					<span className=''>
 						Available
 						{user?.m_balance ? (
-							<span className=' text-blue-gray-300 mx-1'>
+							<span className='mx-1 text-blue-gray-300'>
 								{Number(availableAmount).toFixed(2)}
 							</span>
 						) : (
@@ -220,7 +224,7 @@ const LeftContent = () => {
 					</span>
 					<span>
 						Minimum Amount
-						<span className=' text-blue-gray-300 mx-1'>12</span>
+						<span className='mx-1 text-blue-gray-300'>12</span>
 						USDT
 					</span>
 				</small>
@@ -229,7 +233,7 @@ const LeftContent = () => {
 
 			<hr className='my-2 border border-blue-gray-900 ' />
 			{user?.is_withdraw_requested && (
-				<small className=' text-center text-red-500'>
+				<small className='text-center text-red-500 '>
 					Your withdrawal request is under processing.
 				</small>
 			)}
@@ -249,7 +253,7 @@ const LeftContent = () => {
 
 				<div className='flex items-center justify-center '>
 					<button
-						className='w-full flex items-center justify-center py-2 font-bold bg-yellow-700 rounded-lg text-blue-gray-900 disabled:opacity-50 disabled:cursor-not-allowed '
+						className='flex items-center justify-center w-full py-2 font-bold bg-yellow-700 rounded-lg text-blue-gray-900 disabled:opacity-50 disabled:cursor-not-allowed '
 						disabled={
 							errorText
 								? true
@@ -274,11 +278,11 @@ const LeftContent = () => {
 				size='xs'
 				className='bg-black_2'
 			>
-				<div className=' flex items-center justify-between'>
-					<DialogHeader className=' text-center text-blue-gray-200 font-bold '>
+				<div className='flex items-center justify-between '>
+					<DialogHeader className='font-bold text-center text-blue-gray-200'>
 						Security Verification
 					</DialogHeader>
-					<div className=' flex items-end justify-end my-2 mx-2'>
+					<div className='flex items-end justify-end mx-2 my-2 '>
 						<span onClick={handleOpen2}>
 							<CloseIcon2 />
 						</span>
@@ -288,7 +292,7 @@ const LeftContent = () => {
 				<DialogBody>
 					<div className='my-4'>
 						<div className='space-y-4 text-white '>
-							<div className=' relative flex flex-col gap-1'>
+							<div className='relative flex flex-col gap-1 '>
 								<label className='text-sm font-semibold text-gray-400 '>
 									Email Verification Code
 								</label>
@@ -301,11 +305,11 @@ const LeftContent = () => {
 									onChange={(e) => handleChange(e)}
 								/>
 								<button
-									className=' absolute right-2 top-9 text-xs font-bold text-yellow-800 '
+									className='absolute text-xs font-bold text-yellow-800 right-2 top-9'
 									onClick={handleResend}
 								>
 									{isResend ? (
-										<span className=' flex text-gray-500'>
+										<span className='flex text-gray-500 '>
 											Verification code sent
 											<ExplanationIcon h={4} w={4} color={''} />
 										</span>
@@ -319,7 +323,7 @@ const LeftContent = () => {
 								)}
 
 								{user?.email && (
-									<small className=' text-gray-500'>
+									<small className='text-gray-500 '>
 										Enter the 6-digit code sent to {maskEmail(user?.email)}
 									</small>
 								)}

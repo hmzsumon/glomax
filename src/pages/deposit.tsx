@@ -62,7 +62,7 @@ const Deposit = () => {
 			setTextError('');
 		}
 
-		if (e.target.value >= 50) {
+		if (e.target.value >= 10) {
 			setBonusTex(true);
 		} else {
 			setBonusTex(false);
@@ -244,7 +244,7 @@ const Deposit = () => {
 											)}
 										</div>
 									</div>
-									{amount >= 50 && (
+									{amount >= 10 && (
 										<div>
 											<Checkbox
 												label='I want to receive bonus.'
@@ -267,7 +267,8 @@ const Deposit = () => {
 							<div className='px-4 pb-3 '>
 								<button
 									onClick={handleSubmit}
-									className='w-full py-1 bg-yellow-700 rounded-sm'
+									className='w-full py-1 bg-yellow-700 rounded-sm disabled:opacity-50 disabled:cursor-not-allowed '
+									disabled={isLoading || amount < 10 || !transactionId}
 								>
 									{isLoading ? (
 										<ScaleLoader color={'#36d7b7'} height={20} width={2} />

@@ -355,7 +355,7 @@ export default function FriendsList() {
 														</div>
 													</td>
 													<td className={classes}>
-														<div className='flex-col hidden md:flex'>
+														<div className='flex-col md:flex'>
 															<Typography
 																variant='small'
 																color='blue-gray'
