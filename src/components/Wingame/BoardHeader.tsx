@@ -27,12 +27,12 @@ const winGameFaq = [
 			`1. JOIN GREEN: If the result shows green, you get(98 * 2) 196.`,
 			`2. JOIN RED: If the result shows red, you get(98 * 2) 196.`,
 			`3. JOIN VIOLET: If the result shows violet, you will get(98 * 4.5) 441. If your result shows red or green, you will get(98 * 1.5) 147.`,
-			`4. SELECT NUMBER: If the result is the same as the number you selected, you will get(98 * 9) 882.`,
+			`4. SELECT NUMBER: If the result is the same as the number you selected, you will get(98 * 6) 588.`,
 		],
 	},
 	{
 		id: 2,
-		question: `Win game rebate commission?`,
+		question: `Win game trade commission?`,
 		answer: [
 			`You also get extra commission: 40% from level-1, 30% from level-2, and 20% from level-3 (Commission coming from the service fee of the trading amount). Invite friends for more commission.`,
 		],
@@ -51,11 +51,11 @@ const winGameFaq = [
 		id: 5,
 		question: `How many stages count for the win game?`,
 		answer: [
-			`The win game is a 7-stage plan. The Teacher will make you win at any stage from the 7 stages. If the teacher fails to win you in the 7th stage, we will refund your full compensation (Only at official trade time). Of course, you have to participate in every stage, and you have to maintain a 2X or 3X plan.`,
+			`The win game is a 6-stage plan. The Teacher will make you win at any stage from the 6 stages. If the teacher fails to win you in the 6th stage, we will refund your full compensation (Only at official trade time). Of course, you have to participate in every stage, and you have to maintain a 2X or 3X plan.`,
 			`For example:`,
-			`(a) 2X plan: If you trade 1st stage-1 USDT, 2nd stage-2 USDT, 3rd stage-4 USDT, 4th stage-8 USDT,
-            5th stage-16 USDT, 6th stage-32 USDT, 7th stage-64 USDT.`,
-			`(b) 3X plan: If you trade 1st stage-1 USDT, 2nd stage-3 USDT, 3rd stage-9 USDT, 4th stage-27 USDT, 5th stage-81 USDT, 6th stage-243 USDT, 7th stage-729 USDT.`,
+			`(a) 2X plan: If you trade 1st stage 1USDT, 2nd stage 2USDT, 3rd stage 4USDT, 4th stage 8USDT,
+            5th stage 16USDT, 6th stage 32USDT.`,
+			`(b) 3X plan: If you trade 1st stage 1USDT, 2nd stage 3USDT, 3rd stage 9USDT, 4th stage 27USDT, 5th stage 81USDT, 6th stage 243USDT.`,
 		],
 	},
 ];
@@ -77,14 +77,14 @@ const BoardHeader = () => {
 	return (
 		<div className='px-4 py-2 rounded-t-lg bg-black_3'>
 			<div className='flex items-center justify-between '>
-				<div>
+				<div className='space-x-3'>
 					<Link
 						href='/faq'
 						onClick={() => {
 							handleFaqData();
 						}}
 					>
-						<FcFaq className='inline-block mr-1 text-xl text-white cursor-pointer ' />
+						<FcFaq className='inline-block text-xl text-white cursor-pointer ' />
 					</Link>
 
 					<button
@@ -93,12 +93,12 @@ const BoardHeader = () => {
 					>
 						Official Trade Time
 					</button>
-				</div>
-
-				<div className='flex gap-1 '>
 					<Link href='https://t.me/glomax2020'>
 						<FaTelegram className='inline-block  text-xl text-[#2297D0]' />
 					</Link>
+				</div>
+
+				<div className='flex gap-1 '>
 					<span onClick={handleOpen}>
 						<HistoryIcon h={6} w={6} color={'gray'} />
 					</span>

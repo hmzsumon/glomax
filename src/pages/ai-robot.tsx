@@ -65,7 +65,7 @@ const aiFaq = [
 			`3.Then set your grid{Number of grid, 1 grid => 30USDT, 2 grid => 40USDT, 3 grid => 45USDT, 4 grid => 60USDT, and next grids(5-170 grids) => grid number X 15 USDT }`,
 			`4.Then type amount you want to invest.`,
 			`5.Final step >> Just click on the create button and broom!`,
-			`6.After creating the grid, within 24 hour Ai Robot will provide the profit (1.5 to 30%).`,
+			`6.After creating the grid, within 24 hour Ai Robot will provide the profit (1.5% to 30%).`,
 			`7.After 24 hour you will be able to edit or cancel the Ai spot grid.`,
 			`8.Before 24 hours, If you cancel or edit the grid you will never get the profit.`,
 		],

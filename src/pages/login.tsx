@@ -50,6 +50,12 @@ const LoginPage: NextPage = () => {
 	useEffect(() => {
 		if (isError && error) {
 			toast.error((error as fetchBaseQueryError).data.message);
+			if ((error as fetchBaseQueryError).status === 405) {
+				router.push({
+					pathname: '/email-verify',
+					query: { email: email },
+				});
+			}
 		}
 		if (isSuccess) {
 			toast.success('Login successful');
