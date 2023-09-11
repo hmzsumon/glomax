@@ -56,7 +56,7 @@ const menuItems = [
 	{
 		id: 9,
 		title: 'Settings',
-		link: '/settings',
+		link: '/security',
 		icon: <IoSettings />,
 	},
 
