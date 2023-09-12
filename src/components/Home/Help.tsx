@@ -154,12 +154,12 @@ const allFaq = [
 			`1. JOIN GREEN: If the result shows green, you get(98 * 2) 196.`,
 			`2. JOIN RED: If the result shows red, you get(98 * 2) 196.`,
 			`3. JOIN VIOLET: If the result shows violet, you will get(98 * 4.5) 441. If your result shows red or green, you will get(98 * 1.5) 147.`,
-			`4. SELECT NUMBER: If the result is the same as the number you selected, you will get(98 * 9) 882.`,
+			`4. SELECT NUMBER: If the result is the same as the number you selected, you will get(98 * 6) 588.`,
 		],
 	},
 	{
 		id: 13,
-		question: `Win game rebate commission?`,
+		question: `Win game trade commission?`,
 		answer: [
 			`You also get extra commission: 40% from level-1, 30% from level-2, and 20% from level-3 (Commission coming from the service fee of the trading amount). Invite friends for more commission.`,
 		],

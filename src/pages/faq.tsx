@@ -36,36 +36,34 @@ const Faq = () => {
 	const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
 	return (
 		<Layout>
-			<ProtectedRoute>
-				<div className='px-4 py-20'>
-					<div className='my-2 '>
-						<h1 className='text-2xl font-bold text-center text-blue-gray-200'>
-							{faqTitle} (FAQ)
-						</h1>
-					</div>
-					<hr />
-					<div>
-						{faqData?.map((item: any) => (
-							<Accordion
-								key={item.id}
-								open={open === item.id}
-								icon={<Icon id={item.id} open={open} />}
-							>
-								<AccordionHeader onClick={() => handleOpen(item.id)}>
-									<span className=' text-blue-gray-200'>{item.question}</span>
-								</AccordionHeader>
-								<AccordionBody>
-									{item.answer.map((ans: string, i: number) => (
-										<p key={i} className='my-1 text-blue-gray-400'>
-											{ans}
-										</p>
-									))}
-								</AccordionBody>
-							</Accordion>
-						))}
-					</div>
+			<div className='px-4 py-20'>
+				<div className='my-2 '>
+					<h1 className='text-2xl font-bold text-center text-blue-gray-200'>
+						{faqTitle} (FAQ)
+					</h1>
 				</div>
-			</ProtectedRoute>
+				<hr />
+				<div>
+					{faqData?.map((item: any) => (
+						<Accordion
+							key={item.id}
+							open={open === item.id}
+							icon={<Icon id={item.id} open={open} />}
+						>
+							<AccordionHeader onClick={() => handleOpen(item.id)}>
+								<span className=' text-blue-gray-200'>{item.question}</span>
+							</AccordionHeader>
+							<AccordionBody>
+								{item.answer.map((ans: string, i: number) => (
+									<p key={i} className='my-1 text-blue-gray-400'>
+										{ans}
+									</p>
+								))}
+							</AccordionBody>
+						</Accordion>
+					))}
+				</div>
+			</div>
 		</Layout>
 	);
 };
