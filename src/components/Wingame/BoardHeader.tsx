@@ -93,7 +93,7 @@ const BoardHeader = () => {
 					>
 						Official Trade Time
 					</button>
-					<Link href='https://t.me/glomax2020'>
+					<Link href='https://t.me/+_F020xmmsFAxMWI1'>
 						<FaTelegram className='inline-block  text-xl text-[#2297D0]' />
 					</Link>
 				</div>

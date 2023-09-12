@@ -19,7 +19,7 @@ const Withdraw = () => {
 	return (
 		<Layout>
 			<ProtectedRoute>
-				<div className='px-2 py-20 withdraw-wrapper'>
+				<div className='px-2 py-20 '>
 					<div className='relative px-4 py-6 mx-auto rounded-lg bg-black_2 md:w-7/12'>
 						<div className='flex items-center justify-between mb-4'>
 							<div className='ml-2 '>

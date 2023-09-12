@@ -5,7 +5,7 @@ export default function Document() {
 		<Html lang='en'>
 			<Head>
 				<link rel='icon' href='/fav_icon.png' />
-				<meta property='og:image' content='/fav-icon.png' />
+				<meta property='og:image' content='/fav_icon.png' />
 			</Head>
 			<body>
 				<Main />
