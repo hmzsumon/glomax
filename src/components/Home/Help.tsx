@@ -232,7 +232,7 @@ const Help = () => {
 							</p>
 							<button>
 								<a
-									href='https://wa.me/message/2PHVZROK6QFAP1'
+									href='https://t.me/glomax2020'
 									target='_blank'
 									rel='noopener noreferrer'
 									className='text-yellow-700 '
