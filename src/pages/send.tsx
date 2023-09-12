@@ -35,11 +35,17 @@ const Send = () => {
 									{' '}
 									MAJESTIC
 								</span>
-								, then you will be able use the facility of sent option.
+								, then you will be able use the facility of send option.
 							</p>
+							<div className='text-center '>
+								<Link
+									href='/rewards'
+									className='text-xs font-bold text-blue-700 underline hover:text-blue-900 '
+								>
+									Learn more about ranks
+								</Link>
+							</div>
 						</div>
-
-						<br />
 					</div>
 				</div>
 			</ProtectedRoute>
