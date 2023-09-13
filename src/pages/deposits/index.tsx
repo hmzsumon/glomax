@@ -25,7 +25,6 @@ import {
 import DepositRecords from '@/components/Deposits/DepositRecords';
 import { useLoadUserQuery } from '@/features/auth/authApi';
 const Deposit = () => {
-	useLoadUserQuery();
 	const [createDepositRequest, { isError, isSuccess, isLoading, error }] =
 		useCreateDepositRequestMutation();
 	const router = useRouter();

@@ -58,6 +58,8 @@ const WinGlobalHistory: React.FC<winGameInterface> = ({ game }) => {
 		}
 	}, [timer]);
 
+	console.log('timer', timer);
+
 	const { results } = data || { results: [] };
 
 	const router = useRouter();
@@ -137,7 +139,7 @@ const WinGlobalHistory: React.FC<winGameInterface> = ({ game }) => {
 												<td className=''>
 													<div className='flex-col md:flex'>
 														<p
-															className='md:text-xl md:font-bold text-center'
+															className='text-center md:text-xl md:font-bold'
 															style={{ color: win_colors[0] }}
 														>
 															{win_number}

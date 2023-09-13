@@ -17,8 +17,17 @@ export const depositApi = apiSlice.injectEndpoints({
 			query: () => '/deposits/me',
 			providesTags: ['Deposits'],
 		}),
+
+		// get single deposit
+		getDeposit: builder.query<any, any>({
+			query: (id) => `/deposit/${id}`,
+			providesTags: ['Deposits'],
+		}),
 	}),
 });
 
-export const { useCreateDepositRequestMutation, useGetMyDepositsQuery } =
-	depositApi;
+export const {
+	useCreateDepositRequestMutation,
+	useGetMyDepositsQuery,
+	useGetDepositQuery,
+} = depositApi;
