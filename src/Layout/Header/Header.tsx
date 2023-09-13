@@ -157,32 +157,34 @@ export default function Header() {
 											)}
 										</div>
 									</MenuHandler>
-									<MenuList>
-										{notifications?.map((notification: any) => (
-											<Link
-												href={notification?.url}
-												key={notification?._id}
-												onClick={() => {
-													updateNotification(notification?._id);
-												}}
-											>
-												<MenuItem
-													color='blueGray'
-													className='hover:bg-blueGray-100'
+									{count > 0 && (
+										<MenuList>
+											{notifications?.map((notification: any) => (
+												<Link
+													href={notification?.url}
+													key={notification?._id}
+													onClick={() => {
+														updateNotification(notification?._id);
+													}}
 												>
-													<div className='flex items-center justify-between'>
-														<div className='flex items-center gap-x-2'>
-															<div className='flex flex-col'>
-																<p className='text-sm font-semibold text-blue-gray-900'>
-																	{notification?.subject}
-																</p>
+													<MenuItem
+														color='blueGray'
+														className='hover:bg-blueGray-100'
+													>
+														<div className='flex items-center justify-between'>
+															<div className='flex items-center gap-x-2'>
+																<div className='flex flex-col'>
+																	<p className='text-sm font-semibold text-blue-gray-900'>
+																		{notification?.subject}
+																	</p>
+																</div>
 															</div>
 														</div>
-													</div>
-												</MenuItem>
-											</Link>
-										))}
-									</MenuList>
+													</MenuItem>
+												</Link>
+											))}
+										</MenuList>
+									)}
 								</Menu>
 							</div>
 							{/* End Notification */}
