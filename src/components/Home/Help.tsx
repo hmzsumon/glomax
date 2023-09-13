@@ -1,6 +1,10 @@
 import { setFaqData, setFaqTitle } from '@/features/appSlice';
+import { Dialog, DialogBody } from '@material-tailwind/react';
 import Link from 'next/link';
+import { set } from 'nprogress';
 import React from 'react';
+import { FaQrcode } from 'react-icons/fa';
+import { IoCloseCircleOutline } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
 const allFaq = [
 	{
@@ -212,6 +216,10 @@ const allFaq = [
 const Help = () => {
 	const dispatch = useDispatch();
 
+	const [open, setOpen] = React.useState(false);
+
+	const handleOpen = () => setOpen(!open);
+
 	// handle faq data
 	const handleFaqData = () => {
 		dispatch(setFaqData(allFaq));
@@ -262,8 +270,50 @@ const Help = () => {
 							</button>
 						</div>
 					</div>
+					<div className='flex items-start space-x-4 '>
+						<div className='flex items-center justify-center col-span-1 p-4 bg-[#474D57] rounded-xl'>
+							<FaQrcode
+								className='inline-block text-2xl text-gray-400 cursor-pointer '
+								onClick={handleOpen}
+							/>
+						</div>
+						<div className='space-y-2 '>
+							<h1 className='text-xl font-bold '>Please scan the QR code</h1>
+							<p>
+								Please scan the QR code and Download the Glomax App from Play
+								Store
+							</p>
+							<button onClick={handleOpen}>
+								<button className='text-yellow-700 '>QR Code</button>
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
+			<>
+				<Dialog
+					open={open}
+					size='xs'
+					handler={handleOpen}
+					className='px-0 overflow-auto text-white bg-black_2'
+				>
+					<div className='flex items-center justify-center py-3 '>
+						<h4 className='text-sm font-bold text-center text-blue-gray-200'>
+							Scan QR Code to Download Glomax App
+						</h4>
+						<IoCloseCircleOutline
+							className='absolute text-2xl cursor-pointer text-blue-gray-600 right-3 top-2 hover:text-red-500'
+							onClick={handleOpen}
+						/>
+					</div>
+					<hr className='my-2 border border-black_3' />
+					<DialogBody className='px-0 overflow-auto '>
+						<div className=''>
+							<img src='./glomax-app.png' alt='' className='mx-auto w-60' />
+						</div>
+					</DialogBody>
+				</Dialog>
+			</>
 		</div>
 	);
 };
