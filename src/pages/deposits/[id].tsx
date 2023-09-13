@@ -5,11 +5,12 @@ import { HiArrowSmLeft } from 'react-icons/hi';
 import { useRouter } from 'next/router';
 import CopyToClipboard from '@/global/CopyToClipboard';
 import { useGetDepositQuery } from '@/features/deposit/depositApi';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const Deposit = () => {
 	const router = useRouter();
 	const { id } = router.query;
-	const { data } = useGetDepositQuery(id);
+	const { data, isLoading } = useGetDepositQuery(id);
 	const { deposit: record } = data || {};
 	return (
 		<Layout>
@@ -32,46 +33,58 @@ const Deposit = () => {
 						</div>
 
 						<hr className='my-2 border border-black_3' />
-						<div className='my-8 '>
-							<div className='px-1 py-1 space-y-2 list-none text-blue-gray-400 '>
-								<div className='grid grid-cols-2'>
-									<li>Amount</li>
-									<li className='text-end'>
-										{Number(record?.amount).toLocaleString('en-US', {
-											style: 'currency',
-											currency: 'USD',
-										})}
-									</li>
-								</div>
-								<div className='grid grid-cols-2'>
-									<li>Date</li>
-									<li className='text-xs text-end'>
-										{new Date(record?.createdAt).toLocaleDateString('en-US', {
-											year: 'numeric',
-											month: 'short',
-											day: 'numeric',
-											hour: 'numeric',
-											minute: 'numeric',
-										})}
-									</li>
-								</div>
 
-								<div className='grid grid-cols-2'>
-									<li>
-										<p className='capitalize'>Transaction ID</p>
-									</li>
-									<li className='text-xs text-end'>{record?._id}</li>
-								</div>
-								<div className='grid grid-cols-2'>
-									<li>Status</li>
-									<li className='text-end'>
-										{record?.status === 'approved' && (
-											<p className='capitalize  text-[#388E3C]'>Success</p>
-										)}
-									</li>
-								</div>
+						{isLoading ? (
+							<div className='flex items-center justify-center h-[40vh]'>
+								<ScaleLoader color='#e65100' />
 							</div>
-						</div>
+						) : (
+							<>
+								<div className='my-8 '>
+									<div className='px-1 py-1 space-y-2 list-none text-blue-gray-400 '>
+										<div className='grid grid-cols-2'>
+											<li>Amount</li>
+											<li className='text-end'>
+												{Number(record?.amount).toLocaleString('en-US', {
+													style: 'currency',
+													currency: 'USD',
+												})}
+											</li>
+										</div>
+										<div className='grid grid-cols-2'>
+											<li>Date</li>
+											<li className='text-xs text-end'>
+												{new Date(record?.createdAt).toLocaleDateString(
+													'en-US',
+													{
+														year: 'numeric',
+														month: 'short',
+														day: 'numeric',
+														hour: 'numeric',
+														minute: 'numeric',
+													}
+												)}
+											</li>
+										</div>
+
+										<div className='grid grid-cols-2'>
+											<li>
+												<p className='capitalize'>Transaction ID</p>
+											</li>
+											<li className='text-xs text-end'>{record?._id}</li>
+										</div>
+										<div className='grid grid-cols-2'>
+											<li>Status</li>
+											<li className='text-end'>
+												{record?.status === 'approved' && (
+													<p className='capitalize  text-[#388E3C]'>Success</p>
+												)}
+											</li>
+										</div>
+									</div>
+								</div>
+							</>
+						)}
 					</div>
 				</div>
 			</ProtectedRoute>
