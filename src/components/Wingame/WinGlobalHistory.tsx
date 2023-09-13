@@ -6,6 +6,7 @@ import {
 	Button,
 	CardBody,
 	CardFooter,
+	Dialog,
 } from '@material-tailwind/react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -15,6 +16,8 @@ import { NotFoundIcon } from '@/global/icons/CommonIcons';
 import useTimer from '@/hooks/useTimer';
 import { useSelector } from 'react-redux';
 import { useLoadUserQuery } from '@/features/auth/authApi';
+import socketIOClient, { io } from 'socket.io-client';
+import ioBaseUrl from '@/config/ioBaseUrl';
 const TABS = [
 	{
 		id: 1,
@@ -39,31 +42,59 @@ const TABLE_HEAD = ['Period', 'Win Number', 'Win Color'];
 
 const WinGlobalHistory: React.FC<winGameInterface> = ({ game }) => {
 	const { user } = useSelector((state: any) => state.auth);
-	const { refetch: refetch2 } = useLoadUserQuery(user?._id);
-	const {
-		remainingSeconds: timer,
-		gameId,
-		setTimer,
-	} = useTimer({
-		gameType: game?.game_type,
-	});
+
+	console.log('game', game?.game_type);
 
 	const { data, refetch } = useGetWinGameResultQuery(game?.game_type);
+	const [response, setResponse] = useState<any>({});
+	const [open, setOpen] = React.useState(false);
+	const handleOpen = () => setOpen(!open);
 
-	// setIsGet(true) by timer
 	useEffect(() => {
-		if (timer === 0) {
-			refetch();
-			refetch2();
-		}
-	}, [timer]);
-
-	console.log('timer', timer);
+		refetch();
+	}, [game?.game_type]);
 
 	const { results } = data || { results: [] };
 
 	const router = useRouter();
 	const [currentPage, setCurrentPage] = useState(1);
+
+	useEffect(() => {
+		const socket = socketIOClient(ioBaseUrl, {
+			transports: ['websocket', 'polling'],
+		});
+
+		socket.on('win-result', (ioData) => {
+			if (ioData?.game_type === game?.game_type) {
+				console.log('ioData', ioData);
+				refetch();
+			}
+
+			// find this user particular data and set it to response
+			const userResponse = ioData?.usersIds?.find(
+				(item: any) => item.user_id === user?._id
+			);
+
+			if (
+				userResponse?.user_id === user?._id &&
+				ioData?.game_type === game?.game_type
+			) {
+				setResponse(userResponse);
+				setOpen(true);
+				// Close the dialog after 3 seconds
+				setTimeout(() => {
+					setOpen(false);
+					setResponse({});
+				}, 3000);
+			}
+		});
+
+		// Cleanup function to disconnect the socket and remove event listener when the component unmounts
+		return () => {
+			socket.disconnect();
+			socket.off('result-pop'); // Remove the 'result-pop' event listener
+		};
+	}, []);
 
 	return (
 		<div className='mx-auto '>
@@ -209,6 +240,32 @@ const WinGlobalHistory: React.FC<winGameInterface> = ({ game }) => {
 					</div>
 				</CardFooter>
 			</Card>
+			<Dialog
+				open={open}
+				handler={handleOpen}
+				size='xs'
+				className='border-0 bg-black_1 '
+			>
+				<div className='flex items-center justify-center'>
+					<h2 className='my-2'>
+						{response?.status === 'win'
+							? 'Congratulations'
+							: ' You Lost try again! '}
+					</h2>
+				</div>
+				<div>
+					{response?.status === 'win' && (
+						<img
+							src='/winner-win.gif'
+							alt='win'
+							className='w-[100%] mx-auto '
+						/>
+					)}
+					{response?.status === 'lose' && (
+						<img src='/oops.png' alt='win' className='w-full mx-auto ' />
+					)}
+				</div>
+			</Dialog>
 		</div>
 	);
 };

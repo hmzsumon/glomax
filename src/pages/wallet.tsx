@@ -10,7 +10,7 @@ const menuItems = [
 	{
 		id: 1,
 		title: 'Deposit',
-		url: '/deposit',
+		url: '/deposits',
 	},
 	{
 		id: 2,

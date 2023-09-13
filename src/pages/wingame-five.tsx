@@ -21,38 +21,6 @@ const WingameFive = () => {
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(!open);
 
-	useEffect(() => {
-		const socket = socketIOClient(ioBaseUrl, {
-			transports: ['websocket', 'polling'],
-		});
-
-		socket.on('result-pop', (data) => {
-			// find this user particular data and set it to response
-			const userResponse = data.find((item: any) => item.user_id === user?._id);
-			setResponse(userResponse);
-
-			// check if user is in the game
-			// Check if data is an array and if user_id is present in any of the objects
-			if (
-				Array.isArray(data) &&
-				data.some((item) => item.user_id === user?._id)
-			) {
-				setOpen(true);
-				// Close the dialog after 3 seconds
-				setTimeout(() => {
-					setOpen(false);
-					setResponse({});
-				}, 3000);
-			}
-		});
-
-		// Cleanup function to disconnect the socket and remove event listener when the component unmounts
-		return () => {
-			socket.disconnect();
-			socket.off('result-pop'); // Remove the 'result-pop' event listener
-		};
-	}, [user?._id]);
-
 	return (
 		<Layout>
 			<ProtectedRoute>
@@ -66,7 +34,6 @@ const WingameFive = () => {
 							<WinGlobalHistory game={game} />
 						</div>
 					</div>
-					<WinDialogBox open={open} handler={handleOpen} response={response} />
 				</div>
 			</ProtectedRoute>
 		</Layout>

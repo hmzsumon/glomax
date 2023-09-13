@@ -21,6 +21,7 @@ import useTimer from '@/hooks/useTimer';
 import { useWinGameCreateTradeMutation } from '@/features/winGame/winGameApi';
 import { useLoadUserQuery } from '@/features/auth/authApi';
 import { IoCloseCircleOutline } from 'react-icons/io5';
+import { read } from 'fs';
 
 const buttons = [
 	{
@@ -151,6 +152,7 @@ const Board: React.FC<MyCombinedInterface> = ({ game }) => {
 
 	const { user } = useSelector((state: any) => state.auth);
 	const [btnActive, setBtnActive] = useState<boolean>(false);
+	const [readOnly, setReadOnly] = useState<boolean>(false);
 
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(!open);
@@ -357,13 +359,13 @@ const Board: React.FC<MyCombinedInterface> = ({ game }) => {
 								</div>
 							</div>
 
-							<div className='-ml-2.5'>
+							{/* <div className='-ml-2.5'>
 								<Checkbox
 									label='I agree the rule'
 									className='w-4 h-4 rounded-sm '
 									checked={true}
 								/>
-							</div>
+							</div> */}
 						</div>
 					</DialogBody>
 					<DialogFooter>
