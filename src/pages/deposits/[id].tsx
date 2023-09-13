@@ -15,7 +15,7 @@ const Deposit = () => {
 		<Layout>
 			<ProtectedRoute>
 				<div className='px-2 py-20 md:py-24 '>
-					<div className='px-4 py-4 mx-auto rounded md:w-6/12 bg-black_2'>
+					<div className='px-2 py-4 mx-auto mt-10 rounded md:w-6/12 bg-black_2'>
 						<div className='flex items-center justify-between '>
 							<div className=''>
 								<HiArrowSmLeft
@@ -33,7 +33,7 @@ const Deposit = () => {
 
 						<hr className='my-2 border border-black_3' />
 						<div className='my-8 '>
-							<div className='px-4 py-1 space-y-2 list-none text-blue-gray-400 '>
+							<div className='px-1 py-1 space-y-2 list-none text-blue-gray-400 '>
 								<div className='grid grid-cols-2'>
 									<li>Amount</li>
 									<li className='text-end'>
@@ -45,7 +45,7 @@ const Deposit = () => {
 								</div>
 								<div className='grid grid-cols-2'>
 									<li>Date</li>
-									<li className='text-end'>
+									<li className='text-xs text-end'>
 										{new Date(record?.createdAt).toLocaleDateString('en-US', {
 											year: 'numeric',
 											month: 'short',
@@ -60,7 +60,7 @@ const Deposit = () => {
 									<li>
 										<p className='capitalize'>Transaction ID</p>
 									</li>
-									<li className='text-end'>{record?._id}</li>
+									<li className='text-xs text-end'>{record?._id}</li>
 								</div>
 								<div className='grid grid-cols-2'>
 									<li>Status</li>
