@@ -70,7 +70,7 @@ const useTimer = ({ gameType }: TimerOptions): TimerState => {
 		};
 	}, [gameType]);
 
-	return { remainingSeconds, gameId, setTimer, id, timer };
+	return { remainingSeconds, gameId, setTimer, id, timer, type };
 };
 
 export default useTimer;

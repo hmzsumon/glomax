@@ -318,7 +318,9 @@ const Board: React.FC<MyCombinedInterface> = ({ game }) => {
 									type='number'
 									placeholder='> 0.1'
 									value={amount}
-									onChange={(e: any) => handleChange(e.target.value)}
+									onChange={(e: any) =>
+										handleChange(parseFloat(e.target.value))
+									}
 								/>
 
 								{amount && (
