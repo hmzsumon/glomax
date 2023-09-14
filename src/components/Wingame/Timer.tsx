@@ -3,7 +3,7 @@ import useTimer from '@/hooks/useTimer';
 
 const Timer = ({ gameType }: any) => {
 	const { remainingSeconds, gameId, setTimer } = useTimer({ gameType });
-	console.log('remainingSeconds', remainingSeconds);
+	// console.log('remainingSeconds', remainingSeconds);
 
 	const formatTime = (timeInSeconds: number): string => {
 		const minutes = Math.floor(timeInSeconds / 60);

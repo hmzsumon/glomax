@@ -43,8 +43,6 @@ const TABLE_HEAD = ['Period', 'Win Number', 'Win Color'];
 const WinGlobalHistory: React.FC<winGameInterface> = ({ game }) => {
 	const { user } = useSelector((state: any) => state.auth);
 
-	console.log('game', game?.game_type);
-
 	const { data, refetch } = useGetWinGameResultQuery(game?.game_type);
 	const [response, setResponse] = useState<any>({});
 	const [open, setOpen] = React.useState(false);
@@ -94,7 +92,7 @@ const WinGlobalHistory: React.FC<winGameInterface> = ({ game }) => {
 			socket.disconnect();
 			socket.off('result-pop'); // Remove the 'result-pop' event listener
 		};
-	}, []);
+	}, [game?.game_type]);
 
 	return (
 		<div className='mx-auto '>

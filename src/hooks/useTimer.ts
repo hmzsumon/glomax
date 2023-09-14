@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import ioBaseUrl from '@/config/ioBaseUrl';
+import { type } from 'os';
 
 interface TimerOptions {
 	gameType: string;
@@ -11,6 +12,8 @@ interface TimerState {
 	gameId: string;
 	setTimer: (time: number) => void;
 	id: string;
+	timer: number;
+	type: string;
 }
 
 const useTimer = ({ gameType }: TimerOptions): TimerState => {
@@ -18,6 +21,7 @@ const useTimer = ({ gameType }: TimerOptions): TimerState => {
 	const [gameId, setGameId] = useState('');
 	const [id, setId] = useState('');
 	const [timer, setTimer] = useState<number>(0);
+	const [type, setType] = useState<string>('');
 
 	useEffect(() => {
 		const socket: Socket = io(ioBaseUrl, {
@@ -34,9 +38,10 @@ const useTimer = ({ gameType }: TimerOptions): TimerState => {
 
 		const handleGameData = (data: any) => {
 			setRemainingSeconds(data?.time);
-			setGameId(data?.game_id);
+			setGameId(data?.game_id); // period no
 			setTimer(data?.time);
-			setId(data?.id);
+			setId(data?.id); // game._id
+			setType(data?.game_type);
 		};
 
 		if (gameType === '1m') {
@@ -65,7 +70,7 @@ const useTimer = ({ gameType }: TimerOptions): TimerState => {
 		};
 	}, [gameType]);
 
-	return { remainingSeconds, gameId, setTimer, id };
+	return { remainingSeconds, gameId, setTimer, id, timer };
 };
 
 export default useTimer;

@@ -102,9 +102,8 @@ const UserTradeRecords = ({ open }: any) => {
 										index % 2 === 0 ? 'bg-blue-gray-800' : 'bg-blue-gray-900';
 
 									return (
-										<>
+										<div key={period}>
 											<div
-												key={period}
 												className={`
                     ${oddEven} grid grid-cols-3 list-none justify-between items-center px-4 py-1 text-xs transition-colors cursor-pointer 
                     `}
@@ -185,7 +184,7 @@ const UserTradeRecords = ({ open }: any) => {
 													<TradeDetails record={selectedItem} />
 												</div>
 											)}
-										</>
+										</div>
 									);
 								}
 							)}
