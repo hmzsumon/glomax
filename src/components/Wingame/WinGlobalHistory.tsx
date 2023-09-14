@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import {
 	Card,
 	CardHeader,
@@ -42,6 +42,7 @@ const TABLE_HEAD = ['Period', 'Win Number', 'Win Color'];
 
 const WinGlobalHistory: React.FC<winGameInterface> = ({ game }) => {
 	const { user } = useSelector((state: any) => state.auth);
+	const { refetch: refetch2 } = useLoadUserQuery();
 
 	const { data, refetch } = useGetWinGameResultQuery(game?.game_type);
 	const [response, setResponse] = useState<any>({});
@@ -51,6 +52,12 @@ const WinGlobalHistory: React.FC<winGameInterface> = ({ game }) => {
 	useEffect(() => {
 		refetch();
 	}, [game?.game_type]);
+
+	useEffect(() => {
+		if (response?.status === 'win') {
+			refetch2();
+		}
+	}, [response]);
 
 	const { results } = data || { results: [] };
 

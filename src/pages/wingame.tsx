@@ -8,7 +8,9 @@ import socketIOClient from 'socket.io-client';
 import ioBaseUrl from '@/config/ioBaseUrl';
 import { useSelector } from 'react-redux';
 import WinDialogBox from '@/global/WinDialogBox';
+import { useLoadUserQuery } from '@/features/auth/authApi';
 const Wingame = () => {
+	useLoadUserQuery();
 	const { user } = useSelector((state: any) => state.auth);
 	const { data, isLoading, isError, error, isSuccess, refetch } =
 		useOneMActiveGameQuery();
