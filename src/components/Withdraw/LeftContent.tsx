@@ -49,7 +49,7 @@ const LeftContent = () => {
 
 	const { refetch } = useLoadUserQuery();
 	const { user } = useSelector((state: any) => state.auth);
-	const [way, setWay] = React.useState<string>('crypto');
+	const [way, setWay] = React.useState<string>('binances');
 	const [network, setNetwork] = React.useState<string>('TRC20');
 	const [address, setAddress] = React.useState<string>('');
 	const [payId, setPayId] = React.useState<string>('');

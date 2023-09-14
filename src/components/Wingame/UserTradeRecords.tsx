@@ -85,13 +85,14 @@ const UserTradeRecords = ({ open }: any) => {
 										trade_amount: number;
 										_id: string;
 										win_amount: number;
+										amount: number;
 									},
 									index: number
 								) => {
 									const {
 										period,
 										win_number,
-										trade_colors,
+										amount,
 										status,
 										trade_amount,
 										win_amount,
@@ -135,6 +136,12 @@ const UserTradeRecords = ({ open }: any) => {
 																{status}
 															</p>
 														)}
+
+														{status === 'refund' && (
+															<p className='capitalize text-center text-[#FFA000]'>
+																{status}
+															</p>
+														)}
 													</div>
 												</li>
 												<li className='grid items-center justify-around grid-cols-2 ml-2 '>
@@ -152,6 +159,12 @@ const UserTradeRecords = ({ open }: any) => {
 														{status === 'pending' && (
 															<ClockLoader size={15} color='#FFA000' />
 														)}
+
+														{status === 'refund' && (
+															<p className='capitalize text-center text-[#FFA000]'>
+																+ {Number(amount).toFixed(2)} $
+															</p>
+														)}
 													</div>
 													<div className='flex items-center justify-end '>
 														<IoIosArrowDown
@@ -166,7 +179,7 @@ const UserTradeRecords = ({ open }: any) => {
 											</div>
 											{showMore && selected_id === _id && (
 												<div className=''>
-													<h2 className='my-2 text-center  text-blue-gray-200'>
+													<h2 className='my-2 text-center text-blue-gray-200'>
 														Trad Details
 													</h2>
 													<TradeDetails record={selectedItem} />

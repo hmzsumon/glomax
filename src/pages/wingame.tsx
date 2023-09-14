@@ -10,14 +10,13 @@ import { useSelector } from 'react-redux';
 import WinDialogBox from '@/global/WinDialogBox';
 const Wingame = () => {
 	const { user } = useSelector((state: any) => state.auth);
-	const { data, isLoading, isError, error, isSuccess } =
+	const { data, isLoading, isError, error, isSuccess, refetch } =
 		useOneMActiveGameQuery();
 	const { game } = data || { game: null };
-	// console.log('game', game);
-	const [response, setResponse] = useState<any>({});
-	const [open, setOpen] = React.useState(false);
 
-	const handleOpen = () => setOpen(!open);
+	useEffect(() => {
+		refetch();
+	}, []);
 
 	return (
 		<Layout>
