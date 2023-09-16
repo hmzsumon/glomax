@@ -59,7 +59,6 @@ const useTimer = ({ gameType }: TimerOptions): TimerState => {
 
 		// Cleanup function to disconnect the socket and remove event listeners when the component unmounts
 		return () => {
-			socket.disconnect();
 			if (gameType === '1m') {
 				socket.off('game-1m', handleGameData);
 			} else if (gameType === '3m') {
@@ -67,6 +66,7 @@ const useTimer = ({ gameType }: TimerOptions): TimerState => {
 			} else if (gameType === '5m') {
 				socket.off('game-5m', handleGameData);
 			}
+			socket.disconnect();
 		};
 	}, [gameType]);
 

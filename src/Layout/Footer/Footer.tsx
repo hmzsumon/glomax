@@ -111,7 +111,7 @@ const Footer = () => {
 				</div>
 			</div>
 			<div className='border-t mt-8 border-[#272A2E]  flex items-center justify-center'>
-				<p className='mt-4 text-gray-500 '>Rapid win &#169; 2022</p>
+				<p className='mt-4 text-gray-500 '>Glomax &#169; 2022</p>
 			</div>
 		</div>
 	);
