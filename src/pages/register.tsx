@@ -22,7 +22,7 @@ const pattern = `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6
 const SignupPage = () => {
 	const router = useRouter();
 	const referralId = router.query.referral_id;
-	console.log(referralId);
+	// console.log(referralId);
 	const [registerUser, { isLoading, error, isSuccess, isError }] =
 		useRegisterUserMutation();
 	const [showPassword, setShowPassword] = useState<boolean>(false);

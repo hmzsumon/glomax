@@ -130,7 +130,11 @@ const Deposit = () => {
 							</div>
 						</div>
 						<div className='flex flex-col items-center justify-center my-4 '>
-							<img src='/qr_code.png' alt='Deposit' className=' w-36 md:w-60' />
+							<img
+								src='/cocoin-qr.png'
+								alt='Deposit'
+								className=' w-36 md:w-60'
+							/>
 							<p className='my-3 text-blue-gray-400'>
 								Send only USDT to this address
 							</p>
@@ -145,10 +149,10 @@ const Deposit = () => {
 								<p className='text-sm text-blue-gray-400'>Wallet Address</p>
 								<div className='flex items-center justify-between'>
 									<p className='text-sm text-blue-gray-100'>
-										TMtMm2fgAxkBZxXQzw9UFvf4oddR2DPD73
+										TS7v4YksSk2BFyC3cPwzyg1Y1RQDQNN3kG
 									</p>
 									<CopyToClipboard
-										text={'TMtMm2fgAxkBZxXQzw9UFvf4oddR2DPD73'}
+										text={'TS7v4YksSk2BFyC3cPwzyg1Y1RQDQNN3kG'}
 										size='text-md'
 									/>
 								</div>
