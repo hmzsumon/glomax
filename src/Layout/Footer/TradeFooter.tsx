@@ -1,14 +1,11 @@
 import { Navbar } from '@material-tailwind/react';
 import { HiHome } from 'react-icons/hi';
-import { IoGameController } from 'react-icons/io5';
-import { GiGamepadCross } from 'react-icons/gi';
-import { ImShare } from 'react-icons/im';
-import { PiPokerChipBold } from 'react-icons/pi';
-import { MdInsertChart, MdOutlineStackedBarChart } from 'react-icons/md';
+import { MdOutlineStackedBarChart } from 'react-icons/md';
 import { FaRobot } from 'react-icons/fa';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import UpDown from '@/components/Trade/UpDown';
+import { GiWallet } from 'react-icons/gi';
 
 const menuItems = [
 	{
@@ -18,17 +15,18 @@ const menuItems = [
 		icon: <HiHome />,
 	},
 	{
+		id: 3,
+		title: 'Wallet',
+		link: '/wallet',
+		icon: <GiWallet />,
+	},
+	{
 		id: 2,
 		title: 'Market',
 		link: '/market',
 		icon: <MdOutlineStackedBarChart />,
 	},
-	{
-		id: 3,
-		title: 'Win',
-		link: '/wingame',
-		icon: <GiGamepadCross />,
-	},
+
 	{
 		id: 4,
 		title: 'Ai-Robot',

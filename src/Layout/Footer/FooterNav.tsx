@@ -1,13 +1,10 @@
 import { Navbar } from '@material-tailwind/react';
 import { HiHome } from 'react-icons/hi';
-import { IoGameController } from 'react-icons/io5';
-import { GiGamepadCross } from 'react-icons/gi';
-import { ImShare } from 'react-icons/im';
-import { PiPokerChipBold } from 'react-icons/pi';
 import { MdInsertChart, MdOutlineStackedBarChart } from 'react-icons/md';
 import { FaRobot } from 'react-icons/fa';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { GiWallet } from 'react-icons/gi';
 
 const menuItems = [
 	{
@@ -15,6 +12,12 @@ const menuItems = [
 		title: 'Home',
 		link: '/',
 		icon: <HiHome />,
+	},
+	{
+		id: 6,
+		title: 'Wallet',
+		link: '/wallet',
+		icon: <GiWallet />,
 	},
 	{
 		id: 2,
@@ -34,12 +37,6 @@ const menuItems = [
 		title: 'Ai-Robot',
 		link: '/ai-robot',
 		icon: <FaRobot />,
-	},
-	{
-		id: 3,
-		title: 'Win',
-		link: '/wingame',
-		icon: <GiGamepadCross />,
 	},
 ];
 

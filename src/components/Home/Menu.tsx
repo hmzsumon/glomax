@@ -30,24 +30,6 @@ const menuItems = [
 	},
 
 	{
-		id: 3,
-		title: 'Win-1m',
-		link: '/wingame',
-		icon: <GiGamepadCross />,
-	},
-	{
-		id: 4,
-		title: 'Win-3m',
-		link: '/wingame-three',
-		icon: <GiGamepadCross />,
-	},
-	{
-		id: 5,
-		title: 'Win-5m',
-		link: '/wingame-five',
-		icon: <GiGamepadCross />,
-	},
-	{
 		id: 7,
 		title: 'Ai-Robot',
 		link: '/ai-robot',
