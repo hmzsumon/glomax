@@ -83,12 +83,15 @@ const CreateRobot = () => {
 			if (aiRobot?.grid_no == 1) {
 				setMinAmount(30);
 			} else if (aiRobot?.grid_no == 2) {
-				setMinAmount(50);
+				setMinAmount(90);
 			} else if (aiRobot?.grid_no == 3) {
-				setMinAmount(70);
-			} else if (aiRobot?.grid_no >= 4 && aiRobot?.grid_no <= 170) {
-				const additionalAmount = (aiRobot?.grid_no - 4) * 15;
-				setMinAmount(80 + additionalAmount);
+				setMinAmount(200);
+			} else if (aiRobot?.grid_no == 4) {
+				setMinAmount(500);
+			} else if (aiRobot?.grid_no == 5) {
+				setMinAmount(1000);
+			} else if (aiRobot?.grid_no == 6) {
+				setMinAmount(2500);
 			}
 		}
 	}, [aiRobot, mode]);
@@ -114,12 +117,15 @@ const CreateRobot = () => {
 		if (gridValue == 1) {
 			setMinAmount(30);
 		} else if (gridValue == 2) {
-			setMinAmount(50);
+			setMinAmount(90);
 		} else if (gridValue == 3) {
-			setMinAmount(70);
-		} else if (gridValue >= 4 && gridValue <= 170) {
-			const additionalAmount = (gridValue - 4) * 15;
-			setMinAmount(80 + additionalAmount);
+			setMinAmount(200);
+		} else if (gridValue == 4) {
+			setMinAmount(500);
+		} else if (gridValue == 5) {
+			setMinAmount(1000);
+		} else if (gridValue == 6) {
+			setMinAmount(2500);
 		}
 	};
 
@@ -253,7 +259,7 @@ const CreateRobot = () => {
 								<input
 									type='number'
 									value={grid}
-									placeholder='1-170'
+									placeholder='1-6'
 									className='w-full p-2 rounded-md outline-none bg-black_3 placeholder-blue-gray-400'
 									onChange={handleSetGrid}
 								/>

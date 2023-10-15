@@ -25,7 +25,7 @@ const Home: NextPage = () => {
 				{isAuthenticated && <Menu />}
 				<TradeSection />
 				<AiSection />
-				<WinGame />
+				{/* <WinGame /> */}
 				<MakeUp />
 				<Help />
 				{!isAuthenticated && <StartEaring />}
