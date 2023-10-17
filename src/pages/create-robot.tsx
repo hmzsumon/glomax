@@ -153,6 +153,12 @@ const CreateRobot = () => {
 
 	// handle create robot
 	const handleCreateRobot = () => {
+		// check grid no 6
+		if (grid > 6) {
+			toast.error('Grid no must be less than or equal to 6');
+			return;
+		}
+
 		const data = {
 			investment: amount,
 			pair: l_symbol,
