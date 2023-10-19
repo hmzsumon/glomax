@@ -10,6 +10,9 @@ import AfterCreate from '@/components/AiRobot/AfterCreate';
 import { setFaqData, setFaqTitle } from '@/features/appSlice';
 import { useDispatch } from 'react-redux';
 import { useLoadUserQuery } from '@/features/auth/authApi';
+import { useMyAiRobotQuery } from '@/features/aiRobot/aiRobotApi';
+import { RingLoader } from 'react-spinners';
+import Claim from '@/components/AiRobot/Claim';
 const aiFaq = [
 	{
 		id: 1,
@@ -76,6 +79,17 @@ const AiRobot = () => {
 	useLoadUserQuery();
 	const { user } = useSelector((state: any) => state.auth);
 	const dispatch = useDispatch();
+
+	const {
+		data,
+		isLoading: r_isLoading,
+		isError: r_isError,
+		isSuccess: r_isSuccess,
+		error: r_error,
+	} = useMyAiRobotQuery(undefined);
+	// console.log(data);
+	const { aiRobot } = data || {};
+	console.log(aiRobot);
 
 	// handle faq data
 	const handleFaqData = () => {
@@ -151,7 +165,21 @@ const AiRobot = () => {
 										</Button>
 									</Link>
 								</div>
-								<div>{user?.ai_robot ? <AfterCreate /> : <BeforeCreate />}</div>
+								{r_isLoading ? (
+									<div>
+										<div className='flex items-center justify-center mt-10 '>
+											<RingLoader color='#F59E0B' size={50} />
+										</div>
+									</div>
+								) : (
+									<div>
+										{aiRobot?.is_active && !aiRobot?.is_claimed && (
+											<AfterCreate />
+										)}
+										{!aiRobot?.is_active && <BeforeCreate />}
+										{aiRobot?.is_active && aiRobot?.is_claimed && <Claim />}
+									</div>
+								)}
 							</div>
 						</div>
 					</div>

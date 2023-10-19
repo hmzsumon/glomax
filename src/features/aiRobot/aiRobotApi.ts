@@ -52,6 +52,15 @@ export const aiRobotApi = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ['User', 'AiRobot'],
 		}),
+
+		// claim aiRobot profit
+		claimAiRobotProfit: builder.mutation({
+			query: () => ({
+				url: `/aiRobot/claimProfit`,
+				method: 'PUT',
+			}),
+			invalidatesTags: ['User', 'AiRobot'],
+		}),
 	}),
 });
 
@@ -62,4 +71,5 @@ export const {
 	useEditAiRobotMutation,
 	useGetAllAiRobotQuery,
 	useUpdateAiRobotAutoCreateMutation,
+	useClaimAiRobotProfitMutation,
 } = aiRobotApi;
