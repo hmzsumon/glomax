@@ -159,6 +159,13 @@ const CreateRobot = () => {
 			return;
 		}
 
+		if (amount < minAmount) {
+			toast.error(
+				`If Grid ${grid} Amount must be equal or greater than ${minAmount} USDT`
+			);
+			return;
+		}
+
 		const data = {
 			investment: amount,
 			pair: l_symbol,
