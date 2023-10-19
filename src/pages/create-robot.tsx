@@ -12,7 +12,7 @@ import React, { use, useEffect, useState } from 'react';
 import { BiTransferAlt } from 'react-icons/bi';
 import { HiArrowSmLeft } from 'react-icons/hi';
 import { useSelector } from 'react-redux';
-import { BeatLoader } from 'react-spinners';
+import { BeatLoader, ScaleLoader } from 'react-spinners';
 import socketIOClient from 'socket.io-client';
 import {
 	Dialog,
@@ -347,11 +347,19 @@ const CreateRobot = () => {
 									!ticker?.c ||
 									user?.ai_balance < amount ||
 									!amount ||
-									!grid
+									!grid ||
+									isLoading ||
+									e_isLoading
 								}
 								onClick={mode === 'edit' ? handleEditRobot : handleCreateRobot}
 							>
-								{mode === 'edit' ? 'Update Robot' : 'Create Robot'}
+								{mode === 'edit' ? (
+									'Update Robot'
+								) : isLoading ? (
+									<ScaleLoader color='#fff' height={20} width={3} radius={2} />
+								) : (
+									'Create Robot'
+								)}
 							</button>
 						</div>
 						{/* End Submit Button */}
