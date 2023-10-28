@@ -49,16 +49,24 @@ const TABS = [
 		value: 'all',
 	},
 	{
-		label: 'Level-1',
+		label: 'L-1',
 		value: 'level_1',
 	},
 	{
-		label: 'Level-2',
+		label: 'L-2',
 		value: 'level_2',
 	},
 	{
-		label: 'Level-3',
+		label: 'L-3',
 		value: 'level_3',
+	},
+	{
+		label: 'L-4',
+		value: 'level_4',
+	},
+	{
+		label: 'L-5',
+		value: 'level_5',
 	},
 ];
 
@@ -162,6 +170,16 @@ export default function FriendsList() {
 		activeCount = members?.filter(
 			(member) => member.level === 3 && member.is_start
 		).length;
+	} else if (selectedTab === 'level_4') {
+		count = members?.filter((member) => member.level === 4).length;
+		activeCount = members?.filter(
+			(member) => member.level === 4 && member.is_start
+		).length;
+	} else if (selectedTab === 'level_5') {
+		count = members?.filter((member) => member.level === 5).length;
+		activeCount = members?.filter(
+			(member) => member.level === 5 && member.is_start
+		).length;
 	}
 
 	return (
@@ -235,6 +253,30 @@ export default function FriendsList() {
 							</span>
 						</small>
 					)}
+
+					{selectedTab === 'level_4' && (
+						<small>
+							4<sup>th</sup> Level Commission:{' '}
+							<span className='text-green-500'>
+								{Number(user?.trade_com?.level_4).toLocaleString('en-US', {
+									style: 'currency',
+									currency: 'USD',
+								})}
+							</span>
+						</small>
+					)}
+
+					{selectedTab === 'level_5' && (
+						<small>
+							5<sup>th</sup> Level Commission:{' '}
+							<span className='text-green-500'>
+								{Number(user?.trade_com?.level_5).toLocaleString('en-US', {
+									style: 'currency',
+									currency: 'USD',
+								})}
+							</span>
+						</small>
+					)}
 				</div>
 				<CardHeader floated={false} shadow={false} className='rounded-none'>
 					<div className='flex flex-col items-center justify-between gap-4 bg-blue-gray-900'>
@@ -297,6 +339,8 @@ export default function FriendsList() {
 										if (selectedTab === 'level_1') return member.level === 1;
 										if (selectedTab === 'level_2') return member.level === 2;
 										if (selectedTab === 'level_3') return member.level === 3;
+										if (selectedTab === 'level_4') return member.level === 4;
+										if (selectedTab === 'level_5') return member.level === 5;
 										return false;
 									})
 									.slice((currentPage - 1) * 5, currentPage * 5)

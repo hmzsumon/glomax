@@ -41,7 +41,7 @@ const Deposit = () => {
 
 	const [textError, setTextError] = useState<string>('');
 	const [tnxError, setTnxError] = useState<string>('');
-	const [amount, setAmount] = useState<number>(10);
+	const [amount, setAmount] = useState<number>(30);
 	const [transactionId, setTransactionId] = useState<string>('');
 	const [open, setOpen] = useState(false);
 	const [open2, setOpen2] = useState(false);
@@ -55,13 +55,13 @@ const Deposit = () => {
 
 	const handleChange = (e: any) => {
 		setAmount(e.target.value);
-		if (e.target.value < 10) {
-			setTextError('Minimum amount is $10');
+		if (e.target.value < 30) {
+			setTextError('Minimum amount is $30');
 		} else {
 			setTextError('');
 		}
 
-		if (e.target.value >= 10) {
+		if (e.target.value >= 30) {
 			setBonusTex(true);
 		} else {
 			setBonusTex(false);
@@ -69,8 +69,8 @@ const Deposit = () => {
 	};
 
 	const handleSubmit = async () => {
-		if (amount < 10) {
-			setTextError('Minimum amount is $10');
+		if (amount < 30) {
+			setTextError('Minimum amount is $30');
 		} else {
 			setTextError('');
 			const data = {
@@ -82,7 +82,7 @@ const Deposit = () => {
 			// console.log('data', data);
 
 			createDepositRequest(data);
-			setAmount(10);
+			setAmount(30);
 		}
 	};
 
@@ -161,7 +161,7 @@ const Deposit = () => {
 							<div className='px-4 py-4 space-y-2 text-xs bg-black_3 md:text-md'>
 								<div className='flex items-center justify-between '>
 									<p className='text-blue-gray-400 '>Minimum deposit</p>
-									<p className='text-blue-gray-100 '> &gt;10 USDT </p>
+									<p className='text-blue-gray-100 '> &gt;30 USDT </p>
 								</div>
 								<div className='flex items-center justify-between '>
 									<p className='text-blue-gray-400 '>Expected arrival</p>
@@ -247,7 +247,7 @@ const Deposit = () => {
 											)}
 										</div>
 									</div>
-									{amount >= 10 && (
+									{amount >= 30 && (
 										<div>
 											<Checkbox
 												label='I want to receive bonus.'
@@ -271,7 +271,7 @@ const Deposit = () => {
 								<button
 									onClick={handleSubmit}
 									className='w-full py-1 bg-yellow-700 rounded-sm disabled:opacity-50 disabled:cursor-not-allowed '
-									disabled={isLoading || amount < 10 || !transactionId}
+									disabled={isLoading || amount < 30 || !transactionId}
 								>
 									{isLoading ? (
 										<ScaleLoader color={'#36d7b7'} height={20} width={2} />
