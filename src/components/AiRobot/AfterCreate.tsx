@@ -121,7 +121,10 @@ const AfterCreate = () => {
 										query: { mode: 'edit' },
 									}}
 								>
-									<button className='w-full px-2 py-1 rounded bg-black_3'>
+									<button
+										className='w-full px-2 py-1 rounded bg-black_3 disabled:opacity-50 disabled:cursor-not-allowed'
+										disabled
+									>
 										Edit
 									</button>
 								</Link>
