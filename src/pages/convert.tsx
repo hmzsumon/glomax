@@ -54,6 +54,13 @@ const Withdraw = () => {
 			toast.error('Please enter amount');
 			return;
 		}
+		// check if user m_balance is less than 0.1
+		const reamingBalance = Number(user?.m_balance - amount);
+		if (reamingBalance < 0.1) {
+			toast.error('Insufficient balance');
+			return;
+		}
+
 		convert({
 			amount: Number(amount),
 			from: main ? 'main' : 'ai',
@@ -151,7 +158,7 @@ const Withdraw = () => {
 											Main Balance
 											{user?.m_balance ? (
 												<span className='mx-1 text-blue-gray-300'>
-													{Number(user?.m_balance).toFixed(2)}
+													{Number(user?.m_balance - 0.1).toFixed(2)}
 												</span>
 											) : (
 												<PulseLoader size={10} color={'#fff'} />
@@ -192,7 +199,9 @@ const Withdraw = () => {
 							<div className='flex items-center justify-center '>
 								<button
 									className='w-full py-2 font-bold bg-yellow-700 rounded-lg text-blue-gray-900 disabled:opacity-50 disabled:cursor-not-allowed '
-									disabled={!amount || amount < 1}
+									disabled={
+										!amount || amount < 1 || isLoading || user?.m_balance < 0.1
+									}
 									onClick={handleConvert}
 								>
 									{isLoading ? (

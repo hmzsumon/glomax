@@ -37,7 +37,7 @@ const ForgotPassword = () => {
 		if (isError) {
 			setStateError(true);
 			setErrorText(
-				'Rapid account does not exist. Please try again or create a new account.'
+				'account does not exist. Please try again or create a new account.'
 			);
 		}
 
