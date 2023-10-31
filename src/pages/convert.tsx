@@ -199,9 +199,7 @@ const Withdraw = () => {
 							<div className='flex items-center justify-center '>
 								<button
 									className='w-full py-2 font-bold bg-yellow-700 rounded-lg text-blue-gray-900 disabled:opacity-50 disabled:cursor-not-allowed '
-									disabled={
-										!amount || amount < 1 || isLoading || user?.m_balance < 0.1
-									}
+									disabled={!amount || amount < 1 || isLoading}
 									onClick={handleConvert}
 								>
 									{isLoading ? (
