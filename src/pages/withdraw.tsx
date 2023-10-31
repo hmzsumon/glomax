@@ -51,7 +51,7 @@ const Withdraw = () => {
 					>
 						<div className='flex items-center justify-center py-3 '>
 							<h4 className='text-2xl font-bold text-center text-blue-gray-200'>
-								My Deposit Records
+								My Withdraw Records
 							</h4>
 							<IoCloseCircleOutline
 								className='absolute text-2xl cursor-pointer text-blue-gray-600 right-3 top-2 hover:text-red-500'
