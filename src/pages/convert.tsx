@@ -55,14 +55,14 @@ const Withdraw = () => {
 			return;
 		}
 		// check if user m_balance is less than 0.1
-		const reamingBalance = Number(user?.m_balance - amount);
-		if (reamingBalance < 0.1) {
-			toast.error('Insufficient balance');
-			return;
-		}
+		// const reamingBalance = Number(user?.m_balance - amount);
+		// if (reamingBalance < 0.1) {
+		// 	toast.error('Insufficient balance');
+		// 	return;
+		// }
 
 		convert({
-			amount: Number(amount),
+			amount,
 			from: main ? 'main' : 'ai',
 			to: main ? 'ai' : 'main',
 			id: user?._id,
