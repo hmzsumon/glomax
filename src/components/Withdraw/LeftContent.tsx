@@ -61,6 +61,8 @@ const LeftContent = () => {
 	const [isResend, setIsResend] = useState<boolean>(false);
 	const [codeError, setCodeError] = useState<boolean>(false);
 	const [open2, setOpen2] = useState(false);
+	const [balanceError, setBalanceError] = useState<boolean>(false);
+	const [needAmount, setNeedAmount] = useState<number>(0);
 	const handleOpen2 = () => setOpen2(!open2);
 
 	// handle resend email verification
@@ -85,11 +87,17 @@ const LeftContent = () => {
 
 	// set available amount
 	useEffect(() => {
-		const balance = user?.m_balance - user?.trading_volume;
+		const totalBalance = user?.m_balance + user?.ai_balance;
+		const balance2 = totalBalance - user?.trading_volume;
+		const balance = balance2 - user?.trading_volume;
 		if (balance < 0) {
 			setAvailable(0);
 		} else {
-			setAvailable(balance);
+			if (balance > user.m_balance) {
+				setAvailable(user.m_balance);
+			} else {
+				setAvailable(balance);
+			}
 		}
 	}, [user]);
 
