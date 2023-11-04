@@ -1,6 +1,10 @@
 import Layout from '@/Layout';
+import { useLoadUserQuery } from '@/features/auth/authApi';
 import ProtectedRoute from '@/global/ProtectedRoute';
+import Link from 'next/link';
 import React from 'react';
+import { FaUsers } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 const headers = [
 	{
@@ -10,19 +14,15 @@ const headers = [
 	},
 	{
 		id: 2,
-		title: 'Level-1',
+		title: 'Direct',
 		class: 'text-center',
 	},
 	{
 		id: 3,
-		title: 'Level-2',
+		title: 'Total Team',
 		class: 'text-center',
 	},
-	{
-		id: 4,
-		title: 'Level-3',
-		class: 'text-center',
-	},
+
 	{
 		id: 5,
 		title: 'Bonus',
@@ -35,55 +35,82 @@ const headers = [
 	},
 ];
 
-const ranks = [
-	{
-		id: 1,
-		title: 'Premier',
-		level1: 5,
-		level2: 10,
-		level3: 15,
-		bonus: 30,
-		action: 'Claim',
-	},
-	{
-		id: 2,
-		title: 'Elite',
-		level1: 8,
-		level2: 15,
-		level3: 25,
-		bonus: 50,
-		action: 'Claim',
-	},
-	{
-		id: 3,
-		title: 'Majestic',
-		level1: 12,
-		level2: 25,
-		level3: 60,
-		bonus: 100,
-		action: 'Claim',
-	},
-	{
-		id: 4,
-		title: 'Royal',
-		level1: 18,
-		level2: 45,
-		level3: 100,
-		bonus: 180,
-		action: 'Claim',
-	},
-	{
-		id: 5,
-		title: 'Glorious',
-		level1: 40,
-		level2: 80,
-		level3: 250,
-		bonus: 300,
-		action: 'Claim',
-	},
-];
-
 const Rewards = () => {
+	useLoadUserQuery();
+	const { user } = useSelector((state: any) => state.auth);
+
+	const ranks = [
+		{
+			id: 1,
+			title: 'Premier',
+			level1: 5,
+			total: 30,
+			bonus: 50,
+			action:
+				user?.rank === 'premier' || user?.rank === 'elite'
+					? 'Claimed'
+					: 'Claim',
+			claimed:
+				user?.rank === 'premier' || user?.rank === 'elite' ? true : false,
+			btnActive:
+				user?.rank === 'member' && user?.rank_is_processing === true
+					? true
+					: false,
+		},
+		{
+			id: 2,
+			title: 'Elite',
+			level1: 8,
+			total: 50,
+			bonus: 100,
+			action: user?.rank === 'elite' ? 'Claimed' : 'Claim',
+			claimed: user?.rank === 'elite' ? true : false,
+			btnActive:
+				user?.rank === 'premier' && user?.rank_is_processing === true
+					? true
+					: false,
+		},
+		{
+			id: 3,
+			title: 'Majestic',
+			level1: 10,
+			total: 70,
+			bonus: 200,
+			action: user?.rank === 'majestic' ? 'Claimed' : 'Claim',
+			claimed: user?.rank === 'majestic' ? true : false,
+			btnActive:
+				user?.rank === 'elite' && user?.rank_is_processing === true
+					? true
+					: false,
+		},
+		{
+			id: 4,
+			title: 'Royal',
+			level1: 12,
+			total: 100,
+			bonus: 300,
+			action: user?.rank === 'royal' ? 'Claimed' : 'Claim',
+			claimed: user?.rank === 'royal' ? true : false,
+			btnActive:
+				user?.rank === 'majestic' && user?.rank_is_processing === true
+					? true
+					: false,
+		},
+		{
+			id: 5,
+			title: 'Glorious',
+			level1: 15,
+			total: 150,
+			bonus: 500,
+			action: user?.rank === 'glorious' ? 'Claimed' : 'Claim',
+			claimed: user?.rank === 'glorious' ? true : false,
+			btnActive:
+				user?.rank === 'royal' && user?.rank_is_processing === true
+					? true
+					: false,
+		},
+	];
+
 	return (
 		<Layout>
 			<ProtectedRoute>
@@ -94,7 +121,7 @@ const Rewards = () => {
 						</h2>
 						<div className='my-4'>
 							<div>
-								<ul className='border border-blue-700 p-1 border-b-0 grid grid-cols-6 text-xs text-center text-blue-gray-300 font-bold uppercase'>
+								<ul className='border border-blue-700 p-1 border-b-0 grid grid-cols-5 text-xs text-center text-blue-gray-300 font-bold uppercase'>
 									{headers.map((header) => (
 										<li key={header.id} className={header.class}>
 											{header.title}
@@ -105,17 +132,39 @@ const Rewards = () => {
 									{ranks.map((rank) => (
 										<ul
 											key={rank.id}
-											className='grid  grid-cols-6 text-xs text-center text-blue-gray-300 font-bold uppercase'
+											className='grid  grid-cols-5 text-xs text-center text-blue-gray-300 font-bold uppercase  border-blue-700 '
 										>
 											<li className=' text-left'>{rank.title}</li>
-											<li>{rank.level1}</li>
-											<li>{rank.level2}</li>
-											<li>{rank.level3}</li>
+
+											<li>
+												{rank.level1}
+												<FaUsers className='inline-block ml-1' />
+											</li>
+											<li>
+												{rank.total}
+												<FaUsers className='inline-block ml-1' />
+											</li>
 											<li>$ {rank.bonus}</li>
 											<li className=' text-right'>
-												<button className='bg-black_3 text-blue-gray-100 px-2 py-1 rounded-lg'>
-													{rank.action}
-												</button>
+												{rank.btnActive ? (
+													<Link href='/rank-claim'>
+														<button className='bg-green-500 text-blue-gray-100 px-2 py-1 rounded-lg'>
+															{rank.action}
+														</button>
+													</Link>
+												) : (
+													<button
+														className={`bg-black_3 px-2 py-1 rounded-lg
+														${
+															rank.claimed
+																? 'bg-opacity-50  text-orange-800 cursor-not-allowed'
+																: 'text-blue-gray-100'
+														}
+														`}
+													>
+														{rank.action}
+													</button>
+												)}
 											</li>
 										</ul>
 									))}

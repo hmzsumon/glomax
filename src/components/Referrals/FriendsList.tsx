@@ -154,31 +154,31 @@ export default function FriendsList() {
 	// find count and active count
 	if (selectedTab === 'all') {
 		count = members?.length;
-		activeCount = members?.filter((member) => member.is_start).length;
+		activeCount = members?.filter((member) => member.is_active).length;
 	} else if (selectedTab === 'level_1') {
 		count = members?.filter((member) => member.level === 1).length;
 		activeCount = members?.filter(
-			(member) => member.level === 1 && member.is_start
+			(member) => member.level === 1 && member.is_active
 		).length;
 	} else if (selectedTab === 'level_2') {
 		count = members?.filter((member) => member.level === 2).length;
 		activeCount = members?.filter(
-			(member) => member.level === 2 && member.is_start
+			(member) => member.level === 2 && member.is_active
 		).length;
 	} else if (selectedTab === 'level_3') {
 		count = members?.filter((member) => member.level === 3).length;
 		activeCount = members?.filter(
-			(member) => member.level === 3 && member.is_start
+			(member) => member.level === 3 && member.is_active
 		).length;
 	} else if (selectedTab === 'level_4') {
 		count = members?.filter((member) => member.level === 4).length;
 		activeCount = members?.filter(
-			(member) => member.level === 4 && member.is_start
+			(member) => member.level === 4 && member.is_active
 		).length;
 	} else if (selectedTab === 'level_5') {
 		count = members?.filter((member) => member.level === 5).length;
 		activeCount = members?.filter(
-			(member) => member.level === 5 && member.is_start
+			(member) => member.level === 5 && member.is_active
 		).length;
 	}
 

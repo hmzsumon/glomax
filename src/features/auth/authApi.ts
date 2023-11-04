@@ -222,6 +222,15 @@ export const authApi = apiSlice.injectEndpoints({
 		getAllTransactions: builder.query<any, void>({
 			query: () => '/transactions',
 		}),
+
+		// claim rank bonus
+		claimRankBonus: builder.mutation<any, any>({
+			query: () => ({
+				url: '/claim-rank-bonus',
+				method: 'PUT',
+			}),
+			invalidatesTags: ['User'],
+		}),
 	}),
 });
 
@@ -246,4 +255,5 @@ export const {
 	useUpdateUserProfilePictureMutation,
 	useUpdateFullNameMutation,
 	useGetAllTransactionsQuery,
+	useClaimRankBonusMutation,
 } = authApi;
