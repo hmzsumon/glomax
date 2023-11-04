@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import { toast } from 'react-toastify';
 import { fetchBaseQueryError } from '@/services/helpers';
 import ScaleLoader from 'react-spinners/ScaleLoader';
@@ -24,7 +24,9 @@ import {
 
 import DepositRecords from '@/components/Deposits/DepositRecords';
 import { useLoadUserQuery } from '@/features/auth/authApi';
+import { useSelector } from 'react-redux';
 const Deposit = () => {
+	const { user } = useSelector((state: any) => state.auth);
 	const [createDepositRequest, { isError, isSuccess, isLoading, error }] =
 		useCreateDepositRequestMutation();
 	const router = useRouter();
@@ -181,11 +183,21 @@ const Deposit = () => {
 						</div>
 						<div className=''>
 							<button
-								className='w-full py-1 font-bold bg-yellow-700 rounded-sm text-blue-gray-900'
+								className='w-full py-1 font-bold bg-yellow-700 rounded-sm text-blue-gray-900 disabled:opacity-50 disabled:cursor-not-allowed'
 								onClick={handleOpen}
+								disabled={isLoading || user?.is_deposit_requested}
 							>
 								Confirm
 							</button>
+							{user?.is_deposit_requested && (
+								<small
+									className='block mt-2 text-xs text-center text-red-500'
+									style={{ lineHeight: '1.2rem' }}
+								>
+									You already have a pending deposit request. Please wait for
+									approval.
+								</small>
+							)}
 						</div>
 					</div>
 					<>
