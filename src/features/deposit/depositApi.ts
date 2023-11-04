@@ -9,7 +9,7 @@ export const depositApi = apiSlice.injectEndpoints({
 				method: 'POST',
 				body,
 			}),
-			invalidatesTags: ['Deposits'],
+			invalidatesTags: ['Deposits', 'User'],
 		}),
 
 		// get my deposits

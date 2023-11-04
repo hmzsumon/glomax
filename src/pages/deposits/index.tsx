@@ -26,6 +26,7 @@ import DepositRecords from '@/components/Deposits/DepositRecords';
 import { useLoadUserQuery } from '@/features/auth/authApi';
 import { useSelector } from 'react-redux';
 const Deposit = () => {
+	useLoadUserQuery();
 	const { user } = useSelector((state: any) => state.auth);
 	const [createDepositRequest, { isError, isSuccess, isLoading, error }] =
 		useCreateDepositRequestMutation();
