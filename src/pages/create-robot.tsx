@@ -285,7 +285,7 @@ const CreateRobot = () => {
 									Profit/Grid (fees deducted)
 								</p>
 								<p className='my-2 text-xs text-blue-gray-300'>
-									3.5% - 5% (3.5% default)
+									4% - 10% (4% default)
 								</p>
 							</div>
 						</div>
