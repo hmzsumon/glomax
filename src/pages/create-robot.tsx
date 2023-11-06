@@ -47,7 +47,7 @@ const CreateRobot = () => {
 	// console.log(data);
 	const { aiRobot } = data || {};
 
-	const { ticker } = useTickerContext();
+	const { ticker: ticker2 } = useTickerContext();
 	const { user } = useSelector((state: any) => state.auth);
 	const [createAiRobot, { isLoading, isError, isSuccess, error }] =
 		useCreateAiRobotMutation();
@@ -69,11 +69,12 @@ const CreateRobot = () => {
 	const [errorText, setErrorText] = useState<string>('');
 	const [minAmount, setMinAmount] = useState<number>(30);
 	const [tickers, setTickers] = useState<any[]>([]);
+	const [ticker, setTicker] = useState<any>(null);
 	const [open, setOpen] = useState<boolean>(false);
 	const [openModal, setOpenModal] = useState<boolean>(false);
 	const [autoCreate, setAutoCreate] = useState<boolean>(false);
 	const handleOpen = () => setOpenModal(!openModal);
-
+	// console.log('Ticker', ticker);
 	useEffect(() => {
 		if (mode === 'edit' && aiRobot) {
 			setGrid(aiRobot?.grid_no);
@@ -98,7 +99,7 @@ const CreateRobot = () => {
 
 	useEffect(() => {
 		const socket = socketIOClient(
-			'https://rapid-trade-api-8113f7eb458c.herokuapp.com'
+			'https://glomax-trade-api-372edeb4df58.herokuapp.com'
 		);
 		socket.on('tickers', (data: any[]) => {
 			setTickers(data);
@@ -108,6 +109,12 @@ const CreateRobot = () => {
 			socket.disconnect();
 		};
 	}, [symbol]);
+
+	// set ticker
+	useEffect(() => {
+		const ticker = tickers.find((t) => t.symbol === symbol);
+		setTicker(ticker);
+	}, [tickers, symbol]);
 
 	// handle set grid
 	const handleSetGrid = (e: any) => {
@@ -171,8 +178,10 @@ const CreateRobot = () => {
 			pair: l_symbol,
 			grid_no: grid,
 			price_range:
-				Number(ticker?.l).toFixed(2) + ' - ' + Number(ticker?.h).toFixed(2),
-			last_price: ticker?.c,
+				Number(ticker?.lowPrice).toFixed(2) +
+				' - ' +
+				Number(ticker?.highPrice).toFixed(2),
+			last_price: ticker?.lastPrice,
 			auto_create: autoCreate,
 		};
 		// console.log(data);
@@ -224,7 +233,7 @@ const CreateRobot = () => {
 					{/* <div className='ai-overlay'></div> */}
 					<div className='relative px-4 py-6 mx-auto space-y-4 rounded-lg bg-black_2 md:w-7/12'>
 						<div>
-							<RobotHeader ticker={ticker} setOpen={setOpen} open={open} />
+							<RobotHeader ticker={ticker2} setOpen={setOpen} open={open} />
 						</div>
 						{/* Start Price Range */}
 						<div>
@@ -233,9 +242,9 @@ const CreateRobot = () => {
 								<div className='space-y-2 '>
 									<p className=' text-blue-gray-300'>Lower Price</p>
 									<div className='flex items-center p-2 pl-4 space-x-2 rounded-md bg-black_3 '>
-										{ticker?.l ? (
+										{ticker?.lowPrice ? (
 											<p className=' text-blue-gray-100'>
-												{Number(ticker?.l).toLocaleString('en-US', {
+												{Number(ticker?.lowPrice).toLocaleString('en-US', {
 													minimumFractionDigits: 3,
 												})}
 											</p>
@@ -249,9 +258,9 @@ const CreateRobot = () => {
 								<div className='space-y-2 '>
 									<p className=' text-blue-gray-300'>Upper Price</p>
 									<div className='flex items-center p-2 pl-4 space-x-2 rounded-md bg-black_3 '>
-										{ticker?.h ? (
+										{ticker?.highPrice ? (
 											<p className=' text-blue-gray-100'>
-												{Number(ticker?.h).toLocaleString('en-US', {
+												{Number(ticker?.highPrice).toLocaleString('en-US', {
 													minimumFractionDigits: 3,
 												})}
 											</p>
@@ -342,9 +351,8 @@ const CreateRobot = () => {
 								className='w-full py-2 font-bold text-gray-800 bg-yellow-700 rounded-md disabled:opacity-40 disabled:cursor-not-allowed '
 								disabled={
 									stateError ||
-									!ticker?.l ||
-									!ticker?.h ||
-									!ticker?.c ||
+									!ticker?.lowPrice ||
+									!ticker?.highPrice ||
 									user?.ai_balance < amount ||
 									!amount ||
 									!grid ||

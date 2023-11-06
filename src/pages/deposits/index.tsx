@@ -190,7 +190,7 @@ const Deposit = () => {
 							>
 								Confirm
 							</button>
-							{user?.is_deposit_requested && (
+							{/* {user?.is_deposit_requested && (
 								<small
 									className='block mt-2 text-xs text-center text-red-500'
 									style={{ lineHeight: '1.2rem' }}
@@ -198,7 +198,7 @@ const Deposit = () => {
 									You already have a pending deposit request. Please wait for
 									approval.
 								</small>
-							)}
+							)} */}
 						</div>
 					</div>
 					<>
