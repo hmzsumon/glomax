@@ -51,9 +51,7 @@ export default function Header() {
 	} = useGetNotificationsQuery(undefined);
 
 	const [fetch, setFetch] = useState(false);
-	const { data: userData } = useLoadUserQuery(undefined, {
-		skip: !fetch,
-	});
+	const { data: userData, refetch: refetch2 } = useLoadUserQuery();
 
 	const [updateNotification, {}] = useUpdateNotificationMutation();
 
@@ -80,6 +78,7 @@ export default function Header() {
 		playNotificationSound();
 		setFetch(true);
 		refetch();
+		refetch2();
 	}
 
 	useEffect(() => {

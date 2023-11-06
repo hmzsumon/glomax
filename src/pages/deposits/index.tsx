@@ -44,7 +44,7 @@ const Deposit = () => {
 
 	const [textError, setTextError] = useState<string>('');
 	const [tnxError, setTnxError] = useState<string>('');
-	const [amount, setAmount] = useState<number>(30);
+	const [amount, setAmount] = useState<number>(0);
 	const [transactionId, setTransactionId] = useState<string>('');
 	const [open, setOpen] = useState(false);
 	const [open2, setOpen2] = useState(false);
@@ -85,7 +85,7 @@ const Deposit = () => {
 			// console.log('data', data);
 
 			createDepositRequest(data);
-			setAmount(30);
+			setAmount(0);
 		}
 	};
 

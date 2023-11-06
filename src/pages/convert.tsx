@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
 import { HiArrowSmLeft } from 'react-icons/hi';
 import { useLoadUserQuery } from '@/features/auth/authApi';
 
-const Withdraw = () => {
+const Convert = () => {
 	const { refetch } = useLoadUserQuery();
 	const router = useRouter();
 	const { user } = useSelector((state: any) => state.auth);
@@ -156,9 +156,9 @@ const Withdraw = () => {
 									{main ? (
 										<span className=''>
 											Main Balance
-											{user?.m_balance ? (
+											{user?.m_balance >= 0 ? (
 												<span className='mx-1 text-blue-gray-300'>
-													{Number(user?.m_balance - 0.1).toFixed(2)}
+													{Number(user?.m_balance).toFixed(2)}
 												</span>
 											) : (
 												<PulseLoader size={10} color={'#fff'} />
@@ -168,7 +168,7 @@ const Withdraw = () => {
 									) : (
 										<span className=''>
 											Ai Balance
-											{user?.m_balance ? (
+											{user?.m_balance >= 0 ? (
 												<span className='mx-1 text-blue-gray-300'>
 													{Number(user?.ai_balance).toFixed(2)}
 												</span>
@@ -238,4 +238,4 @@ const Withdraw = () => {
 	);
 };
 
-export default Withdraw;
+export default Convert;

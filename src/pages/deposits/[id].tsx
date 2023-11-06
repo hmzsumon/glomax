@@ -6,8 +6,10 @@ import { useRouter } from 'next/router';
 import CopyToClipboard from '@/global/CopyToClipboard';
 import { useGetDepositQuery } from '@/features/deposit/depositApi';
 import ScaleLoader from 'react-spinners/ScaleLoader';
+import { useLoadUserQuery } from '@/features/auth/authApi';
 
 const Deposit = () => {
+	useLoadUserQuery();
 	const router = useRouter();
 	const { id } = router.query;
 	const { data, isLoading } = useGetDepositQuery(id);

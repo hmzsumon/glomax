@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 const dashboard = () => {
 	const { user } = useSelector((state: any) => state.auth);
-	useLoadUserQuery(user?._id);
+	useLoadUserQuery();
 	return (
 		<UserLayout>
 			<div>

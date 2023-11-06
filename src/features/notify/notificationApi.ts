@@ -13,7 +13,7 @@ export const notificationApi = apiSlice.injectEndpoints({
 				url: `/update/notifications/${id}`,
 				method: 'PUT',
 			}),
-			invalidatesTags: ['Notification'],
+			invalidatesTags: ['Notification', 'User'],
 		}),
 	}),
 });
