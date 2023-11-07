@@ -47,11 +47,14 @@ const Rewards = () => {
 			total: 30,
 			bonus: 50,
 			action:
-				user?.rank === 'premier' || user?.rank === 'elite'
+				user?.rank === 'premier' ||
+				user?.rank === 'elite' ||
+				user?.rank === 'majestic' ||
+				user?.rank === 'royal' ||
+				user?.rank === 'glorious'
 					? 'Claimed'
 					: 'Claim',
-			claimed:
-				user?.rank === 'premier' || user?.rank === 'elite' ? true : false,
+			claimed: user?.rank === 'elite' ? true : false,
 			btnActive:
 				user?.rank === 'member' && user?.rank_is_processing === true
 					? true
@@ -63,7 +66,13 @@ const Rewards = () => {
 			level1: 8,
 			total: 50,
 			bonus: 100,
-			action: user?.rank === 'elite' ? 'Claimed' : 'Claim',
+			action:
+				user?.rank === 'elite' ||
+				user?.rank === 'majestic' ||
+				user?.rank === 'royal' ||
+				user?.rank === 'glorious'
+					? 'Claimed'
+					: 'Claim',
 			claimed: user?.rank === 'elite' ? true : false,
 			btnActive:
 				user?.rank === 'premier' && user?.rank_is_processing === true
@@ -76,7 +85,12 @@ const Rewards = () => {
 			level1: 10,
 			total: 70,
 			bonus: 200,
-			action: user?.rank === 'majestic' ? 'Claimed' : 'Claim',
+			action:
+				user?.rank === 'majestic' ||
+				user?.rank === 'royal' ||
+				user?.rank === 'glorious'
+					? 'Claimed'
+					: 'Claim',
 			claimed: user?.rank === 'majestic' ? true : false,
 			btnActive:
 				user?.rank === 'elite' && user?.rank_is_processing === true
@@ -89,7 +103,10 @@ const Rewards = () => {
 			level1: 12,
 			total: 100,
 			bonus: 300,
-			action: user?.rank === 'royal' ? 'Claimed' : 'Claim',
+			action:
+				user?.rank === 'royal' || user?.rank === 'glorious'
+					? 'Claimed'
+					: 'Claim',
 			claimed: user?.rank === 'royal' ? true : false,
 			btnActive:
 				user?.rank === 'majestic' && user?.rank_is_processing === true
