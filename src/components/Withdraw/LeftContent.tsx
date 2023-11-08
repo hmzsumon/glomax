@@ -90,11 +90,7 @@ const LeftContent = () => {
 		const totalBalance = user?.m_balance + user?.ai_balance;
 		const balance = totalBalance - user?.trading_volume;
 
-		if (balance > totalBalance) {
-			setAvailable(0);
-		} else {
-			setAvailable(balance);
-		}
+		setAvailable(balance);
 
 		if (balance > user?.m_balance) {
 			setNeedAmount(balance - user?.m_balance);
@@ -226,7 +222,7 @@ const LeftContent = () => {
 						Available
 						{user?.m_balance >= 0 ? (
 							<span className='mx-1 text-blue-gray-300'>
-								{Number(availableAmount).toFixed(2)}
+								{Number(availableAmount > 0 ? availableAmount : 0).toFixed(2)}
 							</span>
 						) : (
 							<PulseLoader size={10} color={'#fff'} />
@@ -281,7 +277,7 @@ const LeftContent = () => {
 						)}
 					</button>
 					{balanceError && (
-						<small className='text-xs text-red-500'>
+						<small className='mt-1 text-xs text-red-500'>
 							Please convert {needAmount} USDT to Main Balance
 						</small>
 					)}
