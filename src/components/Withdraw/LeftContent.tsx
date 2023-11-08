@@ -89,7 +89,12 @@ const LeftContent = () => {
 	useEffect(() => {
 		const totalBalance = user?.m_balance + user?.ai_balance;
 		const balance = totalBalance - user?.trading_volume;
-		setAvailable(balance);
+
+		if (balance > totalBalance) {
+			setAvailable(0);
+		} else {
+			setAvailable(balance);
+		}
 
 		if (balance > user?.m_balance) {
 			setNeedAmount(balance - user?.m_balance);
