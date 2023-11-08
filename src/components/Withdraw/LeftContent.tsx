@@ -88,16 +88,14 @@ const LeftContent = () => {
 	// set available amount
 	useEffect(() => {
 		const totalBalance = user?.m_balance + user?.ai_balance;
-		const balance2 = totalBalance - user?.trading_volume;
-		const balance = balance2 - user?.trading_volume;
-		if (balance < 0) {
-			setAvailable(0);
+		const balance = totalBalance - user?.trading_volume;
+		setAvailable(balance);
+
+		if (balance > user?.m_balance) {
+			setNeedAmount(balance - user?.m_balance);
+			setBalanceError(true);
 		} else {
-			if (balance > user.m_balance) {
-				setAvailable(user.m_balance);
-			} else {
-				setAvailable(balance);
-			}
+			setBalanceError(false);
 		}
 	}, [user]);
 
@@ -221,7 +219,7 @@ const LeftContent = () => {
 				<small className='flex items-center justify-between px-1 mt-1 text-blue-gray-700'>
 					<span className=''>
 						Available
-						{user?.m_balance ? (
+						{user?.m_balance >= 0 ? (
 							<span className='mx-1 text-blue-gray-300'>
 								{Number(availableAmount).toFixed(2)}
 							</span>
@@ -259,7 +257,7 @@ const LeftContent = () => {
 					</p>
 				</div>
 
-				<div className='flex items-center justify-center '>
+				<div className='flex flex-col items-center justify-center '>
 					<button
 						className='flex items-center justify-center w-full py-2 font-bold bg-yellow-700 rounded-lg text-blue-gray-900 disabled:opacity-50 disabled:cursor-not-allowed '
 						disabled={
@@ -267,7 +265,7 @@ const LeftContent = () => {
 								? true
 								: false || !amount
 								? true
-								: false || user?.is_withdraw_requested
+								: false || user?.is_withdraw_requested || balanceError
 						}
 						onClick={handleOpen2}
 					>
@@ -277,6 +275,11 @@ const LeftContent = () => {
 							<span>Confirm</span>
 						)}
 					</button>
+					{balanceError && (
+						<small className='text-xs text-red-500'>
+							Please convert {needAmount} USDT to Main Balance
+						</small>
+					)}
 				</div>
 			</div>
 			{/* Dialog Security */}
