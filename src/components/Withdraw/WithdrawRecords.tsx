@@ -126,6 +126,12 @@ const WithdrawRecords = ({ records }: any) => {
 															Processing
 														</p>
 													)}
+
+													{status === 'rejected' && (
+														<p className='text-center text-red-500 capitalize'>
+															Rejected
+														</p>
+													)}
 												</li>
 
 												<li className='flex items-center justify-end '>

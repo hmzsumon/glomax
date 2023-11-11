@@ -3,9 +3,7 @@ import { IconButton, Typography } from '@material-tailwind/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { type } from 'os';
 import CopyToClipboard from '@/global/CopyToClipboard';
-import Image from 'next/image';
 
 type UserInfoProps = {
 	closeDrawerRight: () => void;

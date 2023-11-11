@@ -17,7 +17,7 @@ export default class SimpleSlider extends Component {
 			'./images/carousel/ai-grid.png',
 			'./images/carousel/ai-robot.png',
 			'./images/carousel/trading.png',
-			'./images/carousel/refarel.png',
+			'./images/carousel/bg1.jpg',
 		];
 		return (
 			<div className=' bg-gray-900 px-2 w-[95%] mx-auto   py-4'>
