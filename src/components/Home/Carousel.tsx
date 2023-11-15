@@ -15,9 +15,9 @@ export default class SimpleSlider extends Component {
 		};
 		const sliderItems = [
 			'./images/carousel/ai-grid.png',
-			'./images/carousel/ai-robot.png',
+			'./images/carousel/b2.jpg',
 			'./images/carousel/trading.png',
-			'./images/carousel/bg1.jpg',
+			'./images/carousel/b1.jpg',
 		];
 		return (
 			<div className=' bg-gray-900 px-2 w-[95%] mx-auto   py-4'>
