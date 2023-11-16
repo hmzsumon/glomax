@@ -278,13 +278,27 @@ const CreateRobot = () => {
 						<div>
 							<h2 className='my-2'>2. Grids</h2>
 							<div className='relative '>
-								<input
+								{/* <input
 									type='number'
 									value={grid}
 									placeholder='1-6'
 									className='w-full p-2 rounded-md outline-none bg-black_3 placeholder-blue-gray-400'
 									onChange={handleSetGrid}
-								/>
+								/> */}
+								<select
+									name=''
+									id=''
+									className='w-full p-2 rounded-md outline-none bg-black_3 placeholder-blue-gray-400'
+									value={grid}
+									onChange={handleSetGrid}
+								>
+									<option value='1'>1</option>
+									<option value='2'>2</option>
+									<option value='3'>3</option>
+									<option value='4'>4</option>
+									<option value='5'>5</option>
+									<option value='6'>6</option>
+								</select>
 								<span className='absolute right-6 top-2 text-blue-gray-200'>
 									Arithmetic
 								</span>
