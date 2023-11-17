@@ -17,10 +17,8 @@ const Layout = ({ children }: PropsWithChildren<{}>) => {
 	const handleOpen = () => setOpen(!open);
 
 	useEffect(() => {
-		if (user?.is_active === false) {
-			if (router.pathname === '/trade' || router.pathname === '/wingame') {
-				handleOpen();
-			}
+		if (user?.is_block) {
+			router.push('/block');
 		}
 	}, [user]);
 
