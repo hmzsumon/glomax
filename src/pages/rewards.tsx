@@ -164,8 +164,11 @@ const Rewards = () => {
 											<li>$ {rank.bonus}</li>
 											<li className='text-right '>
 												{rank.btnActive ? (
-													<Link href='/rewards'>
-														<button className='px-2 py-1 bg-green-500 rounded-lg text-blue-gray-100'>
+													<Link href='/rank-claim'>
+														<button
+															className='px-2 py-1 bg-green-500 rounded-lg text-blue-gray-100 disabled:opacity-50 disabled:cursor-not-allowed '
+															disabled
+														>
 															{rank.action}
 														</button>
 													</Link>
