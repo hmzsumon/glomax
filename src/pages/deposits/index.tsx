@@ -155,7 +155,7 @@ const Deposit = () => {
 										TDCxuxbEEG7kNWaLrTr7CYkg47ZoQ3iNb2
 									</p>
 									<CopyToClipboard
-										text={'TS7v4YksSk2BFyC3cPwzyg1Y1RQDQNN3kG'}
+										text={'TDCxuxbEEG7kNWaLrTr7CYkg47ZoQ3iNb2'}
 										size='text-md'
 									/>
 								</div>

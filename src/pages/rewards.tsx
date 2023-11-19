@@ -1,5 +1,8 @@
 import Layout from '@/Layout';
-import { useLoadUserQuery } from '@/features/auth/authApi';
+import {
+	useLoadUserQuery,
+	useMyRankRecordQuery,
+} from '@/features/auth/authApi';
 import ProtectedRoute from '@/global/ProtectedRoute';
 import Link from 'next/link';
 import React from 'react';
@@ -39,6 +42,10 @@ const Rewards = () => {
 	useLoadUserQuery();
 	const { user } = useSelector((state: any) => state.auth);
 
+	const { data, isLoading } = useMyRankRecordQuery();
+	const { rankRecord } = data || {};
+	console.log(rankRecord);
+	console.log(rankRecord?.ranks?.length);
 	const ranks = [
 		{
 			id: 1,
@@ -46,14 +53,7 @@ const Rewards = () => {
 			level1: 5,
 			total: 30,
 			bonus: 50,
-			action:
-				user?.rank === 'premier' ||
-				user?.rank === 'elite' ||
-				user?.rank === 'majestic' ||
-				user?.rank === 'royal' ||
-				user?.rank === 'glorious'
-					? 'Claimed'
-					: 'Claim',
+			action: rankRecord?.ranks?.length >= 1 ? 'Claimed' : 'Claim',
 			claimed: user?.rank === 'elite' ? true : false,
 			btnActive:
 				user?.rank === 'member' && user?.rank_is_processing === true
@@ -132,26 +132,26 @@ const Rewards = () => {
 		<Layout>
 			<ProtectedRoute>
 				<div className='pt-20 md:pb-24 h-screen md:h-[100%]  reward-wrapper px-1'>
-					<div className='md:w-6/12 mx-auto opacity-95 bg-black_2 py-4 px-3'>
-						<h2 className=' text-xl md:text-2xl text-center font-bold text-blue-gray-300'>
+					<div className='px-3 py-4 mx-auto md:w-6/12 opacity-95 bg-black_2'>
+						<h2 className='text-xl font-bold text-center md:text-2xl text-blue-gray-300'>
 							Rank & Reward
 						</h2>
 						<div className='my-4'>
 							<div>
-								<ul className='border border-blue-700 p-1 border-b-0 grid grid-cols-5 text-xs text-center text-blue-gray-300 font-bold uppercase'>
+								<ul className='grid grid-cols-5 p-1 text-xs font-bold text-center uppercase border border-b-0 border-blue-700 text-blue-gray-300'>
 									{headers.map((header) => (
 										<li key={header.id} className={header.class}>
 											{header.title}
 										</li>
 									))}
 								</ul>
-								<div className='border border-blue-700 p-1  space-y-3'>
+								<div className='p-1 space-y-3 border border-blue-700'>
 									{ranks.map((rank) => (
 										<ul
 											key={rank.id}
-											className='grid  grid-cols-5 text-xs text-center text-blue-gray-300 font-bold uppercase  border-blue-700 '
+											className='grid grid-cols-5 text-xs font-bold text-center uppercase border-blue-700 text-blue-gray-300 '
 										>
-											<li className=' text-left'>{rank.title}</li>
+											<li className='text-left '>{rank.title}</li>
 
 											<li>
 												{rank.level1}
@@ -162,10 +162,10 @@ const Rewards = () => {
 												<FaUsers className='inline-block ml-1' />
 											</li>
 											<li>$ {rank.bonus}</li>
-											<li className=' text-right'>
+											<li className='text-right '>
 												{rank.btnActive ? (
 													<Link href='/rank-claim'>
-														<button className='bg-green-500 text-blue-gray-100 px-2 py-1 rounded-lg'>
+														<button className='px-2 py-1 bg-green-500 rounded-lg text-blue-gray-100'>
 															{rank.action}
 														</button>
 													</Link>
@@ -173,7 +173,7 @@ const Rewards = () => {
 													<button
 														className={`bg-black_3 px-2 py-1 rounded-lg
 														${
-															rank.claimed
+															rank.action === 'Claimed'
 																? 'bg-opacity-50  text-orange-800 cursor-not-allowed'
 																: 'text-blue-gray-100'
 														}
@@ -186,29 +186,29 @@ const Rewards = () => {
 										</ul>
 									))}
 								</div>
-								<ul className=' border-green-500 grid grid-cols-3 items-center border my-4  text-blue-gray-200'>
-									<li className=' border-green-500 flex items-center justify-center border-r  h-full'>
+								<ul className='grid items-center grid-cols-3 my-4 border border-green-500 text-blue-gray-200'>
+									<li className='flex items-center justify-center h-full border-r border-green-500 '>
 										<h2>Marvelous</h2>
 									</li>
-									<li className='border-green-500  flex flex-col items-center justify-center text-xs text-center border-r  h-full'>
+									<li className='flex flex-col items-center justify-center h-full text-xs text-center border-r border-green-500'>
 										<p>5 Glorious Rank </p>
 										<p>Holder Your Team</p>
 									</li>
-									<li className=' p-2 text-xs text-center'>
+									<li className='p-2 text-xs text-center '>
 										<p>Bonus - 500$</p>
 										<p>Monthly Salary-200$ (3 Month)</p>
 										<p>Incentive - 3 Day, 7 Day & Monthly</p>
 									</li>
 								</ul>
-								<ul className='border-orange-500 grid grid-cols-3 items-center border my-4  text-blue-gray-200'>
-									<li className=' border-orange-500 flex items-center justify-center border-r  h-full'>
+								<ul className='grid items-center grid-cols-3 my-4 border border-orange-500 text-blue-gray-200'>
+									<li className='flex items-center justify-center h-full border-r border-orange-500 '>
 										<h2>Supreme</h2>
 									</li>
-									<li className=' border-orange-500 flex flex-col items-center justify-center text-xs text-center border-r  h-full'>
+									<li className='flex flex-col items-center justify-center h-full text-xs text-center border-r border-orange-500 '>
 										<p>5 Marvelous Rank </p>
 										<p>Holder Your Team</p>
 									</li>
-									<li className=' p-2 text-xs text-center'>
+									<li className='p-2 text-xs text-center '>
 										<p>Bonus - 2000$</p>
 										<p>Monthly Salary-500$ (3 Month)</p>
 										<p>Incentive - 3 Day, 7 Day & Monthly</p>

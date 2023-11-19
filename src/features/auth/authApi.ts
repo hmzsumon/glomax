@@ -231,6 +231,12 @@ export const authApi = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ['User'],
 		}),
+
+		// my rank record
+		myRankRecord: builder.query<any, void>({
+			query: () => '/my-rank-record',
+			providesTags: ['User'],
+		}),
 	}),
 });
 
@@ -256,4 +262,5 @@ export const {
 	useUpdateFullNameMutation,
 	useGetAllTransactionsQuery,
 	useClaimRankBonusMutation,
+	useMyRankRecordQuery,
 } = authApi;
