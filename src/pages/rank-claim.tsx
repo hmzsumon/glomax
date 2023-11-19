@@ -46,19 +46,20 @@ const RankClaim = () => {
 	return (
 		<Layout>
 			<div className='pt-20 md:pb-24 h-screen md:h-[100%]   px-1'>
-				<div className='md:w-6/12 mx-auto opacity-95 bg-black_2 py-4 px-3'>
+				<div className='px-3 py-4 mx-auto md:w-6/12 opacity-95 bg-black_2'>
 					<div>
 						<GiRank3 className='mx-auto text-6xl text-center text-blue-gray-300' />
 					</div>
-					<h1 className=' text-2xl font-bold text-center'>
+					<h1 className='text-2xl font-bold text-center '>
 						Claim your rank Bonus
 					</h1>
 
 					<div>
 						<button
-							className='w-full disabled:opacity-50 disabled:cursor-not-allowed bg-yellow-700 hover:bg-yellow-600 text-blue-gray-800 font-bold py-2 px-4 rounded mt-5'
+							className='w-full px-4 py-2 mt-5 font-bold bg-yellow-700 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-yellow-600 text-blue-gray-800'
 							onClick={() => handleClaim()}
-							disabled={user?.rank_claimed === true || btnDisabled}
+							// disabled={user?.rank_claimed === true || btnDisabled}
+							disabled
 						>
 							Claim
 						</button>
