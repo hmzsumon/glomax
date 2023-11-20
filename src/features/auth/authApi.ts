@@ -1,6 +1,7 @@
 import { setCookie } from '@/utils/cookie';
 import { apiSlice } from '../api/apiSlice';
 import { setUser, logoutUser } from './authSlice';
+import { AnyAsyncThunk } from '@reduxjs/toolkit/dist/matchers';
 export interface IUser {
 	user: any;
 	token: string;
@@ -237,6 +238,18 @@ export const authApi = apiSlice.injectEndpoints({
 			query: () => '/my-rank-record',
 			providesTags: ['User'],
 		}),
+
+		// get rank members
+		getRankMembers: builder.query<any, void>({
+			query: () => `/get-rank-members`,
+			providesTags: ['Users'],
+		}),
+
+		// get rank members by rank
+		getRankMembersByRank: builder.query<any, any>({
+			query: ({ rank }) => `/get-rank-members-by-rank/${rank}`,
+			providesTags: ['Users'],
+		}),
 	}),
 });
 
@@ -263,4 +276,6 @@ export const {
 	useGetAllTransactionsQuery,
 	useClaimRankBonusMutation,
 	useMyRankRecordQuery,
+	useGetRankMembersQuery,
+	useGetRankMembersByRankQuery,
 } = authApi;

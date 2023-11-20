@@ -58,8 +58,7 @@ const RankClaim = () => {
 						<button
 							className='w-full px-4 py-2 mt-5 font-bold bg-yellow-700 rounded disabled:opacity-50 disabled:cursor-not-allowed hover:bg-yellow-600 text-blue-gray-800'
 							onClick={() => handleClaim()}
-							// disabled={user?.rank_claimed === true || btnDisabled}
-							disabled
+							disabled={user?.rank_claimed === true || btnDisabled}
 						>
 							Claim
 						</button>
