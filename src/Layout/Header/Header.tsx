@@ -39,6 +39,7 @@ import {
 } from '@/features/notify/notificationApi';
 import socketIOClient from 'socket.io-client';
 import ioBaseUrl from '@/config/ioBaseUrl';
+import { m } from 'framer-motion';
 
 export default function Header() {
 	const token = Cookies.get('token');
@@ -132,12 +133,15 @@ export default function Header() {
 						<div className='flex items-center gap-x-4 '>
 							<div className='px-2 py-1 bg-gray-900 rounded-md '>
 								<span>
-									{user?.m_balance
-										? Number(user?.m_balance)?.toLocaleString('en-US', {
-												style: 'currency',
-												currency: 'USD',
-										  })
-										: '0.00'}{' '}
+									{Number(user?.m_balance + user?.ai_balance)?.toLocaleString(
+										'en-US',
+										{
+											style: 'currency',
+											currency: 'USD',
+											minimumFractionDigits: 2,
+											maximumFractionDigits: 2,
+										}
+									)}
 								</span>
 								<Link href='/deposits'>
 									<BiSolidWallet className='inline-block ml-2 text-xl transition-all cursor-pointer hover:text-yellow-700 hover:scale-125 ' />

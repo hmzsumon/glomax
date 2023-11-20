@@ -92,7 +92,7 @@ const LeftContent = () => {
 
 		setAvailable(balance);
 
-		if (balance > user?.m_balance) {
+		if (amount > user?.m_balance) {
 			setNeedAmount(balance - user?.m_balance);
 			setBalanceError(true);
 		} else {
