@@ -145,11 +145,11 @@ const AiRobot = () => {
 								<div className='grid items-center justify-between grid-cols-2 p-4 mt-2 border border-blue-gray-800'>
 									<div>
 										<p className='text-sm text-gray-500'>Active Strategies</p>
-										<h2>66,420</h2>
+										<h2>75,309</h2>
 									</div>
 									<div>
 										<p className='text-sm text-gray-500'>Total Value</p>
-										<h2>105,951</h2>
+										<h2>305,800</h2>
 									</div>
 								</div>
 
