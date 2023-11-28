@@ -39,6 +39,11 @@ const headers = [
 		class: 'text-center',
 	},
 	{
+		id: 7,
+		name: 'Balance',
+		class: 'text-center',
+	},
+	{
 		id: 6,
 		name: 'Details',
 		class: 'text-right',
@@ -72,7 +77,7 @@ const WalletHistory = () => {
 					<div className='my-4 rounded '>
 						<div className='w-full '>
 							<div className='bg-[#071832] rounded-t-md'>
-								<div className='grid grid-cols-4 list-none '>
+								<div className='grid grid-cols-5 list-none '>
 									{headers.map((head, index) => {
 										return (
 											<li key={head.id} className={`py-4  px-2 `}>
@@ -95,13 +100,15 @@ const WalletHistory = () => {
 									(
 										tnx: {
 											amount: number;
+											balance: number;
 											createdAt: Date;
 											transactionType: string;
 											_id: string;
 										},
 										index: number
 									) => {
-										const { amount, createdAt, transactionType, _id } = tnx;
+										const { amount, createdAt, transactionType, _id, balance } =
+											tnx;
 										const oddEven =
 											index % 2 === 0 ? 'bg-blue-gray-800' : 'bg-blue-gray-900';
 
@@ -110,7 +117,7 @@ const WalletHistory = () => {
 												<div
 													key={_id}
 													className={`
-                    ${oddEven} grid grid-cols-4  list-none justify-between items-center px-2 py-2 text-[0.6rem] transition-colors text-blue-gray-200 cursor-pointer 
+                    ${oddEven} grid grid-cols-5  list-none justify-between items-center px-2 py-2 text-[0.6rem] transition-colors text-blue-gray-200 cursor-pointer 
                     `}
 													onClick={() => handleShowMore(_id)}
 												>
@@ -152,6 +159,12 @@ const WalletHistory = () => {
 																- {Number(amount).toFixed(2)} $
 															</p>
 														)}
+													</li>
+
+													<li className=''>
+														<p className='text-center capitalize'>
+															{Number(balance ? balance : 0).toFixed(2)} $
+														</p>
 													</li>
 
 													<li className='flex items-center justify-end '>
