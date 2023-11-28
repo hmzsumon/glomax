@@ -45,7 +45,7 @@ const Claim = () => {
 						color='amber'
 						className='w-full disabled:opacity-50 disabled:cursor-not-allowed '
 						onClick={handleClaim}
-						disabled
+						disabled={btnFalse || isLoading}
 					>
 						{isLoading ? (
 							<ScaleLoader color='#fff' height={20} width={3} radius={2} />
