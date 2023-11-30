@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
+import { useLogoutUserMutation } from '@/features/auth/authApi';
+import { useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
 
 const Block = () => {
+	const { user } = useSelector((state: any) => state.auth);
+	const [logoutUser, { isLoading, isError }] = useLogoutUserMutation();
+
+	useEffect(() => {
+		logoutUser({ email: user?.email });
+		console.log('logout');
+
+		// Remove token and user info from cookies
+		Cookies.remove('token');
+		Cookies.remove('user');
+	}, []);
+
 	return (
 		<div>
 			<div className='mx-auto my-6 md:w-1/2'>

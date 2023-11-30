@@ -22,6 +22,8 @@ import {
 	useGetMyDepositsQuery,
 } from '@/features/deposit/depositApi';
 
+import { FaExternalLinkAlt } from 'react-icons/fa';
+
 import DepositRecords from '@/components/Deposits/DepositRecords';
 import { useLoadUserQuery } from '@/features/auth/authApi';
 import { useSelector } from 'react-redux';
@@ -251,7 +253,22 @@ const Deposit = () => {
 
 										<div className='flex items-center justify-between '>
 											{tnxError ? (
-												<p className='text-xs text-red-500'>{tnxError}</p>
+												<div className=' flex flex-col'>
+													<p className='text-xs text-red-500'>{tnxError}</p>
+													<div className='flex items-center justify-center '>
+														<button>
+															<a
+																href='https://t.me/glomax2020'
+																target='_blank'
+																rel='noopener noreferrer'
+																className='text-yellow-700 '
+															>
+																Contact with customer support
+																<FaExternalLinkAlt className='inline-block ml-1 text-xs' />
+															</a>
+														</button>
+													</div>
+												</div>
 											) : (
 												<small>
 													Please enter a valid transaction id otherwise your
