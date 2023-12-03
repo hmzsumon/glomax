@@ -17,10 +17,20 @@ export const withdrawApi = apiSlice.injectEndpoints({
 			query: () => `/my-withdraws`,
 			providesTags: ['Withdraws'],
 		}),
+
+		// get whatsapp code
+		getWhatsappCode: builder.mutation<any, any>({
+			query: (data) => ({
+				url: `/whatsapp-verification-code`,
+				method: 'POST',
+				body: data,
+			}),
+		}),
 	}),
 });
 
 export const {
 	useCreateWithdrawRequestMutation,
 	useGetMyWithdrawRequestsQuery,
+	useGetWhatsappCodeMutation,
 } = withdrawApi;
