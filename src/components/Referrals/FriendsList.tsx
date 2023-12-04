@@ -352,7 +352,7 @@ export default function FriendsList() {
 												customer_id,
 												kyc_verified,
 												join_date,
-
+												name,
 												is_active,
 												level,
 												total_withdraw,
@@ -386,7 +386,7 @@ export default function FriendsList() {
 																	color='blue-gray'
 																	className='font-normal text-white opacity-70'
 																>
-																	{email}
+																	{name}
 																</Typography>
 																<Typography
 																	variant='small'
