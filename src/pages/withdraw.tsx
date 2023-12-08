@@ -7,8 +7,20 @@ import { Dialog, DialogBody } from '@material-tailwind/react';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import { useGetMyWithdrawRequestsQuery } from '@/features/withdraw/withdrawApi';
 import WithdrawRecords from '@/components/Withdraw/WithdrawRecords';
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 
 const Withdraw = () => {
+	const { user } = useSelector((state: any) => state.auth);
+
+	// check if user has completed kyc
+	const router = useRouter();
+	React.useEffect(() => {
+		if (!user?.kyc_verified) {
+			router.push('/kyc');
+		}
+	}, [user]);
+
 	const { data, refetch, isLoading, isSuccess, isError, error } =
 		useGetMyWithdrawRequestsQuery(undefined);
 	const { withdraws } = data || [];

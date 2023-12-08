@@ -190,6 +190,16 @@ export const authApi = apiSlice.injectEndpoints({
 			invalidatesTags: ['User'],
 		}),
 
+		// change password
+		changePassword: builder.mutation<IUser, any>({
+			query: (body) => ({
+				url: '/change-password',
+				method: 'PUT',
+				body,
+			}),
+			invalidatesTags: ['User'],
+		}),
+
 		// security verify
 		securityVerify: builder.mutation<IUser, any>({
 			query: (body) => ({
@@ -250,6 +260,16 @@ export const authApi = apiSlice.injectEndpoints({
 			query: ({ rank }) => `/get-rank-members-by-rank/${rank}`,
 			providesTags: ['Users'],
 		}),
+
+		// kyc verification
+		kycVerification: builder.mutation<any, any>({
+			query: (body) => ({
+				url: '/submit-kyc',
+				method: 'POST',
+				body,
+			}),
+			invalidatesTags: ['User'],
+		}),
 	}),
 });
 
@@ -278,4 +298,6 @@ export const {
 	useMyRankRecordQuery,
 	useGetRankMembersQuery,
 	useGetRankMembersByRankQuery,
+	useChangePasswordMutation,
+	useKycVerificationMutation,
 } = authApi;

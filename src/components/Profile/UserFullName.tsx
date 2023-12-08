@@ -52,10 +52,10 @@ const UserFullName = () => {
 	return (
 		<div className=' list-none flex gap-2'>
 			<li>{user?.name}</li>
-			<RiEdit2Fill
+			{/* <RiEdit2Fill
 				onClick={handleOpen}
 				className='cursor-pointer hover:text-red-500 p-1 text-xl text-gray-400 bg-gray-600 rounded'
-			/>
+			/> */}
 			<Dialog
 				size='xs'
 				open={open}
@@ -63,11 +63,11 @@ const UserFullName = () => {
 				className='  bg-transparent shadow-none'
 			>
 				<Card className='relative mx-auto w-full max-w-[24rem] bg-black_2'>
-					<div className='absolute right-0'>
+					{/* <div className='absolute right-0'>
 						<IconButton variant='text' color='white' onClick={handleOpen}>
 							<XMarkIcon strokeWidth={2} className='w-5 h-5' />
 						</IconButton>
-					</div>
+					</div> */}
 					<div className=' pt-4'>
 						<h2 className='text-xl text-center text-blue-gray-100 font-medium'>
 							Update Full Name
