@@ -82,158 +82,171 @@ const Kyc = () => {
 		<Layout>
 			<ProtectedRoute>
 				<div className='py-20'>
-					<div className=' w-full md:w-7/12 mx-auto flex items-center justify-center'>
-						{!user?.is_verify_request ? (
-							<div>
-								<Card color='transparent' shadow={false}>
-									<Typography variant='h4' className=' text-blue-gray-100'>
-										KYC Form
-									</Typography>
-									<Typography
-										color='gray'
-										className='mt-1 font-normal text-blue-gray-200'
-									>
-										Please fill in the form below to complete your KYC
-										registration.
-									</Typography>
-									<form className='mt-8 mb-2 w-full max-w-screen-lg sm:w-96'>
-										<div className='mb-1 flex flex-col gap-6'>
-											<Typography
-												variant='h6'
-												className='-mb-3 text-blue-gray-200'
-											>
-												Your Full Name
-											</Typography>
-											<Input
-												size='lg'
-												placeholder='name@mail.com'
-												className='  text-blue-gray-100 !border-t-blue-gray-200 focus:!border-t-gray-900'
-												value={name}
-												readOnly
-											/>
-											{/*Start Address */}
-											<Typography
-												variant='h6'
-												color='blue-gray'
-												className='-mb-3 text-blue-gray-200'
-											>
-												Address
-											</Typography>
-											<Input
-												size='lg'
-												className=' text-blue-gray-100 !border-t-blue-gray-200 focus:!border-t-gray-900'
-												labelProps={{
-													className: 'before:content-none after:content-none',
-												}}
-												value={address}
-												onChange={(e) => setAddress(e.target.value)}
-											/>
-											{/*End Address */}
-
-											{/*Start City */}
-											<Typography
-												variant='h6'
-												color='blue-gray'
-												className='-mb-3 text-blue-gray-200'
-											>
-												City
-											</Typography>
-											<Input
-												size='lg'
-												className=' text-blue-gray-100 !border-t-blue-gray-200 focus:!border-t-gray-900'
-												labelProps={{
-													className: 'before:content-none after:content-none',
-												}}
-												value={city}
-												onChange={(e) => setCity(e.target.value)}
-											/>
-											{/*End City */}
-
-											{/*Start Zip */}
-											<Typography
-												variant='h6'
-												color='blue-gray'
-												className='-mb-3 text-blue-gray-200'
-											>
-												Zip Code
-											</Typography>
-											<Input
-												size='lg'
-												className=' text-blue-gray-100 !border-t-blue-gray-200 focus:!border-t-gray-900'
-												labelProps={{
-													className: 'before:content-none after:content-none',
-												}}
-												value={zip}
-												onChange={(e) => setZip(e.target.value)}
-											/>
-											{/*End Zip */}
-
-											{/*Start Country */}
-											<Typography
-												variant='h6'
-												color='blue-gray'
-												className='-mb-3 text-blue-gray-200'
-											>
-												Country
-											</Typography>
-											<Input
-												size='lg'
-												className=' text-blue-gray-100 !border-t-blue-gray-200 focus:!border-t-gray-900'
-												labelProps={{
-													className: 'before:content-none after:content-none',
-												}}
-												value={country}
-												onChange={(e) => setCountry(e.target.value)}
-											/>
-											{/*End Country */}
-
-											{/*Start Nid No */}
-											<Typography
-												variant='h6'
-												color='blue-gray'
-												className='-mb-3 text-blue-gray-200'
-											>
-												Nid No
-											</Typography>
-											<Input
-												size='lg'
-												className=' text-blue-gray-100 !border-t-blue-gray-200 focus:!border-t-gray-900'
-												labelProps={{
-													className: 'before:content-none after:content-none',
-												}}
-												value={nidNo}
-												onChange={(e) => setNidNo(e.target.value)}
-											/>
-											{/*End Nid No */}
-										</div>
-									</form>
-									<div className='grid grid-cols-3 gap-2'>
-										<NidOne setNidOne={setNidOne} />
-										<NidTwo setNidTwo={setNidTwo} />
-										<Photo setPhoto={setPhoto} />
-									</div>
-
-									<Button className='mt-6' fullWidth onClick={handleSubmit}>
-										{isLoading ? (
-											<PulseLoader color='white' size={10} />
-										) : (
-											'Submit'
-										)}
-									</Button>
-								</Card>
-							</div>
-						) : (
+					{user?.kyc_verified ? (
+						<div>
 							<div className='flex flex-col items-center justify-center'>
 								<h1 className='text-2xl font-bold text-blue-gray-200'>
-									Your KYC verification is under review
+									Your KYC verification is approved
 								</h1>
 								<p className='text-blue-gray-200'>
-									Please wait for admin approval, it may take up to 24 - 72
-									hours
+									You can now deposit and withdraw funds
 								</p>
 							</div>
-						)}
-					</div>
+						</div>
+					) : (
+						<div className=' w-full md:w-7/12 mx-auto flex items-center justify-center'>
+							{!user?.is_verify_request ? (
+								<div>
+									<Card color='transparent' shadow={false}>
+										<Typography variant='h4' className=' text-blue-gray-100'>
+											KYC Form
+										</Typography>
+										<Typography
+											color='gray'
+											className='mt-1 font-normal text-blue-gray-200'
+										>
+											Please fill in the form below to complete your KYC
+											registration.
+										</Typography>
+										<form className='mt-8 mb-2 w-full max-w-screen-lg sm:w-96'>
+											<div className='mb-1 flex flex-col gap-6'>
+												<Typography
+													variant='h6'
+													className='-mb-3 text-blue-gray-200'
+												>
+													Your Full Name
+												</Typography>
+												<Input
+													size='lg'
+													placeholder='name@mail.com'
+													className='  text-blue-gray-100 !border-t-blue-gray-200 focus:!border-t-gray-900'
+													value={name}
+													readOnly
+												/>
+												{/*Start Address */}
+												<Typography
+													variant='h6'
+													color='blue-gray'
+													className='-mb-3 text-blue-gray-200'
+												>
+													Address
+												</Typography>
+												<Input
+													size='lg'
+													className=' text-blue-gray-100 !border-t-blue-gray-200 focus:!border-t-gray-900'
+													labelProps={{
+														className: 'before:content-none after:content-none',
+													}}
+													value={address}
+													onChange={(e) => setAddress(e.target.value)}
+												/>
+												{/*End Address */}
+
+												{/*Start City */}
+												<Typography
+													variant='h6'
+													color='blue-gray'
+													className='-mb-3 text-blue-gray-200'
+												>
+													City
+												</Typography>
+												<Input
+													size='lg'
+													className=' text-blue-gray-100 !border-t-blue-gray-200 focus:!border-t-gray-900'
+													labelProps={{
+														className: 'before:content-none after:content-none',
+													}}
+													value={city}
+													onChange={(e) => setCity(e.target.value)}
+												/>
+												{/*End City */}
+
+												{/*Start Zip */}
+												<Typography
+													variant='h6'
+													color='blue-gray'
+													className='-mb-3 text-blue-gray-200'
+												>
+													Zip Code
+												</Typography>
+												<Input
+													size='lg'
+													className=' text-blue-gray-100 !border-t-blue-gray-200 focus:!border-t-gray-900'
+													labelProps={{
+														className: 'before:content-none after:content-none',
+													}}
+													value={zip}
+													onChange={(e) => setZip(e.target.value)}
+												/>
+												{/*End Zip */}
+
+												{/*Start Country */}
+												<Typography
+													variant='h6'
+													color='blue-gray'
+													className='-mb-3 text-blue-gray-200'
+												>
+													Country
+												</Typography>
+												<Input
+													size='lg'
+													className=' text-blue-gray-100 !border-t-blue-gray-200 focus:!border-t-gray-900'
+													labelProps={{
+														className: 'before:content-none after:content-none',
+													}}
+													value={country}
+													onChange={(e) => setCountry(e.target.value)}
+												/>
+												{/*End Country */}
+
+												{/*Start Nid No */}
+												<Typography
+													variant='h6'
+													color='blue-gray'
+													className='-mb-3 text-blue-gray-200'
+												>
+													Nid No
+												</Typography>
+												<Input
+													size='lg'
+													className=' text-blue-gray-100 !border-t-blue-gray-200 focus:!border-t-gray-900'
+													labelProps={{
+														className: 'before:content-none after:content-none',
+													}}
+													value={nidNo}
+													onChange={(e) => setNidNo(e.target.value)}
+												/>
+												{/*End Nid No */}
+											</div>
+										</form>
+										<div className='grid grid-cols-3 gap-2'>
+											<NidOne setNidOne={setNidOne} />
+											<NidTwo setNidTwo={setNidTwo} />
+											<Photo setPhoto={setPhoto} />
+										</div>
+
+										<Button className='mt-6' fullWidth onClick={handleSubmit}>
+											{isLoading ? (
+												<PulseLoader color='white' size={10} />
+											) : (
+												'Submit'
+											)}
+										</Button>
+									</Card>
+								</div>
+							) : (
+								<div className='flex flex-col items-center justify-center'>
+									<h1 className='text-2xl font-bold text-blue-gray-200'>
+										Your KYC verification is under review
+									</h1>
+									<p className='text-blue-gray-200'>
+										Please wait for admin approval, it may take up to 24 - 72
+										hours
+									</p>
+								</div>
+							)}
+						</div>
+					)}
 				</div>
 			</ProtectedRoute>
 		</Layout>

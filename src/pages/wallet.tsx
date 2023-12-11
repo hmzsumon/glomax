@@ -31,7 +31,9 @@ const menuItems = [
 
 const Wallet = () => {
 	const { user } = useSelector((state: any) => state.auth);
-	const totalBalance = Number(user?.m_balance + user?.ai_balance).toFixed(2);
+	const totalBalance = Number(
+		user?.m_balance + user?.ai_balance + user?.e_balance
+	).toFixed(2);
 	return (
 		<Layout>
 			<ProtectedRoute>

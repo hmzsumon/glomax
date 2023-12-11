@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { CloseIcon2, ExplanationIcon } from '@/utils/icons/CommonIcons';
 import { toast } from 'react-toastify';
 import {
 	Navbar,
@@ -16,6 +17,9 @@ import {
 	MenuList,
 	MenuItem,
 	Menu,
+	Dialog,
+	DialogHeader,
+	DialogBody,
 } from '@material-tailwind/react';
 import { BiSolidWallet } from 'react-icons/bi';
 import { XMarkIcon } from '@heroicons/react/24/outline';
@@ -40,8 +44,13 @@ import {
 import socketIOClient from 'socket.io-client';
 import ioBaseUrl from '@/config/ioBaseUrl';
 import { m } from 'framer-motion';
+import Wallet from '../../pages/wallet';
+import { useRouter } from 'next/router';
 
 export default function Header() {
+	const router = useRouter();
+	const path = router.pathname;
+
 	const token = Cookies.get('token');
 	const {
 		data,
@@ -60,6 +69,11 @@ export default function Header() {
 	const { notifications } = data || [];
 	const [logoutUser, { isSuccess }] = useLogoutUserMutation();
 
+	const [notiFication, setNotiFication] = useState({
+		subject: '',
+		description: '',
+	});
+
 	const [count, setCount] = React.useState(notifications?.length);
 	useEffect(() => {
 		setCount(notifications?.length);
@@ -69,6 +83,23 @@ export default function Header() {
 	const [openRight, setOpenRight] = React.useState(false);
 	const openDrawerRight = () => setOpenRight(true);
 	const closeDrawerRight = () => setOpenRight(false);
+	const [open2, setOpen2] = useState(false);
+	const handleOpen2 = () => setOpen2(!open2);
+
+	// handle notification
+	const handleNotification = async (id: any) => {
+		// find notification by id
+		const notification = notifications?.find((n: any) => n._id === id);
+		setNotiFication(notification);
+		handleOpen2();
+		updateNotification({
+			id: id as string,
+			is_read: true,
+		});
+		setFetch(true);
+		refetch();
+		refetch2();
+	};
 
 	function playNotificationSound() {
 		const audio = new Audio('/sounds/user-notification.wav');
@@ -132,17 +163,38 @@ export default function Header() {
 					{token ? (
 						<div className='flex items-center gap-x-4 '>
 							<div className='px-2 py-1 bg-gray-900 rounded-md '>
-								<span>
-									{Number(user?.m_balance + user?.ai_balance)?.toLocaleString(
-										'en-US',
-										{
-											style: 'currency',
-											currency: 'USD',
-											minimumFractionDigits: 2,
-											maximumFractionDigits: 2,
-										}
-									)}
-								</span>
+								{path === '/withdraw' ? (
+									<>
+										<span>Earn: </span>
+										<span>
+											{Number(
+												user?.e_balance ? user?.e_balance : 0.0
+											)?.toLocaleString('en-US', {
+												style: 'currency',
+												currency: 'USD',
+												minimumFractionDigits: 2,
+												maximumFractionDigits: 2,
+											})}
+										</span>
+									</>
+								) : (
+									<>
+										<span>Wallet: </span>
+										<span>
+											{Number(
+												user?.m_balance >= 0
+													? user?.m_balance + user?.ai_balance + user?.e_balance
+													: 0.0
+											)?.toLocaleString('en-US', {
+												style: 'currency',
+												currency: 'USD',
+												minimumFractionDigits: 2,
+												maximumFractionDigits: 2,
+											})}
+										</span>
+									</>
+								)}
+
 								<Link href='/deposits'>
 									<BiSolidWallet className='inline-block ml-2 text-xl transition-all cursor-pointer hover:text-yellow-700 hover:scale-125 ' />
 								</Link>
@@ -164,28 +216,24 @@ export default function Header() {
 									{count > 0 && (
 										<MenuList>
 											{notifications?.map((notification: any) => (
-												<Link
-													href={notification?.url}
+												<MenuItem
 													key={notification?._id}
+													color='blueGray'
+													className='hover:bg-blueGray-100'
 													onClick={() => {
-														updateNotification(notification?._id);
+														handleNotification(notification?._id);
 													}}
 												>
-													<MenuItem
-														color='blueGray'
-														className='hover:bg-blueGray-100'
-													>
-														<div className='flex items-center justify-between'>
-															<div className='flex items-center gap-x-2'>
-																<div className='flex flex-col'>
-																	<p className='text-sm font-semibold text-blue-gray-900'>
-																		{notification?.subject}
-																	</p>
-																</div>
+													<div className='flex items-center justify-between'>
+														<div className='flex items-center gap-x-2'>
+															<div className='flex flex-col'>
+																<p className='text-sm font-semibold text-blue-gray-900'>
+																	{notification?.subject}
+																</p>
 															</div>
 														</div>
-													</MenuItem>
-												</Link>
+													</div>
+												</MenuItem>
 											))}
 										</MenuList>
 									)}
@@ -240,6 +288,36 @@ export default function Header() {
 					</div>
 				</Drawer>
 			</div>
+			{/* Dialog Box */}
+			<Dialog
+				open={open2}
+				handler={handleOpen2}
+				size='xs'
+				className='bg-black_2'
+			>
+				<div className='flex items-center justify-between '>
+					<DialogHeader className='font-bold text-center text-blue-gray-200'>
+						{notiFication?.subject}
+					</DialogHeader>
+					<div className='flex items-end justify-end mx-2 my-2 '>
+						<span onClick={handleOpen2}>
+							<CloseIcon2 />
+						</span>
+					</div>
+				</div>
+				<hr className='border-0.5 border-black_3' />
+				<DialogBody>
+					<div className='my-4'>
+						<div className='space-y-4 text-white '>
+							<div className='relative flex flex-col gap-1 '>
+								<p className='text-sm font-semibold text-blue-gray-200'>
+									{notiFication?.description}
+								</p>
+							</div>
+						</div>
+					</div>
+				</DialogBody>
+			</Dialog>
 		</>
 	);
 }

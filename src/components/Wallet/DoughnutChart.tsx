@@ -10,18 +10,32 @@ const DoughnutChart = () => {
 	const { user } = useSelector((state: any) => state.auth);
 	const MainBalance = user?.m_balance;
 	const AIBalance = user?.ai_balance;
-	const totalBalance = MainBalance + AIBalance;
+	const EarnBalance = user?.e_balance;
+	const totalBalance = MainBalance + AIBalance + EarnBalance;
 	const mainBalancePercentage = ((MainBalance / totalBalance) * 100).toFixed(2);
 	const aiBalancePercentage = ((AIBalance / totalBalance) * 100).toFixed(2);
+	const earnBalancePercentage = ((EarnBalance / totalBalance) * 100).toFixed(2);
 
 	const data = {
-		labels: ['AI Balance', 'Main Balance'],
+		labels: ['AI Balance', 'Main Balance', 'Earn Balance'],
 		datasets: [
 			{
 				// label: '# of Votes',
-				data: [aiBalancePercentage, mainBalancePercentage],
-				backgroundColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 150, 86, 1)'],
-				borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 150, 86, 1)'],
+				data: [
+					aiBalancePercentage,
+					mainBalancePercentage,
+					earnBalancePercentage,
+				],
+				backgroundColor: [
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 150, 86, 1)',
+					'rgba(255, 99, 132, 1)',
+				],
+				borderColor: [
+					'rgba(54, 162, 235, 1)',
+					'rgba(255, 150, 86, 1)',
+					'rgba(255, 99, 132, 1)',
+				],
 				borderWidth: 1,
 			},
 		],
@@ -64,6 +78,20 @@ const DoughnutChart = () => {
 							</div>
 						</div>
 					</div>
+					<div className='flex gap-1 '>
+						<BiSolidCheckbox className='inline-block text-[1rem] text-[#FF6384]' />
+						<div className='flex-1 '>
+							<div className='flex items-center justify-between '>
+								<p className='text-xs text-blue-gray-100'>
+									Earn Balance: ${Number(EarnBalance).toFixed(2) ?? '0.00'}
+								</p>
+								<p className='text-xs text-blue-gray-100'>
+									{earnBalancePercentage}%
+								</p>
+							</div>
+						</div>
+					</div>
+
 					<div className='flex gap-1 '>
 						<BiSolidCheckbox className='inline-block text-[1rem] text-[#36A2EB]' />
 						<div className='flex-1 '>
