@@ -261,13 +261,14 @@ const LeftContent = () => {
 				<div className='flex flex-col items-center justify-center '>
 					<button
 						className='flex items-center justify-center w-full py-2 font-bold bg-yellow-700 rounded-lg text-blue-gray-900 disabled:opacity-50 disabled:cursor-not-allowed '
-						disabled={
-							errorText
-								? true
-								: false || !amount
-								? true
-								: false || user?.is_withdraw_requested || balanceError
-						}
+						// disabled={
+						// 	errorText
+						// 		? true
+						// 		: false || !amount
+						// 		? true
+						// 		: false || user?.is_withdraw_requested || balanceError
+						// }
+						disabled={true}
 						onClick={handleOpen2}
 					>
 						{isLoading ? (
