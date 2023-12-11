@@ -32,6 +32,7 @@ const Kyc = () => {
 	const [nidOne, setNidOne] = React.useState(user?.nidOne);
 	const [nidTwo, setNidTwo] = React.useState(user?.nidTwo);
 	const [photo, setPhoto] = React.useState(user?.photo);
+	const [date_of_birth, setDate_of_birth] = React.useState(user?.date_of_birth);
 
 	// submit form
 	const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -62,6 +63,7 @@ const Kyc = () => {
 			nidOne,
 			nidTwo,
 			photo,
+			date_of_birth,
 		};
 		console.log(formData);
 		kycVerification(formData);
@@ -198,6 +200,26 @@ const Kyc = () => {
 													onChange={(e) => setCountry(e.target.value)}
 												/>
 												{/*End Country */}
+												{/* Start Date of Birth */}
+												<Typography
+													variant='h6'
+													color='blue-gray'
+													className='-mb-3 text-blue-gray-200'
+												>
+													Date of Birth
+												</Typography>
+												<Input
+													type='date'
+													size='lg'
+													className=' text-blue-500 !border-t-blue-gray-100 focus:!border-t-gray-900'
+													labelProps={{
+														className:
+															'before:content-none after:content-none ',
+													}}
+													value={date_of_birth}
+													onChange={(e) => setDate_of_birth(e.target.value)}
+												/>
+												{/* End Date of Birth */}
 
 												{/*Start Nid No */}
 												<Typography
@@ -205,7 +227,7 @@ const Kyc = () => {
 													color='blue-gray'
 													className='-mb-3 text-blue-gray-200'
 												>
-													Nid No
+													Nid/Passport/Driving License No
 												</Typography>
 												<Input
 													size='lg'

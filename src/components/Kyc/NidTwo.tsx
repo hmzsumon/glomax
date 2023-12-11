@@ -16,6 +16,7 @@ import Resizer from 'react-image-file-resizer';
 import { useSelector } from 'react-redux';
 import { useUpdateUserProfilePictureMutation } from '@/features/auth/authApi';
 import { fetchBaseQueryError } from '@/services/helpers';
+import Document from '../../pages/_document';
 
 const NidTwo = ({ setNidTwo }: any) => {
 	const { user } = useSelector((state: any) => state.auth);
@@ -95,15 +96,15 @@ const NidTwo = ({ setNidTwo }: any) => {
 						<img
 							src={pic}
 							alt='user avatar'
-							className='rounded-md w-16 h-10 ring-2 ring-blue-500'
+							className='rounded-md w-16 h-10  ring-blue-500'
 						/>
 					) : (
 						<button
-							className='bottom-0 right-0 bg-blue-gray-300 rounded-md p-1 flex items-center justify-center'
+							className='bottom-0 right-0 bg-yellow-700 text-gray-900 rounded-md p-1 flex items-center justify-center'
 							onClick={handleOpen}
 						>
-							Nid-2
-							<MdOutlineCloudUpload />
+							Document-2
+							<MdOutlineCloudUpload className='ml-1' />
 						</button>
 					)}
 				</div>

@@ -96,11 +96,11 @@ const Photo = ({ setPhoto }: any) => {
 						/>
 					) : (
 						<button
-							className='bottom-0 right-0 bg-blue-gray-300 rounded-md p-1 flex items-center justify-center'
+							className='bottom-0 right-0  bg-yellow-700 text-gray-900 rounded-md p-1 flex items-center justify-center'
 							onClick={handleOpen}
 						>
 							Photo
-							<MdOutlineCloudUpload />
+							<MdOutlineCloudUpload className='ml-1' />
 						</button>
 					)}
 				</div>

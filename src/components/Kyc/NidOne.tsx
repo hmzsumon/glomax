@@ -99,11 +99,11 @@ const NidOne = ({ setNidOne }: any) => {
 						/>
 					) : (
 						<button
-							className='bottom-0 w-full right-0 bg-blue-gray-300 rounded-md p-1 flex items-center justify-center'
+							className='bottom-0 w-full right-0 bg-yellow-700 text-gray-900 rounded-md p-1 flex items-center justify-center'
 							onClick={handleOpen}
 						>
-							Nid-1
-							<MdOutlineCloudUpload />
+							Document-1
+							<MdOutlineCloudUpload className='ml-1' />
 						</button>
 					)}
 				</div>
