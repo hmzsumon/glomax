@@ -43,8 +43,6 @@ import {
 } from '@/features/notify/notificationApi';
 import socketIOClient from 'socket.io-client';
 import ioBaseUrl from '@/config/ioBaseUrl';
-import { m } from 'framer-motion';
-import Wallet from '../../pages/wallet';
 import { useRouter } from 'next/router';
 
 export default function Header() {
