@@ -134,7 +134,7 @@ const Convert = () => {
 											</div>
 
 											<div className=' col-span-5'>
-												<div className='w-72'>
+												<div className='w-full'>
 													<Select
 														label='Select Wallet'
 														onChange={handleSelectChange}
