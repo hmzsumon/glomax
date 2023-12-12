@@ -87,21 +87,27 @@ const Photo = ({ setPhoto }: any) => {
 	return (
 		<div>
 			<div className=' flex flex-col space-y-2 items-center  justify-center mt-3 '>
-				<div className=' '>
+				<div className='w-full '>
 					{pic ? (
 						<img
 							src={pic}
 							alt='user avatar'
-							className='rounded-md w-10 h-10 ring-2 ring-blue-500'
+							className='rounded-md full ring-2 mx-auto ring-blue-500'
 						/>
 					) : (
-						<button
-							className='bottom-0 right-0  bg-yellow-700 text-gray-900 rounded-md p-1 flex items-center justify-center'
-							onClick={handleOpen}
-						>
-							Photo
-							<MdOutlineCloudUpload className='ml-1' />
-						</button>
+						<>
+							<button
+								className='bottom-0 right-0 w-full  bg-yellow-700 text-gray-900 rounded-md p-1 flex items-center justify-center'
+								onClick={handleOpen}
+							>
+								Profile Picture
+								<MdOutlineCloudUpload className='ml-1' />
+							</button>
+							<small>
+								<span className='text-red-500'>*</span>Upload a profile picture
+								(pp size & official)
+							</small>
+						</>
 					)}
 				</div>
 			</div>

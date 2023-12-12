@@ -100,17 +100,19 @@ const Kyc = () => {
 							{!user?.is_verify_request ? (
 								<div>
 									<Card color='transparent' shadow={false}>
-										<Typography variant='h4' className=' text-blue-gray-100'>
-											KYC Form
-										</Typography>
-										<Typography
-											color='gray'
-											className='mt-1 font-normal text-blue-gray-200'
-										>
-											Please fill in the form below to complete your KYC
-											registration.
-										</Typography>
-										<form className='mt-8 mb-2 w-full max-w-screen-lg sm:w-96'>
+										<div className='px-4'>
+											<Typography variant='h4' className=' text-blue-gray-100'>
+												KYC Form
+											</Typography>
+											<Typography
+												color='gray'
+												className='mt-1 font-normal text-blue-gray-200'
+											>
+												Please fill in the form below to complete your KYC
+												registration.
+											</Typography>
+										</div>
+										<form className='mt-8 mb-2 w-full max-w-screen-lg px-4'>
 											<div className='mb-1 flex flex-col gap-6'>
 												<Typography
 													variant='h6'
@@ -241,29 +243,31 @@ const Kyc = () => {
 												{/*End Nid No */}
 											</div>
 										</form>
-										<div className='grid grid-cols-3 gap-2'>
+										<div className='grid md:grid-cols-3 gap-2 px-4'>
 											<NidOne setNidOne={setNidOne} />
 											<NidTwo setNidTwo={setNidTwo} />
 											<Photo setPhoto={setPhoto} />
 										</div>
 
-										<Button className='mt-6' fullWidth onClick={handleSubmit}>
-											{isLoading ? (
-												<PulseLoader color='white' size={10} />
-											) : (
-												'Submit'
-											)}
-										</Button>
+										<div className='px-4'>
+											<Button className='mt-6' fullWidth onClick={handleSubmit}>
+												{isLoading ? (
+													<PulseLoader color='white' size={10} />
+												) : (
+													'Submit'
+												)}
+											</Button>
+										</div>
 									</Card>
 								</div>
 							) : (
-								<div className='flex flex-col items-center justify-center'>
-									<h1 className='text-2xl font-bold text-blue-gray-200'>
-										Your KYC verification is under review
+								<div className='flex flex-col items-center justify-center px-4'>
+									<h1 className='text-xl font-bold text-center my-2 text-blue-gray-200'>
+										Your KYC verification <br /> Is under review
 									</h1>
-									<p className='text-blue-gray-200'>
+									<p className=' text-orange-800'>
 										Please wait for admin approval, it may take up to 24 - 72
-										hours
+										hours.
 									</p>
 								</div>
 							)}

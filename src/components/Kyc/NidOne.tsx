@@ -90,12 +90,12 @@ const NidOne = ({ setNidOne }: any) => {
 	return (
 		<div>
 			<div className=' flex flex-col space-y-2 items-center  justify-center mt-3 '>
-				<div className=' '>
+				<div className='w-full '>
 					{pic ? (
 						<img
 							src={pic}
 							alt='user avatar'
-							className='rounded-md w-16 h-10 ring-2 ring-blue-500'
+							className='rounded-md w-[90%] mx-auto ring-2 ring-blue-500'
 						/>
 					) : (
 						<button

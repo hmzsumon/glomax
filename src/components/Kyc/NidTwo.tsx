@@ -91,16 +91,16 @@ const NidTwo = ({ setNidTwo }: any) => {
 	return (
 		<div>
 			<div className=' flex flex-col space-y-2 items-center  justify-center mt-3 '>
-				<div className=' '>
+				<div className='w-full '>
 					{pic ? (
 						<img
 							src={pic}
 							alt='user avatar'
-							className='rounded-md w-16 h-10  ring-blue-500'
+							className='rounded-md w-[90%] mx-auto  ring-blue-500'
 						/>
 					) : (
 						<button
-							className='bottom-0 right-0 bg-yellow-700 text-gray-900 rounded-md p-1 flex items-center justify-center'
+							className='bottom-0 w-full right-0 bg-yellow-700 text-gray-900 rounded-md p-1 flex items-center justify-center'
 							onClick={handleOpen}
 						>
 							Document-2
