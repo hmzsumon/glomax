@@ -18,6 +18,8 @@ import ConvertRecords from '@/components/Convert/ConvertRecords';
 import { useRouter } from 'next/router';
 import { HiArrowSmLeft } from 'react-icons/hi';
 import { useLoadUserQuery } from '@/features/auth/authApi';
+import { Select, Option, SelectProps } from '@material-tailwind/react';
+import { AnyNode } from 'postcss';
 
 const Convert = () => {
 	const { refetch } = useLoadUserQuery();
@@ -28,14 +30,10 @@ const Convert = () => {
 	const [amount, setAmount] = useState<number>(0);
 	const [convertAmount, setConvertAmount] = useState<number>(0);
 	const [main, setMain] = useState<boolean>(true);
+	const [to_wallet, setToWallet] = useState<string>('');
 
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(!open);
-
-	// handle convert from change
-	const handleConvertFromChange = () => {
-		setMain(!main);
-	};
 
 	// handle amount change
 	const handleAmountChange = (e: any) => {
@@ -48,8 +46,15 @@ const Convert = () => {
 		setConvertAmount(value);
 	};
 
+	const handleSelectChange: SelectProps['onChange'] = (value) => {
+		if (typeof value === 'string') {
+			setToWallet(value);
+		}
+	};
+
 	// handle convert
 	const handleConvert = () => {
+		console.log('value', to_wallet);
 		if (!amount || amount < 1) {
 			toast.error('Please enter amount');
 			return;
@@ -60,11 +65,12 @@ const Convert = () => {
 		// 	toast.error('Insufficient balance');
 		// 	return;
 		// }
+		console.log('ccc', to_wallet);
 
 		convert({
 			amount,
-			from: main ? 'main' : 'ai',
-			to: main ? 'ai' : 'main',
+			from: 'e_balance',
+			to: to_wallet,
 			id: user?._id,
 		});
 	};
@@ -110,33 +116,35 @@ const Convert = () => {
 							<div className='px-2 rounded-sm bg-black_3'>
 								<div className='grid grid-cols-5 '>
 									<div className='col-span-4 py-2 space-y-2 text-blue-gray-300'>
-										<div className='flex items-center justify-between'>
-											<h2>From </h2>
-											{main ? (
-												<h2 className=''>Main Balance</h2>
-											) : (
-												<h2 className=''>Ai Balance</h2>
-											)}
-											<IoIosArrowForward className=' text-blue-gray-600' />
+										<div className='grid grid-cols-5'>
+											<div className=' col-span-2'>
+												<h2>From </h2>
+											</div>
+
+											<div className=' col-span-3 '>
+												<h2 className=''>Earn Balance</h2>
+											</div>
 										</div>
 										<div className='flex items-center justify-around'>
 											<FaLongArrowAltDown className=' text-blue-gray-600' />
 										</div>
-										<div className='flex items-center justify-between'>
-											<h2 className=''>To </h2>
-											{main ? (
-												<h2 className=''>Ai Balance</h2>
-											) : (
-												<h2 className=''>Main Balance</h2>
-											)}
-											<IoIosArrowForward className=' text-blue-gray-600' />
+										<div className='grid grid-cols-7'>
+											<div className=' col-span-2'>
+												<h2 className=''>To </h2>
+											</div>
+
+											<div className=' col-span-5'>
+												<div className='w-72'>
+													<Select
+														label='Select Wallet'
+														onChange={handleSelectChange}
+													>
+														<Option value='ai'>Ai Balance</Option>
+														<Option value='main'>Trade Balance</Option>
+													</Select>
+												</div>
+											</div>
 										</div>
-									</div>
-									<div className='flex items-center justify-center col-span-1 '>
-										<BiTransferAlt
-											className='text-3xl text-yellow-700 rotate-90 cursor-pointer '
-											onClick={handleConvertFromChange}
-										/>
 									</div>
 								</div>
 							</div>
@@ -155,10 +163,10 @@ const Convert = () => {
 								<small className='flex items-center justify-between px-1 mt-1 text-blue-gray-700'>
 									{main ? (
 										<span className=''>
-											Main Balance
-											{user?.m_balance >= 0 ? (
+											Earn Balance
+											{user?.e_balance >= 0 ? (
 												<span className='mx-1 text-blue-gray-300'>
-													{Number(user?.m_balance).toFixed(2)}
+													{Number(user?.e_balance).toFixed(2)}
 												</span>
 											) : (
 												<PulseLoader size={10} color={'#fff'} />

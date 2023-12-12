@@ -10,7 +10,6 @@ import {
 	useSecurityVerifyMutation,
 } from '@/features/auth/authApi';
 import {
-	Select,
 	Option,
 	Input,
 	Dialog,
@@ -19,6 +18,12 @@ import {
 } from '@material-tailwind/react';
 import { useSelector } from 'react-redux';
 import { maskEmail } from '@/utils/functions';
+import Select from 'react-select';
+
+interface RejectionReason {
+	value: string;
+	label: string;
+}
 
 const AddPaymentMethod = () => {
 	useLoadUserQuery();
@@ -54,6 +59,13 @@ const AddPaymentMethod = () => {
 	const [open2, setOpen2] = useState(false);
 	const [isResend, setIsResend] = useState<boolean>(false);
 	const handleOpen2 = () => setOpen2(!open2);
+
+	// Explicitly define the type for options
+	const rejectionReasonsOptions: RejectionReason[] = [
+		{ value: 'document_issue', label: 'Document Not Clear' },
+		{ value: 'information_mismatch', label: 'Information Mismatch' },
+		// Add more rejection reasons as needed
+	];
 
 	// submit form
 	const next = (e: { preventDefault: () => void }) => {
