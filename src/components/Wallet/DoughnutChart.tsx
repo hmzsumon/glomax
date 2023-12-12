@@ -67,7 +67,7 @@ const DoughnutChart = () => {
 							<div className='flex items-center justify-between '>
 								<div>
 									<p className='text-xs text-blue-gray-100'>
-										Main Balance: ${Number(MainBalance).toFixed(2) ?? '0.00'}
+										Trade Balance: ${Number(MainBalance).toFixed(2) ?? '0.00'}
 									</p>
 								</div>
 								<div className='self-end '>

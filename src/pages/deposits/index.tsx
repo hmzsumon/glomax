@@ -52,6 +52,7 @@ const Deposit = () => {
 	const [open2, setOpen2] = useState(false);
 	const [bonusTex, setBonusTex] = useState<boolean>(false);
 	const [is_bonus, setIs_bonus] = useState<boolean>(false);
+	const [promo_code, setPromo_code] = useState<string>('');
 	const handleOpen = () => setOpen(!open);
 	const handleOpen2 = () => {
 		setOpen2(!open2);
@@ -81,7 +82,7 @@ const Deposit = () => {
 			const data = {
 				amount: amount,
 				transactionId: transactionId,
-				is_bonus: is_bonus,
+				promo_code: promo_code,
 			};
 
 			// console.log('data', data);
@@ -277,22 +278,17 @@ const Deposit = () => {
 											)}
 										</div>
 									</div>
-									{amount >= 30 && (
-										<div>
-											<Checkbox
-												label='I want to receive bonus.'
-												color='yellow'
-												labelProps={{
-													className: 'text-xs text-blue-gray-400',
-												}}
-												checked={is_bonus}
-												onChange={(e) => setIs_bonus(e.target.checked)}
+									{amount >= 50 && (
+										<div className='relative flex flex-col gap-1'>
+											<label className='mb-1 ml-1 text-sm font-semibold text-gray-400 '>
+												Promo code (optional)
+											</label>
+											<input
+												className={`px-4 py-1 text-blue-gray-200 bg-transparent border rounded  focus:outline-none`}
+												type='text'
+												value={promo_code}
+												onChange={(e) => setPromo_code(e.target.value)}
 											/>
-
-											<p className='ml-10 -mt-1 text-xs'>
-												if you claim the bonus, your trade volume will be
-												increase 5X.
-											</p>
 										</div>
 									)}
 								</div>

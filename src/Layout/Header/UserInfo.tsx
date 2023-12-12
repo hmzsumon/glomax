@@ -44,6 +44,14 @@ const UserInfo = ({ closeDrawerRight }: UserInfoProps) => {
 						</Typography>
 						<CopyToClipboard text={user?.customer_id} />
 					</div>
+					{user?.promo_code && (
+						<div className='flex items-center'>
+							<Typography variant='small' className='text-blue-gray-400'>
+								Promo Code: {user?.promo_code}
+							</Typography>
+							<CopyToClipboard text={user?.promo_code} />
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

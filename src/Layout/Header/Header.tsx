@@ -177,6 +177,20 @@ export default function Header() {
 											})}
 										</span>
 									</>
+								) : path === '/trade' ? (
+									<>
+										<span>Trade B: </span>
+										<span>
+											{Number(
+												user?.m_balance >= 0 ? user?.m_balance : 0.0
+											)?.toLocaleString('en-US', {
+												style: 'currency',
+												currency: 'USD',
+												minimumFractionDigits: 2,
+												maximumFractionDigits: 2,
+											})}
+										</span>
+									</>
 								) : (
 									<>
 										<span>Wallet: </span>

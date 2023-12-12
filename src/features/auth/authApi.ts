@@ -270,6 +270,16 @@ export const authApi = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ['User'],
 		}),
+
+		// add payment method
+		addPaymentMethod: builder.mutation<any, any>({
+			query: (body) => ({
+				url: '/add-payment-method',
+				method: 'POST',
+				body,
+			}),
+			invalidatesTags: ['User'],
+		}),
 	}),
 });
 
@@ -300,4 +310,5 @@ export const {
 	useGetRankMembersByRankQuery,
 	useChangePasswordMutation,
 	useKycVerificationMutation,
+	useAddPaymentMethodMutation,
 } = authApi;

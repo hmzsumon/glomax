@@ -9,8 +9,11 @@ import { useGetMyWithdrawRequestsQuery } from '@/features/withdraw/withdrawApi';
 import WithdrawRecords from '@/components/Withdraw/WithdrawRecords';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import AddPaymentMethod from '@/components/Withdraw/AddPaymentMethod';
+import { useLoadUserQuery } from '@/features/auth/authApi';
 
 const Withdraw = () => {
+	useLoadUserQuery();
 	const { user } = useSelector((state: any) => state.auth);
 
 	// check if user has completed kyc
@@ -50,7 +53,7 @@ const Withdraw = () => {
 						</div>
 
 						<div className=''>
-							<LeftContent />
+							{user?.is_payment_method ? <LeftContent /> : <AddPaymentMethod />}
 						</div>
 					</div>
 				</div>

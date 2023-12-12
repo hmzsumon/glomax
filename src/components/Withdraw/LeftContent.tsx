@@ -16,6 +16,7 @@ import { m } from 'framer-motion';
 import { useCreateWithdrawRequestMutation } from '@/features/withdraw/withdrawApi';
 import { CloseIcon2, ExplanationIcon } from '@/utils/icons/CommonIcons';
 import { maskEmail } from '@/utils/functions';
+import { read } from 'fs';
 import {
 	useLoadUserQuery,
 	useResendVerificationEmailMutation,
@@ -49,9 +50,9 @@ const LeftContent = () => {
 
 	const { refetch } = useLoadUserQuery();
 	const { user } = useSelector((state: any) => state.auth);
-	const [way, setWay] = React.useState<string>('binances');
+	const [way, setWay] = React.useState<string>('crypto');
 	const [network, setNetwork] = React.useState<string>('TRC20');
-	const [address, setAddress] = React.useState<string>('');
+	const [address, setAddress] = React.useState<string>(user?.trc20_address);
 	const [payId, setPayId] = React.useState<string>('');
 	const [amount, setAmount] = React.useState<number>(0);
 	const [availableAmount, setAvailable] = React.useState<number>(0);
@@ -87,13 +88,10 @@ const LeftContent = () => {
 
 	// set available amount
 	useEffect(() => {
-		const totalBalance = user?.m_balance + user?.ai_balance;
-		const balance = totalBalance - user?.trading_volume;
-
+		const balance = user?.e_balance;
 		setAvailable(balance);
-
 		if (amount > user?.m_balance) {
-			setNeedAmount(balance - user?.m_balance);
+			setNeedAmount(balance - user?.e_balance);
 			setBalanceError(true);
 		} else {
 			setBalanceError(false);
@@ -115,7 +113,7 @@ const LeftContent = () => {
 		}
 
 		if (way === 'crypto') {
-			setReceiveAmount(Number(value) - Number(value) * 0.05);
+			setReceiveAmount(Number(value) - Number(value) * 0.07);
 		} else {
 			setReceiveAmount(Number(value) - Number(value) * 0.03);
 		}
@@ -126,7 +124,7 @@ const LeftContent = () => {
 		const data = {
 			amount: amount,
 			net_amount: receiveAmount,
-			charge_p: way === 'crypto' ? 0.05 : 0.03,
+			charge_p: way === 'crypto' ? 0.07 : 0.03,
 			method: {
 				name: way,
 				network: network,
@@ -165,45 +163,34 @@ const LeftContent = () => {
 
 	return (
 		<div className='space-y-4 '>
-			<div className=''>
-				<Select
-					color='blue'
-					label='Select Way'
+			{/* <div className=''>
+				<Input
+					type='text'
+					label='Select Method'
+					className='text-blue-gray-100'
 					value={way}
-					onChange={(selectedValue) => setWay(selectedValue ?? '')}
-					className=' text-blue-gray-100'
-				>
-					<Option value='binance'>Binance Pay</Option>
-					<Option value='crypto'>Crypto</Option>
-				</Select>
+					readOnly={true}
+				/>
+			</div> */}
+
+			<div className=''>
+				{/* read only input */}
+				<Input
+					type='text'
+					label='Network'
+					className='text-blue-gray-100'
+					value={network}
+					readOnly={true}
+				/>
 			</div>
-			{way === 'crypto' && (
-				<div className=''>
-					<Select
-						label='Select Network'
-						className='text-blue-gray-100 '
-						value={network}
-						onChange={(selectedValue) => setNetwork(selectedValue ?? '')}
-					>
-						<Option value='trc20'>TRC20</Option>
-						<Option value='erc20'>ERC20</Option>
-					</Select>
-				</div>
-			)}
 
 			<div className=''>
 				<Input
 					type='text'
-					label={way === 'crypto' ? 'Enter Address' : 'Enter Binance Pay ID'}
+					label={way === 'crypto' ? 'Address' : 'Binance Pay ID'}
 					className=' focus:text-blue-gray-100'
-					value={way === 'crypto' ? address : payId}
-					onChange={(e) => {
-						if (way === 'crypto') {
-							setAddress(e.target.value);
-						} else {
-							setPayId(e.target.value);
-						}
-					}}
+					value={address}
+					readOnly={true}
 				/>
 			</div>
 			<div className=''>
@@ -222,7 +209,7 @@ const LeftContent = () => {
 						Available
 						{user?.m_balance >= 0 ? (
 							<span className='mx-1 text-blue-gray-300'>
-								{Number(availableAmount > 0 ? availableAmount : 0).toFixed(2)}
+								{Number(user?.e_balance ? user?.e_balance : 0).toFixed(2)}
 							</span>
 						) : (
 							<PulseLoader size={10} color={'#fff'} />
@@ -253,7 +240,7 @@ const LeftContent = () => {
 					<p className='text-xs text-blue-gray-600'>
 						processing fee:{' '}
 						<span className='italic font-bold text-blue-gray-300'>
-							{way === 'crypto' ? '5%' : '3%'}
+							{way === 'crypto' ? '7%' : '3%'}
 						</span>{' '}
 					</p>
 				</div>
@@ -261,14 +248,13 @@ const LeftContent = () => {
 				<div className='flex flex-col items-center justify-center '>
 					<button
 						className='flex items-center justify-center w-full py-2 font-bold bg-yellow-700 rounded-lg text-blue-gray-900 disabled:opacity-50 disabled:cursor-not-allowed '
-						// disabled={
-						// 	errorText
-						// 		? true
-						// 		: false || !amount
-						// 		? true
-						// 		: false || user?.is_withdraw_requested || balanceError
-						// }
-						disabled={true}
+						disabled={
+							errorText
+								? true
+								: false || !amount
+								? true
+								: false || user?.is_withdraw_requested || balanceError
+						}
 						onClick={handleOpen2}
 					>
 						{isLoading ? (
