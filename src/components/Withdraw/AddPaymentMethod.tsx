@@ -18,7 +18,6 @@ import {
 } from '@material-tailwind/react';
 import { useSelector } from 'react-redux';
 import { maskEmail } from '@/utils/functions';
-import Select from 'react-select';
 
 interface RejectionReason {
 	value: string;
@@ -122,12 +121,12 @@ const AddPaymentMethod = () => {
 	}, [isError, isSuccess, error]);
 	return (
 		<div>
-			<h2 className=' text-center '>Add Payment Method</h2>
+			<h2 className='text-center '>Add Payment Method</h2>
 			<div>
 				<div className='flex flex-col'>
 					<label
 						htmlFor='trc20Address'
-						className='text-sm font-bold text-blue-gray-200 my-1 mr-2'
+						className='my-1 mr-2 text-sm font-bold text-blue-gray-200'
 					>
 						TRC20 Address
 					</label>
@@ -137,12 +136,12 @@ const AddPaymentMethod = () => {
 						id='trc20Address'
 						value={trc20Address}
 						onChange={(e) => setTrc20Address(e.target.value)}
-						className='border border-gray-400 py-1 px-2 rounded-md bg-transparent'
+						className='px-2 py-1 bg-transparent border border-gray-400 rounded-md'
 					/>
 				</div>
 				<button
 					type='submit'
-					className='bg-blue-500 text-white px-3 py-1 rounded-md mt-2 w-full'
+					className='w-full px-3 py-1 mt-2 text-white bg-blue-500 rounded-md'
 					onClick={handleOpen2}
 				>
 					{isLoading ? (

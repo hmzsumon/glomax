@@ -163,7 +163,9 @@ export default function Header() {
 					{token ? (
 						<div className='flex items-center gap-x-4 '>
 							<div className='px-2 py-1 bg-gray-900 rounded-md '>
-								{path === '/withdraw' || path === '/convert' ? (
+								{path === '/withdraw' ||
+								path === '/convert' ||
+								path === '/send' ? (
 									<>
 										<span>Earn: </span>
 										<span>

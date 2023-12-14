@@ -280,6 +280,14 @@ export const authApi = apiSlice.injectEndpoints({
 			}),
 			invalidatesTags: ['User'],
 		}),
+
+		// find user by customer id
+		findUserByCustomerId: builder.mutation<any, any>({
+			query: (userId) => ({
+				url: `/find-user-by-customer-id/${userId}`,
+				method: 'PUT',
+			}),
+		}),
 	}),
 });
 
@@ -311,4 +319,5 @@ export const {
 	useChangePasswordMutation,
 	useKycVerificationMutation,
 	useAddPaymentMethodMutation,
+	useFindUserByCustomerIdMutation,
 } = authApi;
