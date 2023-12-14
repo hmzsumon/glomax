@@ -50,17 +50,17 @@ const UserFullName = () => {
 	}, [isSuccess]);
 
 	return (
-		<div className=' list-none flex gap-2'>
+		<div className='flex gap-2 list-none '>
 			<li>{user?.name}</li>
-			{/* <RiEdit2Fill
+			<RiEdit2Fill
 				onClick={handleOpen}
-				className='cursor-pointer hover:text-red-500 p-1 text-xl text-gray-400 bg-gray-600 rounded'
-			/> */}
+				className='p-1 text-xl text-gray-400 bg-gray-600 rounded cursor-pointer hover:text-red-500'
+			/>
 			<Dialog
 				size='xs'
 				open={open}
 				handler={handleOpen}
-				className='  bg-transparent shadow-none'
+				className='bg-transparent shadow-none '
 			>
 				<Card className='relative mx-auto w-full max-w-[24rem] bg-black_2'>
 					{/* <div className='absolute right-0'>
@@ -68,8 +68,8 @@ const UserFullName = () => {
 							<XMarkIcon strokeWidth={2} className='w-5 h-5' />
 						</IconButton>
 					</div> */}
-					<div className=' pt-4'>
-						<h2 className='text-xl text-center text-blue-gray-100 font-medium'>
+					<div className='pt-4 '>
+						<h2 className='text-xl font-medium text-center text-blue-gray-100'>
 							Update Full Name
 						</h2>
 					</div>
@@ -80,7 +80,7 @@ const UserFullName = () => {
 							size='lg'
 							value={name}
 							onChange={(e) => setName(e.target.value)}
-							className=' text-white'
+							className='text-white '
 						/>
 					</CardBody>
 					<CardFooter className='pt-0'>
@@ -88,7 +88,7 @@ const UserFullName = () => {
 							// variant='gradient'
 							onClick={handleUpdateFullName}
 							fullWidth
-							className=' bg-yellow-700 text-gray-900 disabled:bg-gray-700 disabled:text-gray-900'
+							className='text-gray-900 bg-yellow-700 disabled:bg-gray-700 disabled:text-gray-900'
 							disabled={name === ''}
 						>
 							{isLoading ? (
