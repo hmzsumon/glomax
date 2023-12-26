@@ -137,7 +137,7 @@ const Deposit = () => {
 						</div>
 						<div className='flex flex-col items-center justify-center my-4 '>
 							<img
-								src='/emran_qr.png'
+								src='/cocoin-qr.png'
 								alt='Deposit'
 								className=' w-36 md:w-60'
 							/>
@@ -155,10 +155,10 @@ const Deposit = () => {
 								<p className='text-sm text-blue-gray-400'>Wallet Address</p>
 								<div className='flex items-center justify-between'>
 									<p className='text-sm text-blue-gray-100'>
-										TDCxuxbEEG7kNWaLrTr7CYkg47ZoQ3iNb2
+										TS7v4YksSk2BFyC3cPwzyg1Y1RQDQNN3kG
 									</p>
 									<CopyToClipboard
-										text={'TDCxuxbEEG7kNWaLrTr7CYkg47ZoQ3iNb2'}
+										text={'TS7v4YksSk2BFyC3cPwzyg1Y1RQDQNN3kG'}
 										size='text-md'
 									/>
 								</div>
