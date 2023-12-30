@@ -13,26 +13,40 @@ import TradeSection from '@/components/Home/TradeSection';
 import AiSection from '@/components/Home/AiSection';
 import WinGame from '@/components/Home/WinGame';
 import MakeUp from '@/components/Home/MakeUp';
+import Maintenance from '@/components/Home/Maintenance';
 
 const Home: NextPage = () => {
 	const { isAuthenticated } = useSelector((state: any) => state.auth);
 	return (
-		<Layout>
+		<>
+			<Head>
+				<title>Home | {process.env.NEXT_PUBLIC_APP_NAME}</title>
+			</Head>
 			<main className={`pt-20 ${isAuthenticated && 'pb-14'}`}>
-				{!isAuthenticated && <Hero />}
-				<SimpleSlider />
-				{isAuthenticated && <Notice />}
-				{isAuthenticated && <Menu />}
-				<TradeSection />
-				<AiSection />
-				{/* <WinGame /> */}
-				<MakeUp />
-				<Help />
-				{!isAuthenticated && <StartEaring />}
-				{!isAuthenticated && <Footer />}
+				<Maintenance />
 			</main>
-		</Layout>
+		</>
 	);
 };
 
 export default Home;
+
+{
+	/* 
+<Layout>
+	<main className={`pt-20 ${isAuthenticated && 'pb-14'}`}>
+		{!isAuthenticated && <Hero />}
+		<SimpleSlider />
+		{isAuthenticated && <Notice />}
+		{isAuthenticated && <Menu />}
+		<TradeSection />
+		<AiSection />
+		{/* <WinGame /> */
+}
+// <MakeUp />
+// <Help />
+// {!isAuthenticated && <StartEaring />}
+// {!isAuthenticated && <Footer />}
+// </main>
+// </Layout>;
+// </Head> */}

@@ -17,6 +17,7 @@ import { NextPage } from 'next';
 
 const LoginPage: NextPage = () => {
 	const router = useRouter();
+
 	const [loginUser, { isLoading, isError, isSuccess, error }] =
 		useLoginUserMutation();
 	const [email, setEmail] = useState<string>('');

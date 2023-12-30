@@ -17,6 +17,10 @@ const Layout = ({ children }: PropsWithChildren<{}>) => {
 	const handleOpen = () => setOpen(!open);
 
 	useEffect(() => {
+		router.push('/');
+	}, []);
+
+	useEffect(() => {
 		if (user?.is_block) {
 			router.push('/block');
 		}
