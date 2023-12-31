@@ -28,9 +28,6 @@ const Maintenance = () => {
 					</button>
 				</div>
 
-				<p className='text-gray-700'>
-					Sorry for the inconvenience. We are currently undergoing maintenance.
-				</p>
 				<div className='my-1 '>
 					<p className='my-1 text-gray-500'>
 						Join our official Telegram group to get all updates of Global X
